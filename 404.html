@@ -156,7 +156,7 @@
         
         
         <li >
-            <a href='/archives/' >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
                 
                 
                 
@@ -170,13 +170,13 @@
 
 
                 
-                <span>Archives</span>
+                <span>归档</span>
             </a>
         </li>
         
         
         <li >
-            <a href='/search/' >
+            <a href='/%E6%90%9C%E7%B4%A2/' >
                 
                 
                 
@@ -189,13 +189,13 @@
 
 
                 
-                <span>Search</span>
+                <span>搜索</span>
             </a>
         </li>
         
         
         <li >
-            <a href='/links/' >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
                 
                 
                 
@@ -208,7 +208,7 @@
 
 
                 
-                <span>Links</span>
+                <span>链接</span>
             </a>
         </li>
         
@@ -245,41 +245,7 @@
     <div class="not-found-card">
         <h1 class="article-title">404 错误</h1>
         <h2 class="article-subtitle">页面不存在</h2>
-    </div><form action="/search/" class="search-form widget" data-json="https://dumbnessrf.github.io/search/index.json">
-            <p>
-                <label>搜索</label>
-                <input id="searchInput" name="keyword" required placeholder="输入关键词..." />
-            
-                <button title="搜索">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <circle cx="10" cy="10" r="7" />
-  <line x1="21" y1="21" x2="15" y2="15" />
-</svg>
-
-
-
-                </button>
-            </p>
-        </form>
-
-        <div class="search-result">
-            <h3 class="search-result--title section-title"></h3>
-            <div class="search-result--list article-list--compact"></div>
-        </div>
-        
-        <script>
-            window.searchResultTitleTemplate = "#PAGES_COUNT 个结果 （用时 #TIME_SECONDS 秒）"
-        </script><script type="text/javascript" src="/ts/search.js" defer></script>
-
-        <script>
-            const wrongUrl = new URL(window.location.href);
-
-            
-            const searchKeyword = wrongUrl.pathname.split(/[/|-]/).join(' ').trim();
-
-            document.getElementById('searchInput').setAttribute('value', searchKeyword);
-        </script><footer class="site-footer">
+    </div><footer class="site-footer">
     <section class="copyright">
         &copy; 
         

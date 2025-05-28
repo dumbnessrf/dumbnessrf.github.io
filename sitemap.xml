@@ -35,12 +35,6 @@
     <loc>https://dumbnessrf.github.io/categories/%E6%B5%8B%E8%AF%95/</loc>
     <lastmod>2020-09-09T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/archives/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/page/</loc>
-    <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://dumbnessrf.github.io/tags/css/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
@@ -83,10 +77,14 @@
     <loc>https://dumbnessrf.github.io/p/emoji-support/</loc>
     <lastmod>2019-03-05T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/links/</loc>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/search/</loc>
+    <loc>https://dumbnessrf.github.io/page/</loc>
   </url><url>
     <loc>https://dumbnessrf.github.io/%E5%85%B3%E4%BA%8E/</loc>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/%E5%BD%92%E6%A1%A3/</loc>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/%E9%93%BE%E6%8E%A5/</loc>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/%E6%90%9C%E7%B4%A2/</loc>
   </url>
 </urlset>
