@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>Example Person</copyright>
-        <lastBuildDate>Fri, 09 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://dumbnessrf.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 28 May 2025 20:49:54 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Dot Net</title>
+        <link>https://dumbnessrf.github.io/p/dotnet/</link>
+        <pubDate>Wed, 28 May 2025 20:49:54 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/p/dotnet/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Archives</title>
         <link>https://dumbnessrf.github.io/archives/</link>
         <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>

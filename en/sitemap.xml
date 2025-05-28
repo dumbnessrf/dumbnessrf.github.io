@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dumbnessrf.github.io/</loc>
-    <lastmod>2020-10-09T00:00:00+00:00</lastmod>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="zh-cn"
@@ -18,6 +18,54 @@
                 rel="alternate"
                 hreflang="en"
                 href="https://dumbnessrf.github.io/"
+                />
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/dotnet/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/post/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://dumbnessrf.github.io/zh-cn/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://dumbnessrf.github.io/ar/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://dumbnessrf.github.io/post/"
+                />
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/tag1/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/tag2/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/tag3/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/</loc>
+    <lastmod>2025-05-28T20:49:54+08:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://dumbnessrf.github.io/zh-cn/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="ar"
+                href="https://dumbnessrf.github.io/ar/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://dumbnessrf.github.io/tags/"
                 />
   </url><url>
     <loc>https://dumbnessrf.github.io/archives/</loc>
@@ -66,44 +114,8 @@
     <loc>https://dumbnessrf.github.io/p/markdown-syntax-guide/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/post/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://dumbnessrf.github.io/zh-cn/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://dumbnessrf.github.io/ar/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://dumbnessrf.github.io/post/"
-                />
-  </url><url>
     <loc>https://dumbnessrf.github.io/categories/syntax/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/</loc>
-    <lastmod>2019-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://dumbnessrf.github.io/zh-cn/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="ar"
-                href="https://dumbnessrf.github.io/ar/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://dumbnessrf.github.io/tags/"
-                />
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/themes/</loc>
     <lastmod>2019-03-11T00:00:00+00:00</lastmod>

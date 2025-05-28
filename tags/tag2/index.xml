@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tag2 on Example Site</title>
+        <link>https://dumbnessrf.github.io/tags/tag2/</link>
+        <description>Recent content in Tag2 on Example Site</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>Example Person</copyright>
+        <lastBuildDate>Wed, 28 May 2025 20:49:54 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/tags/tag2/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Dot Net</title>
+        <link>https://dumbnessrf.github.io/p/dotnet/</link>
+        <pubDate>Wed, 28 May 2025 20:49:54 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/p/dotnet/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>
