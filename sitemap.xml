@@ -3,7 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dumbnessrf.github.io/</loc>
-    <lastmod>2025-05-29T11:04:44+08:00</lastmod>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/post/</loc>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/</loc>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/wpf/</loc>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/data-template-selector-tips/</loc>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/xaml/</loc>
+    <lastmod>2025-05-30T14:46:48+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
     <lastmod>2025-05-29T11:04:44+08:00</lastmod>
@@ -11,13 +26,7 @@
     <loc>https://dumbnessrf.github.io/tags/dotnet/</loc>
     <lastmod>2025-05-29T11:04:44+08:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/post/</loc>
-    <lastmod>2025-05-29T11:04:44+08:00</lastmod>
-  </url><url>
     <loc>https://dumbnessrf.github.io/tags/syntax/</loc>
-    <lastmod>2025-05-29T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/</loc>
     <lastmod>2025-05-29T11:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/p/single-file-run/</loc>
@@ -27,9 +36,12 @@
   </url><url>
     <loc>https://dumbnessrf.github.io/page/</loc>
   </url><url>
+    <loc>https://dumbnessrf.github.io/search/</loc>
+    <priority>0.1</priority>
+  </url><url>
     <loc>https://dumbnessrf.github.io/categories/test/</loc>
   </url><url>
-    <loc>https://dumbnessrf.github.io/%E5%85%B3%E4%BA%8E/</loc>
+    <loc>https://dumbnessrf.github.io/about/</loc>
   </url><url>
     <loc>https://dumbnessrf.github.io/%E5%BD%92%E6%A1%A3/</loc>
   </url><url>
