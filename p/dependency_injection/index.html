@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Avalonia中使用依赖注入重构代码">
+<title>Avalonia中使用依赖注入重构代码</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/dependency_injection/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Avalonia中使用依赖注入重构代码">
+<meta property='og:description' content="Avalonia中使用依赖注入重构代码">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/dependency_injection/'>
+<meta property='og:site_name' content='剪烛西窗'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='csharp' /><meta property='article:tag' content='dotnet' /><meta property='article:tag' content='avalonia' /><meta property='article:published_time' content='2025-06-04T11:04:44&#43;08:00'/><meta property='article:modified_time' content='2025-06-04T11:04:44&#43;08:00'/><meta property='og:image' content='https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=3600' />
+<meta name="twitter:title" content="Avalonia中使用依赖注入重构代码">
+<meta name="twitter:description" content="Avalonia中使用依赖注入重构代码"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=3600' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">剪烛西窗</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/_indexaaaa/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E9%93%BE%E6%8E%A5/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>链接</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-简介">🔍 简介</a>
+      <ol>
+        <li><a href="#-主要特点">✅ 主要特点：</a></li>
+      </ol>
+    </li>
+    <li><a href="#-平台支持">🌐 平台支持</a></li>
+    <li><a href="#-性能表现">⚙️ 性能表现</a></li>
+  </ol>
+
+  <ol>
+    <li><a href="#-概述">📦 概述</a>
+      <ol>
+        <li><a href="#-为什么使用-di">💡 为什么使用 DI？</a></li>
+      </ol>
+    </li>
+    <li><a href="#-服务生命周期service-lifecycle">🕒 服务生命周期（Service Lifecycle）</a>
+      <ol>
+        <li><a href="#示例说明">示例说明：</a></li>
+      </ol>
+    </li>
+  </ol>
+
+  <ol>
+    <li><a href="#1-安装依赖注入包">1️⃣ 安装依赖注入包</a></li>
+    <li><a href="#2-初始化服务容器">2️⃣ 初始化服务容器</a></li>
+    <li><a href="#3-注册服务">3️⃣ 注册服务</a>
+      <ol>
+        <li><a href="#自定义扩展方法注册常用服务">自定义扩展方法注册常用服务</a></li>
+        <li><a href="#注册-redis-缓存服务">注册 Redis 缓存服务</a></li>
+      </ol>
+    </li>
+    <li><a href="#4-辅助类对话框与-toast-管理器">4️⃣ 辅助类：对话框与 Toast 管理器</a></li>
+    <li><a href="#5-视图定位器viewlocator">5️⃣ 视图定位器（ViewLocator）</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/dependency_injection/">
+                
+                    <img src="https://images.unsplash.com/photo-1649972904349-6e44c42644a7?ixlib=rb-4.0.3&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=3600" loading="lazy" alt="Featured image of post Avalonia中使用依赖注入重构代码" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/dependency_injection/">Avalonia中使用依赖注入重构代码</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Avalonia中使用依赖注入重构代码
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 04, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="-avalonia-框架概览">🧩 Avalonia 框架概览
+</h1><h2 id="-简介">🔍 简介
+</h2><p>Avalonia 是一个 <strong>跨平台的 .NET 用户界面框架</strong>，支持使用 C# 和 XAML 构建桌面、移动和 Web 应用程序。其设计灵感来源于 WPF 和 UWP，但具有更强的跨平台兼容性。</p>
+<h3 id="-主要特点">✅ 主要特点：
+</h3><ul>
+<li>使用熟悉的 XAML 语法</li>
+<li>支持多种 UI 控件和样式</li>
+<li>可运行于多个操作系统</li>
+<li>支持 MVVM 模式及依赖注入</li>
+</ul>
+<hr>
+<h2 id="-平台支持">🌐 平台支持
+</h2><p>Avalonia 支持以下平台：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>平台</th>
+          <th>支持情况</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Windows</td>
+          <td>完全支持</td>
+      </tr>
+      <tr>
+          <td>Linux</td>
+          <td>完全支持</td>
+      </tr>
+      <tr>
+          <td>macOS</td>
+          <td>完全支持</td>
+      </tr>
+      <tr>
+          <td>Android/iOS</td>
+          <td>实验性支持（需额外适配）</td>
+      </tr>
+      <tr>
+          <td>WebAssembly</td>
+          <td>支持（通过 WASM 渲染器）</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>💡 Avalonia 提供了真正的跨平台开发能力，适用于需要统一多端体验的应用场景。</p></blockquote>
+<hr>
+<h2 id="-性能表现">⚙️ 性能表现
+</h2><p>Avalonia 的渲染引擎经过优化，具备高效的绘制能力和良好的硬件加速支持，尤其在处理复杂图形与数据可视化时表现出色。</p>
+<ul>
+<li><strong>高效的渲染管道</strong></li>
+<li><strong>支持 GPU 加速</strong></li>
+<li><strong>低延迟响应用户交互</strong></li>
+</ul>
+<p>例如：当应用中存在大量动态图表或动画元素时，Avalonia 能保持流畅的帧率，避免卡顿现象。</p>
+<hr>
+<h1 id="-microsoftextensionsdependencyinjection-详解">🔄 Microsoft.Extensions.DependencyInjection 详解
+</h1><h2 id="-概述">📦 概述
+</h2><p><code>Microsoft.Extensions.DependencyInjection</code> 是 .NET 中的一个 <strong>轻量级依赖注入（DI）容器</strong>，它提供了一种灵活的方式来管理应用程序中的对象及其依赖关系。</p>
+<h3 id="-为什么使用-di">💡 为什么使用 DI？
+</h3><ul>
+<li>解耦业务逻辑与具体实现</li>
+<li>提高代码可测试性和可维护性</li>
+<li>支持模块化开发</li>
+</ul>
+<hr>
+<h2 id="-服务生命周期service-lifecycle">🕒 服务生命周期（Service Lifecycle）
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>生命周期类型</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Transient（瞬态）</strong></td>
+          <td>每次请求都会创建新实例，适合无状态服务</td>
+      </tr>
+      <tr>
+          <td><strong>Scoped（作用域）</strong></td>
+          <td>同一作用域内共享同一个实例，常用于 Web 请求上下文</td>
+      </tr>
+      <tr>
+          <td><strong>Singleton（单例）</strong></td>
+          <td>整个应用程序周期内共享唯一实例，适合全局资源管理</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="示例说明">示例说明：
+</h3><ul>
+<li><code>Transient</code>：每次调用 <code>IDataProcessor</code> 都会返回一个新的实例。</li>
+<li><code>Scoped</code>：在一次 HTTP 请求中，所有对 <code>IDatabaseContext</code> 的请求都返回同一个实例。</li>
+<li><code>Singleton</code>：如 <code>IAppSettings</code>，在整个应用程序中始终为同一实例。</li>
+</ul>
+<hr>
+<h1 id="-示例在-avalonia-中集成依赖注入">🧪 示例：在 Avalonia 中集成依赖注入
+</h1><blockquote>
+<p>📝以下示例将添加<code>Redis</code>和第三方Avalonia样式库<code>SukiUI</code>作为参考</p></blockquote>
+<h2 id="1-安装依赖注入包">1️⃣ 安装依赖注入包
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">install-package Microsoft.Extensions.DependencyInjection
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="2-初始化服务容器">2️⃣ 初始化服务容器
+</h2><p>在 <code>App.xaml.cs</code> 中重写 <code>OnFrameworkInitializationCompleted()</code> 方法以注册并构建服务容器。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnFrameworkInitializationCompleted</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">collection</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ServiceCollection</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddCommonServices</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddDistributedCache</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">_services</span> <span class="p">=</span> <span class="n">collection</span><span class="p">.</span><span class="n">BuildServiceProvider</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">vm</span> <span class="p">=</span> <span class="n">_services</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">MainWindowViewModel</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">toastService</span> <span class="p">=</span> <span class="n">_services</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ISukiToastManager</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">dialogService</span> <span class="p">=</span> <span class="n">_services</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ISukiDialogManager</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">ApplicationLifetime</span> <span class="k">is</span> <span class="n">IClassicDesktopStyleApplicationLifetime</span> <span class="n">desktop</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">desktop</span><span class="p">.</span><span class="n">MainWindow</span> <span class="p">=</span> <span class="n">_services</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">MainWindow</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">ApplicationLifetime</span> <span class="k">is</span> <span class="n">ISingleViewApplicationLifetime</span> <span class="n">singleViewPlatform</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">singleViewPlatform</span><span class="p">.</span><span class="n">MainView</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MainWindow</span><span class="p">(</span><span class="n">toastService</span><span class="p">,</span> <span class="n">dialogService</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">DataContext</span> <span class="p">=</span> <span class="n">vm</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">base</span><span class="p">.</span><span class="n">OnFrameworkInitializationCompleted</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="3-注册服务">3️⃣ 注册服务
+</h2><h3 id="自定义扩展方法注册常用服务">自定义扩展方法注册常用服务
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">AddCommonServices</span><span class="p">(</span><span class="k">this</span> <span class="n">IServiceCollection</span> <span class="n">collection</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">MainWindowViewModel</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">MainWindow</span><span class="p">&gt;(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">MainWindow</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ISukiToastManager</span><span class="p">&gt;(),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">s</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">ISukiDialogManager</span><span class="p">&gt;()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DataContext</span> <span class="p">=</span> <span class="n">s</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">MainWindowViewModel</span><span class="p">&gt;(),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">ISukiToastManager</span><span class="p">&gt;(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">DialogExManager</span><span class="p">.</span><span class="n">GetToastManager</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">ISukiDialogManager</span><span class="p">&gt;(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">DialogExManager</span><span class="p">.</span><span class="n">GetDialogManager</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注册-redis-缓存服务">注册 Redis 缓存服务
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">AddDistributedCache</span><span class="p">(</span><span class="k">this</span> <span class="n">IServiceCollection</span> <span class="n">collection</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">connection</span> <span class="p">=</span> <span class="n">ConnectionMultiplexer</span><span class="p">.</span><span class="n">Connect</span><span class="p">(</span><span class="s">&#34;127.0.0.1:6379&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">redis</span> <span class="p">=</span> <span class="n">connection</span><span class="p">.</span><span class="n">GetDatabase</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">(</span><span class="n">redis</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">(</span><span class="n">connection</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">collection</span><span class="p">.</span><span class="n">AddSingleton</span><span class="p">&lt;</span><span class="n">IDistributedCache</span><span class="p">,</span> <span class="n">RedisCache</span><span class="p">&gt;(</span><span class="n">s</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="k">new</span> <span class="n">RedisCache</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">GetRequiredService</span><span class="p">&lt;</span><span class="n">IDatabase</span><span class="p">&gt;());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="4-辅助类对话框与-toast-管理器">4️⃣ 辅助类：对话框与 Toast 管理器
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">class</span> <span class="nc">DialogExManager</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="k">readonly</span> <span class="n">ISukiToastManager</span> <span class="n">ToastManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SukiToastManager</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">static</span> <span class="k">readonly</span> <span class="n">ISukiDialogManager</span> <span class="n">DialogManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SukiDialogManager</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ISukiToastManager</span> <span class="n">GetToastManager</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">ToastManager</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">ISukiDialogManager</span> <span class="n">GetDialogManager</span><span class="p">()</span> <span class="p">=&gt;</span> <span class="n">DialogManager</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="5-视图定位器viewlocator">5️⃣ 视图定位器（ViewLocator）
+</h2><p>如果启用了 <code>ViewLocator</code>，则 ViewModel 与 View 将自动绑定。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ViewLocator</span> <span class="p">:</span> <span class="n">IDataTemplate</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Control</span><span class="p">?</span> <span class="n">Build</span><span class="p">(</span><span class="kt">object?</span> <span class="n">param</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">param</span> <span class="k">is</span> <span class="kc">null</span><span class="p">)</span> <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">name</span> <span class="p">=</span> <span class="n">param</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">FullName</span><span class="p">!.</span><span class="n">Replace</span><span class="p">(</span><span class="s">&#34;ViewModel&#34;</span><span class="p">,</span> <span class="s">&#34;View&#34;</span><span class="p">,</span> <span class="n">StringComparison</span><span class="p">.</span><span class="n">Ordinal</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="n">Type</span><span class="p">.</span><span class="n">GetType</span><span class="p">(</span><span class="n">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">type</span> <span class="p">!=</span> <span class="kc">null</span> <span class="p">?</span> <span class="p">(</span><span class="n">Control</span><span class="p">)</span><span class="n">Activator</span><span class="p">.</span><span class="n">CreateInstance</span><span class="p">(</span><span class="n">type</span><span class="p">)!</span> <span class="p">:</span> <span class="k">new</span> <span class="n">TextBlock</span> <span class="p">{</span> <span class="n">Text</span> <span class="p">=</span> <span class="s">&#34;Not Found: &#34;</span> <span class="p">+</span> <span class="n">name</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">Match</span><span class="p">(</span><span class="kt">object?</span> <span class="n">data</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">data</span> <span class="k">is</span> <span class="n">ViewModelBase</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>📝 如果未启用 <code>ViewLocator</code>，则需要手动设置 <code>DataContext</code>。</p></blockquote>
+<hr>
+<h1 id="-总结">✅ 总结
+</h1><p>Avalonia 是一个强大的跨平台 UI 框架，结合 <code>Microsoft.Extensions.DependencyInjection</code> 可实现高度解耦和模块化的应用程序架构。通过合理配置服务生命周期和使用视图定位器等机制，可以显著提升开发效率和代码质量。</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/csharp/">Csharp</a>
+        
+            <a href="/tags/dotnet/">Dotnet</a>
+        
+            <a href="/tags/avalonia/">Avalonia</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/single-file-run/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg" loading="lazy" data-key="single-file-run" data-hash="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">单文件运行C#代码</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 剪烛西窗
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>
