@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>剪烛西窗</copyright>
-        <lastBuildDate>Fri, 30 May 2025 14:46:48 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 04 Jun 2025 11:04:44 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Avalonia</title>
+        <link>https://dumbnessrf.github.io/categories/avalonia/</link>
+        <pubDate>Wed, 04 Jun 2025 11:04:44 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/categories/avalonia/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Wpf</title>
         <link>https://dumbnessrf.github.io/categories/wpf/</link>
         <pubDate>Fri, 30 May 2025 14:46:48 +0800</pubDate>
@@ -21,6 +29,14 @@
         <pubDate>Fri, 30 May 2025 14:46:48 +0800</pubDate>
         
         <guid>https://dumbnessrf.github.io/categories/xaml/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Dotnet</title>
+        <link>https://dumbnessrf.github.io/categories/dotnet/</link>
+        <pubDate>Thu, 29 May 2025 11:04:44 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/categories/dotnet/</guid>
         <description></description>
         </item>
         
