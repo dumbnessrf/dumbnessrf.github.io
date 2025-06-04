@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dumbnessrf.github.io/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/dependency_injection_with_dynamic_loaded_dll.md/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/categories/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/categories/dependency_injection/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/dependency_injection/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/post/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/</loc>
+    <lastmod>2025-06-04T14:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/avalonia/</loc>
     <lastmod>2025-06-04T11:04:44+08:00</lastmod>
@@ -12,21 +33,6 @@
     <lastmod>2025-06-04T11:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/p/dependency_injection/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/categories/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/dotnet/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/post/</loc>
-    <lastmod>2025-06-04T11:04:44+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/</loc>
     <lastmod>2025-06-04T11:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/wpf/</loc>
@@ -45,6 +51,9 @@
     <lastmod>2025-05-30T14:46:48+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/dotnet/</loc>
+    <lastmod>2025-05-29T11:04:44+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/dotnet/</loc>
     <lastmod>2025-05-29T11:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/syntax/</loc>
