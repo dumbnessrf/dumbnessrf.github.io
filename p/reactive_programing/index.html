@@ -1,0 +1,1450 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="ReactiveUI 与 Rx 常用方法总结">
+<title>ReactiveUI 与 Rx 常用方法总结</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/reactive_programing/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="ReactiveUI 与 Rx 常用方法总结">
+<meta property='og:description' content="ReactiveUI 与 Rx 常用方法总结">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/reactive_programing/'>
+<meta property='og:site_name' content='飞人博尔特的摄影师'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='csharp' /><meta property='article:tag' content='reactive' /><meta property='article:published_time' content='2025-06-06T11:04:44&#43;08:00'/><meta property='article:modified_time' content='2025-06-06T11:04:44&#43;08:00'/><meta property='og:image' content='https://www.notion.so/images/page-cover/woodcuts_6.jpg' />
+<meta name="twitter:title" content="ReactiveUI 与 Rx 常用方法总结">
+<meta name="twitter:description" content="ReactiveUI 与 Rx 常用方法总结"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.notion.so/images/page-cover/woodcuts_6.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">飞人博尔特的摄影师</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#基础用法">基础用法</a></li>
+    <li><a href="#whenanywhenanyvaluewhenanyobservable"><code>WhenAny</code>、<code>WhenAnyValue</code>、<strong><code>WhenAnyObservable</code></strong></a></li>
+    <li><a href="#whenanyvalue">WhenAnyValue</a></li>
+    <li><a href="#whenany">WhenAny</a></li>
+    <li><a href="#whenanyobservable"><strong>WhenAnyObservable</strong></a></li>
+    <li><a href="#where"><code>Where</code></a></li>
+    <li><a href="#subscribe"><code>Subscribe</code></a></li>
+    <li><a href="#subscribeon"><code>SubscribeOn</code></a></li>
+    <li><a href="#throttle"><code>Throttle</code></a></li>
+    <li><a href="#sampleinterval"><code>Sample</code>、<code>Interval</code></a></li>
+    <li><a href="#timeramb"><code>Timer</code>、<code>Amb</code></a></li>
+    <li><a href="#retrycatch"><code>Retry</code>、<code>Catch</code></a></li>
+    <li><a href="#scanbuffer"><code>Scan</code>、<code>Buffer</code></a></li>
+    <li><a href="#distinct"><strong><code>Distinct</code>、<code>DistinctUntilChanged</code></strong></a></li>
+    <li><a href="#zip"><code>Zip</code></a></li>
+    <li><a href="#delaydotimeinterval"><code>Delay</code>、<code>Do</code>、<code>TimeInterval</code></a></li>
+    <li><a href="#averageaggregate"><strong><code>Average</code>、<code>Concat</code>、<code>Count</code>、<code>Max</code>、<code>Min</code>、</strong><code>Aggregate</code><strong>、<code>Sum</code></strong></a></li>
+    <li><a href="#all"><strong><code>All</code>、<code>Contains</code>、<code>TakeUntil</code>、<code>StartWith</code> 、<code>Join</code></strong></a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/reactive_programing/">
+                
+                    <img src="https://www.notion.so/images/page-cover/woodcuts_6.jpg" loading="lazy" alt="Featured image of post ReactiveUI 与 Rx 常用方法总结" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/reactive/" >
+                Reactive
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/reactive_programing/">ReactiveUI 与 Rx 常用方法总结</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            ReactiveUI 与 Rx 常用方法总结
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 06, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    9 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="reactiveui">ReactiveUI
+</h1><h2 id="基础用法">基础用法
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">ReactiveUI</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">AvaloniaApplication1.ViewModels</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">partial</span> <span class="k">class</span> <span class="nc">MainWindowViewModel</span> <span class="p">:</span> <span class="n">ViewModelBase</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [ObservableProperty]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">partial</span> <span class="kt">string</span> <span class="n">Text1</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [ObservableProperty]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">partial</span> <span class="kt">string</span> <span class="n">Text2</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [ObservableProperty]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">partial</span> <span class="kt">string</span> <span class="n">Result</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">MainWindowViewModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">WhenAnyValue</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text1</span><span class="p">,</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="kt">double</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="k">out</span> <span class="n">_</span><span class="p">)</span> <span class="p">&amp;&amp;</span> <span class="kt">double</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Item2</span><span class="p">,</span> <span class="k">out</span> <span class="n">_</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">Calculate</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="n">WhenAnyValue</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text1</span><span class="p">,</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="p">!</span><span class="kt">double</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Item1</span><span class="p">,</span> <span class="k">out</span> <span class="n">_</span><span class="p">)</span> <span class="p">||</span> <span class="p">!</span><span class="kt">double</span><span class="p">.</span><span class="n">TryParse</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="n">Item2</span><span class="p">,</span> <span class="k">out</span> <span class="n">_</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">Clear</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Calculate</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Result</span> <span class="p">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Text1</span><span class="p">)</span> <span class="p">+</span> <span class="kt">double</span><span class="p">.</span><span class="n">Parse</span><span class="p">(</span><span class="n">Text2</span><span class="p">)).</span><span class="n">ToString</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">void</span> <span class="n">Clear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Result</span> <span class="p">=</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>只有当Text1和Text2发生变化且不为空时才订阅Calculate事件，为空时订阅Clear事件</p>
+<h2 id="whenanywhenanyvaluewhenanyobservable"><code>WhenAny</code>、<code>WhenAnyValue</code>、<strong><code>WhenAnyObservable</code></strong>
+</h2><p><code>WhenAny</code> 是一组扩展方法，每个方法都以前缀 <code>WhenAny</code> 开头，可用于在对象的属性发生更改时获取通知。</p>
+<p>在可能的情况下，<code>WhenAnyValue</code> 应该优先于 <code>WhenAny</code>，并且您不需要知道<code>Sender</code>或<code>Expression</code></p>
+<p><code>WhenAny</code> 变体支持多种属性更改通知。例如，它可以支持视图模型的 <code>INotifyPropertyChanged</code> 、基于 Windows 的 XAML 平台上的 <code>DependencyProperty</code> 以及 Apple 平台上的 <code>NSObject</code> 属性更改通知。要获取值更改通知，您的对象必须实现这些已知的属性更改通知机制之一。
+如果其中一个不支持，您将只能获取属性的初始值，而不会收到任何更新通知。此外，运行时还会发出警告（请确保您已注册 <code>ILogger</code> 服务以便查看此警告）。</p>
+<h2 id="whenanyvalue">WhenAnyValue
+</h2><p><code>IObservable&lt;TRet&gt; WhenAnyValue&lt;TSender, TRet&gt;(    this TSender? sender,    Expression&lt;Func&lt;TSender, TRet&gt;&gt; property1)</code></p>
+<p>由于表达式尚不支持此功能，因此 <code>WhenAnyValue</code> 不能直接执行空传播。
+你可以通过将 <code>WhenAnyValue()</code> 调用链接到每个属性来模拟对空值传播的支持。以下是示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">WhenAnyValue</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Foo</span><span class="p">,</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">,</span> <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span><span class="p">,</span> <span class="p">(</span><span class="n">foo</span><span class="p">,</span> <span class="n">bar</span><span class="p">,</span> <span class="n">baz</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">foo</span><span class="p">?.</span><span class="n">Bar</span><span class="p">?.</span><span class="n">Baz</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="whenany">WhenAny
+</h2><p><code>WhenAny</code> 允许您获取传递到 <code>WhenAny 中</code>的表达式和表达式。这对于一些场景是很有用的，比如在视图中，你需要知道调用属性改变的控件。</p>
+<p><code>WhenAny</code> 仅告知您输入表达式的最终值何时发生变化。即使最终的变化是由于表达式链中的中间值引起的，也是如此。以下是一个解释性示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">WhenAny</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span><span class="p">,</span> <span class="n">_</span> <span class="p">=&gt;</span> <span class="s">&#34;Hello!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 1</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span> <span class="p">=</span> <span class="s">&#34;Something&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&gt;&gt;</span> <span class="n">Hello</span><span class="p">!</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 2: Nothing printed! Because the string value does not change</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span> <span class="p">=</span> <span class="s">&#34;Something&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 3: Still nothing！Because the expression is Foo.Bar.Baz，not Foo.Bar</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="p">()</span> <span class="p">{</span> <span class="n">Baz</span> <span class="p">=</span> <span class="s">&#34;Something&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 4: The result changes, so we print</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="p">()</span> <span class="p">{</span> <span class="n">Baz</span> <span class="p">=</span> <span class="s">&#34;Else&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&gt;&gt;</span> <span class="n">Hello</span><span class="p">!</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>WhenAny</code> 仅在读取给定表达式不会抛出 <code>NullReferenceException</code> 时才会发送通知。请考虑以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">WhenAny</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span><span class="p">,</span> <span class="n">_</span> <span class="p">=&gt;</span> <span class="s">&#34;Hello!&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 1</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span><span class="p">.</span><span class="n">Baz</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&gt;&gt;</span> <span class="n">Hello</span><span class="p">!</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 2: Nothing printed!</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// Example 3</span>
+</span></span><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">Foo</span><span class="p">.</span><span class="n">Bar</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Bar</span><span class="p">()</span> <span class="p">{</span> <span class="n">Baz</span> <span class="p">=</span> <span class="s">&#34;Something&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="p">&gt;&gt;&gt;</span> <span class="n">Hello</span><span class="p">!</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="whenanyobservable"><strong>WhenAnyObservable</strong>
+</h2><p><code>WhenAnyObservable</code> 会观察一个或多个可观察对象并提供最新的可观察值，处理新可观察对象的自动订阅以及 <code>WhenAnyObservable</code> 可观察对象的处理。WhenAnyObservable 默认为惰性订阅，这意味着在订阅之前不会获得任何值(其他的When在Ctor完成时就会通知，这个只有在更改时才会通知)。</p>
+<p>每当文档保存时，它都会打印来自 <code>IsSaved</code> 可观察变量的值。当 <code>Document</code> 属性发生更改时，它将自动取消订阅并重新订阅。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">MyViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Reactive]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Document</span> <span class="n">Document</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">MyViewModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">this</span><span class="p">.</span><span class="n">WhenAnyObservable</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Document</span><span class="p">.</span><span class="n">IsSaved</span><span class="p">).</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Document Saved: {x}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">Document</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">IObservable</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">&gt;</span> <span class="n">IsSaved</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="where"><code>Where</code>
+</h2><p>仅从 Observable 中发出那些通过谓词测试的项
+<code>IObservable&lt;TSource&gt; Where&lt;TSource&gt;(this IObservable&lt;TSource&gt; source, Func&lt;TSource, bool&gt; predicate)</code></p>
+<h2 id="subscribe"><code>Subscribe</code>
+</h2><p>根据事件源的发出的事件或通知进行操作</p>
+<p>注意：该操作符之后将返回IDisposable，而不是IObservable</p>
+<p><code>IDisposable Subscribe&lt;T&gt;(this IObservable&lt;T&gt; source, Action&lt;T&gt; onNext)</code></p>
+<h2 id="subscribeon"><code>SubscribeOn</code>
+</h2><p>指定事件源在订阅时应使用的调度器</p>
+<p>SubscribeOn 运算符指定 Observable 将开始在哪个线程上运行，而不管该运算符在运算符链中的哪个点被调用。另一方面，ObserveOn 会影响 Observable 将使用的线程， <em>该</em>线程位于该运算符出现的位置下方。 因此，您可以调用 在 Observable 链中的不同点多次进行 ObserveOn 运算符，以便更改某些运算符在哪些线程上进行作。</p>
+<p><code>IObservable&lt;TSource&gt; SubscribeOn&lt;TSource&gt;(this IObservable&lt;TSource&gt; source, IScheduler scheduler)</code></p>
+<aside>
+📢
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">WhenAnyValue</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text1</span><span class="p">,</span> <span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">SubscribeOn</span><span class="p">(</span><span class="n">RxApp</span><span class="p">.</span><span class="n">MainThreadScheduler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">SubscribeOn</span><span class="p">(</span><span class="n">RxApp</span><span class="p">.</span><span class="n">TaskpoolScheduler</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">SubscribeOn</span><span class="p">(</span><span class="n">SynchronizationContext</span><span class="p">.</span><span class="n">Current</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div></aside>
+<aside>
+📢
+<p><code>RxApp.MainThreadScheduler</code></p>
+<p>获取或设置一个调度器，该调度器用于对那些应在 “用户界面 (UI) 线程上” 运行的工作项进行调度。在正常模式下，这将是 <code>DispatcherScheduler</code>（分发器调度器），而在单元测试模式下，这将是 <code>Immediate</code>（即时调度器），以便简化常见单元测试的编写工作。</p>
+<p><code>RxApp.TaskpoolScheduler</code></p>
+<p>获取或设置用于调度工作项以在后台线程中运行的调度器。在两种模式下，这些工作项都将在 TPL（任务并行库）任务池中运行。</p>
+<p><code>SynchronizationContext.Current</code>
+Thread.CurrentThread._synchronizationContext</p>
+</aside>
+<h2 id="throttle"><code>Throttle</code>
+</h2><p>此操作符会对源序列进行限流，具体做法是对每个元素保留 <code>dueTime</code>（指定时长）。若在这个时间窗口内又产生了另一个元素，那么前一个元素会被丢弃，并且会为当前元素启动一个新的计时器，如此循环往复。对于元素间间隔从不大于或等于 <code>dueTime</code> 的流，经过处理后的流将不会产生任何元素。若要在保证元素周期性产生的同时减少流的数据量，可考虑使用 <code>Observable.Sample</code> 系列操作符。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">this</span><span class="p">.</span><span class="n">WhenAnyValue</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">s</span><span class="p">.</span><span class="n">Text1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Throttle</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">Calculate</span><span class="p">());</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="sampleinterval"><code>Sample</code>、<code>Interval</code>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">sub</span> <span class="p">=</span> <span class="n">Observable</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">0.01</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Sample</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">500</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">s</span> <span class="p">=&gt;</span> <span class="n">Result</span><span class="p">=</span><span class="n">s</span><span class="p">.</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="n">sub</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>每 10 毫秒发出一个值的可观察序列，每 500 毫秒对这个序列进行一次采样，将采样得到的值转换为字符串并赋值给 <code>Result</code> 变量，持续执行 2 秒后取消订阅并释放资源；尽管2s内通过<code>Interval</code>产生了200个，但是由于<code>Sample</code>，我只采样到了4个</p>
+<h2 id="timeramb"><code>Timer</code>、<code>Amb</code>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">observable1</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">200</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="s">&#34;Observable 1&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 创建第二个可观测序列，延迟 100 毫秒后发射元素</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">observable2</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromMilliseconds</span><span class="p">(</span><span class="m">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="s">&#34;Observable 2&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 使用 Amb 操作符选择第一个产生元素的序列</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="n">observable1</span><span class="p">.</span><span class="n">Amb</span><span class="p">(</span><span class="n">observable2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 订阅结果序列</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">    <span class="k">value</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Received: {value}&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="n">error</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Error: {error}&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Completed&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>借助 <code>Observable.Timer</code> 来创建两个可观测序列 <code>observable1</code> 和 <code>observable2</code>，它们会在特定延迟后发射元素。</p>
+<p>在这个示例中，由于 <code>observable2</code> 延迟 100 毫秒，比 <code>observable1</code> 的 200 毫秒延迟要短，所以 <code>observable2</code> 会率先产生元素，<code>Amb</code> 操作符会选择 <code>observable2</code> 并忽略 <code>observable1</code>。</p>
+<blockquote>
+<p>Received: Observable 2<br>
+Completed<br></p></blockquote>
+<h2 id="retrycatch"><code>Retry</code>、<code>Catch</code>
+</h2><p><code>Retry</code>允许在发生错误时或抛出错误时重新订阅源序列。例如，以下代码创建一个会抛出异常的序列，并通过Retry(2)最多重试2次：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Disposables</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">observer</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Doing work...&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// throw new Exception(&#34;Initial failure&#34;);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">observer</span><span class="p">.</span><span class="n">OnError</span><span class="p">(</span><span class="k">new</span> <span class="n">Exception</span><span class="p">(</span><span class="s">&#34;Initial failure&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Disposable</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">source</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Retry</span><span class="p">(</span><span class="m">2</span><span class="p">)</span> <span class="c1">// 发生错误时重新订阅源序列，最多尝试2次</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnNext: &#34;</span> <span class="p">+</span> <span class="n">x</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ex</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnError: &#34;</span> <span class="p">+</span> <span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnCompleted&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出</p>
+<blockquote>
+<p>Doing work&hellip;<br>
+Doing work&hellip;<br>
+OnError: Initial failure<br></p></blockquote>
+<p>**<code>Catch</code>**用于捕获异常并替换为新的序列。例如，以下代码在发生错误后返回一个备用值：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Disposables</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Create</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;(</span><span class="n">observer</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">observer</span><span class="p">.</span><span class="n">OnError</span><span class="p">(</span><span class="k">new</span> <span class="n">Exception</span><span class="p">(</span><span class="s">&#34;Primary error&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Disposable</span><span class="p">.</span><span class="n">Empty</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">source</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Catch</span><span class="p">(</span><span class="n">Observable</span><span class="p">.</span><span class="n">Return</span><span class="p">(</span><span class="m">42</span><span class="p">))</span>  <span class="c1">// 捕获异常并替换为值42</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnNext: &#34;</span> <span class="p">+</span> <span class="n">x</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="n">ex</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnError: &#34;</span> <span class="p">+</span> <span class="n">ex</span><span class="p">.</span><span class="n">Message</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">        <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnCompleted&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>OnNext: 42<br>
+OnCompleted<br></p></blockquote>
+<h2 id="scanbuffer"><code>Scan</code>、<code>Buffer</code>
+</h2><p><code>Scan</code> 用于对序列中的每个元素连续应用累积函数，并输出中间结果。类似于LINQ的 Aggregate，但会发射所有中间值</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span> <span class="c1">// 生成1到5的序列</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">source</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Scan</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="p">(</span><span class="n">acc</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">acc</span> <span class="p">+</span> <span class="n">val</span><span class="p">)</span> <span class="c1">// 初始值0，累加当前值</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;Scan Result: &#34;</span> <span class="p">+</span> <span class="n">x</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Scan Result: 1<br>
+Scan Result: 3<br>
+Scan Result: 6<br>
+Scan Result: 10<br>
+Scan Result: 15<br></p></blockquote>
+<p><code>Buffer</code> 将事件流按时间或数量分组，输出批量数据。常见用法包括按时间窗口或元素数量缓冲。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">))</span> <span class="c1">// 每秒发射递增数</span>
+</span></span><span class="line"><span class="cl">                       <span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">10</span><span class="p">);</span> <span class="c1">// 限制总发射次数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 按时间窗口（5秒）和最大数量（3个元素）缓冲</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Buffer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">5</span><span class="p">),</span> <span class="m">3</span><span class="p">)</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">buffer</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Buffered Count: {buffer.Count}&#34;</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Buffered Count: 3  // 第1-3秒的数据<br>
+Buffered Count: 3  // 第4-5秒的数据（可能触发时间窗口）<br>
+Buffered Count: 3  // 下一个窗口<br>
+Buffered Count: 1  // 剩余1个元素<br></p></blockquote>
+<aside>
+📢
+<p><code>Buffer</code> 支持多种分组策略，如纯时间窗口（Buffer(<code>TimeSpan</code>)）、纯数量（Buffer(<code>count</code>)）或两者结合</p>
+</aside>
+<h2 id="distinct"><strong><code>Distinct</code>、<code>DistinctUntilChanged</code></strong>
+</h2><p>Distinct：过滤序列中所有重复的元素，仅保留首次出现的元素。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">3</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span><span class="p">.</span><span class="n">ToObservable</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="n">Distinct</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>输出</strong> ：<strong><code>1, 2, 3</code></strong></p>
+<p>DistinctUntilChanged：仅过滤<strong>连续重复</strong> 的元素，保留第一个，后续连续相同的元素被丢弃。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="k">new</span><span class="p">[]</span> <span class="p">{</span> <span class="m">1</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">3</span><span class="p">,</span> <span class="m">2</span><span class="p">,</span> <span class="m">2</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="n">source</span><span class="p">.</span><span class="n">ToObservable</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="n">DistinctUntilChanged</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">      <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">x</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>输出</strong> ：<strong><code>1, 2, 3, 2</code></strong></p>
+<h2 id="zip"><code>Zip</code>
+</h2><p><strong><code>Zip</code></strong> 用于合并两个序列，逐个配对元素并生成结果。在 Rx 中，它常用于组合多个异步数据流。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span> <span class="c1">// 1, 2, 3</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">letters</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Return</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">).</span><span class="n">Concat</span><span class="p">(</span><span class="n">Observable</span><span class="p">.</span><span class="n">Return</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">));</span> <span class="c1">// A, B</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">numbers</span><span class="p">.</span><span class="n">Zip</span><span class="p">(</span><span class="n">letters</span><span class="p">,</span> <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">$&#34;{n}{l}&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">       <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">result</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>1A<br>
+2B<br></p></blockquote>
+<h2 id="delaydotimeinterval"><code>Delay</code>、<code>Do</code>、<code>TimeInterval</code>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Concurrency</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">))</span> <span class="c1">// 每秒发射递增数</span>
+</span></span><span class="line"><span class="cl">                               <span class="p">.</span><span class="n">Take</span><span class="p">(</span><span class="m">5</span><span class="p">);</span> <span class="c1">// 限制发射次数为5次</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">source</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Delay</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">0.5</span><span class="p">))</span> <span class="c1">// 延迟0.5秒后发射元素 [[4]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Do</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Do: 被延迟的值 = {x}&#34;</span><span class="p">))</span> <span class="c1">// 记录中间状态 [[6]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">TimeInterval</span><span class="p">()</span> <span class="c1">// 测量连续事件的时间间隔 [[1]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">                <span class="n">interval</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;TimeInterval: 值={interval.Value}, 间隔={interval.Interval.TotalSeconds}秒&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">ex</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;OnError: {ex.Message}&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;OnCompleted&#34;</span><span class="p">)</span> <span class="c1">// 序列结束 [[10]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 确保主线程等待足够时间以观察输出</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>流程</strong> ：
+<ol>
+<li>每秒生成一个数字（<strong><code>Interval</code></strong>）。</li>
+<li>延迟0.5秒后发射（<strong><code>Delay</code></strong>）。</li>
+<li>记录延迟后的值（<strong><code>Do</code></strong>）。</li>
+<li>计算相邻值的发射时间间隔（<strong><code>TimeInterval</code></strong>）。</li>
+<li>序列结束时自动触发 <strong><code>OnCompleted</code></strong>。</li>
+</ol>
+</li>
+</ul>
+<blockquote>
+<p>Do: 被延迟的值 = 0<br>
+TimeInterval: 值=0, 间隔=1.5369618秒<br>
+Do: 被延迟的值 = 1<br>
+TimeInterval: 值=1, 间隔=0.9820277秒<br>
+Do: 被延迟的值 = 2<br>
+TimeInterval: 值=2, 间隔=0.9995484秒<br>
+Do: 被延迟的值 = 3<br>
+TimeInterval: 值=3, 间隔=1.0001499秒<br>
+Do: 被延迟的值 = 4<br>
+TimeInterval: 值=4, 间隔=1.0005686秒<br>
+OnCompleted<br></p></blockquote>
+<h2 id="averageaggregate"><strong><code>Average</code>、<code>Concat</code>、<code>Count</code>、<code>Max</code>、<code>Min</code>、</strong><code>Aggregate</code><strong>、<code>Sum</code></strong>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建第一个序列</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source1</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">3</span><span class="p">);</span> <span class="c1">// 发射 1, 2, 3</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 创建第二个序列</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source2</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">4</span><span class="p">,</span> <span class="m">2</span><span class="p">);</span> <span class="c1">// 发射 4, 5</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 使用 Concat 合并两个序列 [[3]]</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">concatenated</span> <span class="p">=</span> <span class="n">source1</span><span class="p">.</span><span class="n">Concat</span><span class="p">(</span><span class="n">source2</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 应用聚合操作符</span>
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Count</span><span class="p">()</span> <span class="c1">// 计算总项数 [[1]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">count</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Total Count: {count}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Sum</span><span class="p">()</span> <span class="c1">// 计算总和 [[9]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">sum</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Total Sum: {sum}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Average</span><span class="p">()</span> <span class="c1">// 计算平均值 [[9]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">avg</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Average: {avg}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Min</span><span class="p">()</span> <span class="c1">// 查找最小值</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">min</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Min: {min}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Max</span><span class="p">()</span> <span class="c1">// 查找最大值</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">max</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Max: {max}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 使用 Aggregate 自定义聚合逻辑（类似 Sum）</span>
+</span></span><span class="line"><span class="cl">        <span class="n">concatenated</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Aggregate</span><span class="p">((</span><span class="n">acc</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="n">acc</span> <span class="p">+</span> <span class="n">val</span><span class="p">)</span> <span class="c1">// 累积求和 [[9]]</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">total</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Reduce (Custom Sum): {total}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span> <span class="c1">// 防止控制台退出</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>Total Count: 5<br>
+Total Sum: 15<br>
+Average: 3<br>
+Min: 1<br>
+Max: 5<br>
+Reduce (Custom Sum): 15<br></p></blockquote>
+<h2 id="all"><strong><code>All</code>、<code>Contains</code>、<code>TakeUntil</code>、<code>StartWith</code> 、<code>Join</code></strong>
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.Reactive.Linq</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Program</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">static</span> <span class="k">void</span> <span class="n">Main</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 示例序列1：数字序列 [1, 2, 3, 4, 5]</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">numbers</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">1</span><span class="p">,</span> <span class="m">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 示例序列2：字符串序列 [&#34;A&#34;, &#34;B&#34;, &#34;C&#34;]</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">letters</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Range</span><span class="p">(</span><span class="m">0</span><span class="p">,</span> <span class="m">3</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="p">((</span><span class="kt">char</span><span class="p">)(</span><span class="sc">&#39;A&#39;</span> <span class="p">+</span> <span class="n">x</span><span class="p">)).</span><span class="n">ToString</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// StartWith: 在序列开始前添加元素 [0, 1, 2, 3, 4, 5]</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">startWithExample</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">StartWith</span><span class="p">(</span><span class="m">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">startWithExample</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;StartWith: {x}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// All: 检查所有元素是否大于0</span>
+</span></span><span class="line"><span class="cl">        <span class="n">numbers</span><span class="p">.</span><span class="n">All</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;All &gt; 0: {result}&#34;</span><span class="p">));</span> <span class="c1">// 输出 true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Contains: 判断序列是否包含元素 3</span>
+</span></span><span class="line"><span class="cl">        <span class="n">numbers</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="m">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Contains 3: {result}&#34;</span><span class="p">));</span> <span class="c1">// 输出 true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// TakeUntil: 当另一个序列（如定时器）触发时停止</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">takeUntilExample</span> <span class="p">=</span> <span class="n">numbers</span><span class="p">.</span><span class="n">TakeUntil</span><span class="p">(</span><span class="n">Observable</span><span class="p">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">2</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">takeUntilExample</span><span class="p">.</span><span class="n">Subscribe</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;TakeUntil: {x}&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">            <span class="p">()</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">&#34;TakeUntil Completed&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// Join: 合并两个序列（基于时间窗口）</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">now</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source1</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1</span><span class="p">)).</span><span class="n">Take</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="s">$&#34;N{x}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">source2</span> <span class="p">=</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Interval</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">1.5</span><span class="p">)).</span><span class="n">Take</span><span class="p">(</span><span class="m">3</span><span class="p">).</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="s">$&#34;L{x}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">source1</span><span class="p">.</span><span class="n">Join</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">            <span class="n">source2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_</span> <span class="p">=&gt;</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">2</span><span class="p">)),</span> <span class="c1">// 左侧元素存活时间</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_</span> <span class="p">=&gt;</span> <span class="n">Observable</span><span class="p">.</span><span class="n">Timer</span><span class="p">(</span><span class="n">TimeSpan</span><span class="p">.</span><span class="n">FromSeconds</span><span class="p">(</span><span class="m">2</span><span class="p">)),</span> <span class="c1">// 右侧元素存活时间</span>
+</span></span><span class="line"><span class="cl">            <span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="s">$&#34;{n}+{l}&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">).</span><span class="n">Subscribe</span><span class="p">(</span><span class="n">result</span> <span class="p">=&gt;</span> <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Join Result: {result}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">Console</span><span class="p">.</span><span class="n">ReadLine</span><span class="p">();</span> <span class="c1">// 防止控制台退出</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ol>
+<li>应用StartWith添加初始元素。</li>
+<li>使用All检查条件。</li>
+<li>使用Contains判断是否存在元素。</li>
+<li>使用TakeUntil在另一个序列触发后停止。</li>
+<li>使用Join合并两个序列。</li>
+<li>每个操作符后订阅结果并输出。</li>
+<li>添加必要的引用标注。</li>
+</ol>
+<blockquote>
+<p>StartWith: 0<br>
+StartWith: 1<br>
+StartWith: 2<br>
+StartWith: 3<br>
+StartWith: 4<br>
+StartWith: 5<br>
+All &gt; 0: True<br>
+Contains 3: True<br>
+TakeUntil: 1<br>
+TakeUntil: 2<br>
+TakeUntil: 3<br>
+TakeUntil: 4<br>
+TakeUntil: 5<br>
+TakeUntil Completed<br>
+Join Result: N0+L0<br>
+Join Result: N1+L0<br>
+Join Result: N0+L1<br>
+Join Result: N1+L1<br>
+Join Result: N2+L0<br>
+Join Result: N2+L1<br>
+Join Result: N2+L2<br></p></blockquote>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/csharp/">Csharp</a>
+        
+            <a href="/tags/reactive/">Reactive</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 飞人博尔特的摄影师
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>
