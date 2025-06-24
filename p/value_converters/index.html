@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 WPF、Xamarin.Forms和.NET MAUI开发中，数据绑定是MVVM架构的核心机制。但有时我们希望对绑定的数据进行转换、格式化或逻辑处理，这时候就需要使用 IValueConverter 接口实现值转换器。">
+<title>Value Converters</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/value_converters/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Value Converters">
+<meta property='og:description' content="在 WPF、Xamarin.Forms和.NET MAUI开发中，数据绑定是MVVM架构的核心机制。但有时我们希望对绑定的数据进行转换、格式化或逻辑处理，这时候就需要使用 IValueConverter 接口实现值转换器。">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/value_converters/'>
+<meta property='og:site_name' content='飞人博尔特的摄影师'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='wpf' /><meta property='article:tag' content='xaml' /><meta property='article:published_time' content='2025-06-24T17:39:03&#43;08:00'/><meta property='article:modified_time' content='2025-06-24T17:39:03&#43;08:00'/><meta property='og:image' content='https://www.notion.so/images/page-cover/webb3.jpg' />
+<meta name="twitter:title" content="Value Converters">
+<meta name="twitter:description" content="在 WPF、Xamarin.Forms和.NET MAUI开发中，数据绑定是MVVM架构的核心机制。但有时我们希望对绑定的数据进行转换、格式化或逻辑处理，这时候就需要使用 IValueConverter 接口实现值转换器。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.notion.so/images/page-cover/webb3.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">飞人博尔特的摄影师</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-安装方法">📦 安装方法</a></li>
+    <li><a href="#-如何使用-valueconvertersnet">✅ 如何使用 ValueConverters.NET？</a>
+      <ol>
+        <li><a href="#步骤一在-xaml-中定义资源">步骤一：在 XAML 中定义资源</a></li>
+        <li><a href="#步骤二在绑定中使用-converter">步骤二：在绑定中使用 Converter</a></li>
+      </ol>
+    </li>
+    <li><a href="#-核心-converters-及其示例">🧩 核心 Converters 及其示例</a>
+      <ol>
+        <li><a href="#1-datetimeconverter日期格式化">1. <code>DateTimeConverter</code>：日期格式化</a>
+          <ol>
+            <li><a href="#示例代码">示例代码：</a></li>
+            <li><a href="#支持参数">支持参数：</a></li>
+            <li><a href="#应用场景">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#2-booleantovisibilityconverter布尔值转可见性">2. <code>BooleanToVisibilityConverter</code>：布尔值转可见性</a>
+          <ol>
+            <li><a href="#示例代码-1">示例代码：</a></li>
+            <li><a href="#支持参数-1">支持参数：</a></li>
+            <li><a href="#应用场景-1">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#3-enumwrapperconverter枚举本地化展示">3. <code>EnumWrapperConverter</code>：枚举本地化展示</a>
+          <ol>
+            <li><a href="#示例代码-2">示例代码：</a></li>
+            <li><a href="#支持特性">支持特性：</a></li>
+            <li><a href="#应用场景-2">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-invertbooleanconverter取反布尔值">4. <code>InvertBooleanConverter</code>：取反布尔值</a>
+          <ol>
+            <li><a href="#示例代码-3">示例代码：</a></li>
+            <li><a href="#特点">特点：</a></li>
+            <li><a href="#应用场景-3">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-nulltovisibilityconverter空值控制可见性">5. <code>NullToVisibilityConverter</code>：空值控制可见性</a>
+          <ol>
+            <li><a href="#示例代码-4">示例代码：</a></li>
+            <li><a href="#支持参数-2">支持参数：</a></li>
+            <li><a href="#应用场景-4">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-enumtobooleanconverter枚举匹配判断布尔值">6. <code>EnumToBooleanConverter</code>：枚举匹配判断布尔值</a>
+          <ol>
+            <li><a href="#示例代码-5">示例代码：</a></li>
+            <li><a href="#应用场景-5">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#7-multibindingconverters多个绑定值组合转换">7. <code>MultiBindingConverters</code>：多个绑定值组合转换</a>
+          <ol>
+            <li><a href="#示例根据两个布尔值决定是否启用按钮">示例：根据两个布尔值决定是否启用按钮</a></li>
+            <li><a href="#支持的-multiconverter">支持的 MultiConverter：</a></li>
+            <li><a href="#应用场景-6">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#8-imagesourceconverter图像路径转-imagesource">8. <code>ImageSourceConverter</code>：图像路径转 ImageSource</a>
+          <ol>
+            <li><a href="#示例代码-6">示例代码：</a></li>
+            <li><a href="#支持参数-3">支持参数：</a></li>
+            <li><a href="#应用场景-7">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#9-filesizetostringconverter字节大小自动转-kbmbgb">9. <code>FileSizeToStringConverter</code>：字节大小自动转 KB/MB/GB</a>
+          <ol>
+            <li><a href="#示例代码-7">示例代码：</a></li>
+            <li><a href="#应用场景-8">应用场景：</a></li>
+          </ol>
+        </li>
+        <li><a href="#10-stringformatconverter自定义字符串格式化">10. <code>StringFormatConverter</code>：自定义字符串格式化</a>
+          <ol>
+            <li><a href="#示例代码-8">示例代码：</a></li>
+            <li><a href="#应用场景-9">应用场景：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#-文化敏感支持culture-awareness">🌍 文化敏感支持（Culture Awareness）</a></li>
+    <li><a href="#-总结">📦 总结</a></li>
+    <li><a href="#-结语为什么推荐使用-valueconvertersnet">🧩 结语：为什么推荐使用 ValueConverters.NET？</a></li>
+    <li><a href="#-推荐使用方式">📦 推荐使用方式</a>
+      <ol>
+        <li><a href="#安装包">安装包：</a></li>
+        <li><a href="#全局注册appxaml">全局注册（App.xaml）：</a></li>
+      </ol>
+    </li>
+    <li><a href="#-参考资料">📚 参考资料</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/value_converters/">
+                
+                    <img src="https://www.notion.so/images/page-cover/webb3.jpg" loading="lazy" alt="Featured image of post Value Converters" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/wpf/" >
+                Wpf
+            </a>
+        
+            <a href="/categories/xaml/" >
+                Xaml
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/value_converters/">Value Converters</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            在 WPF、Xamarin.Forms和.NET MAUI开发中，数据绑定是MVVM架构的核心机制。但有时我们希望对绑定的数据进行转换、格式化或逻辑处理，这时候就需要使用 IValueConverter 接口实现值转换器。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jun 24, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在 WPF、Xamarin.Forms 和 .NET MAUI 开发中，<strong>数据绑定（Data Binding）</strong> 是 MVVM 架构的核心机制。但有时我们希望对绑定的数据进行转换、格式化或逻辑处理，这时候就需要使用 <code>IValueConverter</code> 接口实现值转换器。</p>
+<p><a class="link" href="https://github.com/thomasgalliker/ValueConverters.NET"  target="_blank" rel="noopener"
+    >ValueConverters.NET</a> 是一个由 Thomas Galliker 维护的开源项目，它提供了一组常用的 <code>IValueConverter</code> 实现，帮助开发者快速构建强大的数据绑定逻辑。</p>
+<hr>
+<h2 id="-安装方法">📦 安装方法
+</h2><p>你可以通过 NuGet 包安装适用于不同平台的版本：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>平台</th>
+          <th>命令</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>WPF / WinForms / UWP / Avalonia 等</strong></td>
+          <td><code>Install-Package ValueConverters</code></td>
+      </tr>
+      <tr>
+          <td><strong>Xamarin.Forms</strong></td>
+          <td><code>Install-Package ValueConverters.Forms</code></td>
+      </tr>
+      <tr>
+          <td><strong>.NET MAUI</strong></td>
+          <td><code>Install-Package ValueConverters.MAUI</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="-如何使用-valueconvertersnet">✅ 如何使用 ValueConverters.NET？
+</h2><h3 id="步骤一在-xaml-中定义资源">步骤一：在 XAML 中定义资源
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Window.Resources&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;converters:DateTimeConverter</span> <span class="na">x:Key=</span><span class="s">&#34;DateTimeConverter&#34;</span> <span class="na">Format=</span><span class="s">&#34;d&#34;</span> <span class="na">MinValueString=</span><span class="s">&#34;-&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;converters:BooleanToVisibilityConverter</span> <span class="na">x:Key=</span><span class="s">&#34;BooleanToVisibilityConverter&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Window.Resources&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="步骤二在绑定中使用-converter">步骤二：在绑定中使用 Converter
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;{Binding BirthDate, Converter={StaticResource DateTimeConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TextBox</span> <span class="na">Visibility=</span><span class="s">&#34;{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-核心-converters-及其示例">🧩 核心 Converters 及其示例
+</h2><p>下面介绍几个最常用且实用的转换器及其应用场景。</p>
+<hr>
+<h3 id="1-datetimeconverter日期格式化">1. <code>DateTimeConverter</code>：日期格式化
+</h3><h4 id="示例代码">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">DateTime</span> <span class="n">BirthDate</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DateTime</span><span class="p">(</span><span class="m">1990</span><span class="p">,</span> <span class="m">5</span><span class="p">,</span> <span class="m">20</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;{Binding BirthDate, Converter={StaticResource DateTimeConverter}, ConverterParameter=&#39;yyyy-MM-dd&#39;}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持参数">支持参数：
+</h4><ul>
+<li><code>Format</code>: 指定格式字符串（如 <code>&quot;yyyy-MM-dd&quot;</code>）</li>
+<li><code>MinValueString</code>: 当值为 <code>DateTime.MinValue</code> 时显示替代文本</li>
+</ul>
+<h4 id="应用场景">应用场景：
+</h4><ul>
+<li>显示生日、创建时间等日期字段</li>
+<li>处理空日期显示为 <code>-</code> 或 <code>N/A</code></li>
+</ul>
+<hr>
+<h3 id="2-booleantovisibilityconverter布尔值转可见性">2. <code>BooleanToVisibilityConverter</code>：布尔值转可见性
+</h3><h4 id="示例代码-1">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">bool</span> <span class="n">IsBusy</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;ProgressBar</span> <span class="na">Visibility=</span><span class="s">&#34;{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持参数-1">支持参数：
+</h4><ul>
+<li><code>TrueValue</code>: <code>true</code> 时返回的值（默认 <code>Visibility.Visible</code>）</li>
+<li><code>FalseValue</code>: <code>false</code> 时返回的值（默认 <code>Visibility.Collapsed</code>）</li>
+</ul>
+<h4 id="应用场景-1">应用场景：
+</h4><ul>
+<li>控制按钮、进度条、加载动画的显示隐藏</li>
+<li>动态切换控件状态</li>
+</ul>
+<hr>
+<h3 id="3-enumwrapperconverter枚举本地化展示">3. <code>EnumWrapperConverter</code>：枚举本地化展示
+</h3><h4 id="示例代码-2">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// 枚举定义</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">PartyMode</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Display(Name = &#34;PartyMode_Off&#34;, ResourceType = typeof(PartyModeResources))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Off</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Display(Name = &#34;PartyMode_On&#34;, ResourceType = typeof(PartyModeResources))]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">On</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">PartyMode</span> <span class="n">Mode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">PartyMode</span><span class="p">.</span><span class="n">On</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Label</span> <span class="na">Content=</span><span class="s">&#34;{Binding Mode, Converter={StaticResource EnumWrapperConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持特性">支持特性：
+</h4><ul>
+<li>使用 <code>[Display]</code> 注解配合 <code>.resx</code> 资源文件实现多语言支持</li>
+<li>自动识别当前 <code>CurrentUICulture</code></li>
+</ul>
+<h4 id="应用场景-2">应用场景：
+</h4><ul>
+<li>国际化应用中的下拉菜单、状态标签</li>
+<li>将枚举值以用户友好的方式展示</li>
+</ul>
+<hr>
+<h3 id="4-invertbooleanconverter取反布尔值">4. <code>InvertBooleanConverter</code>：取反布尔值
+</h3><h4 id="示例代码-3">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">bool</span> <span class="n">IsLoggedIn</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;登录&#34;</span> <span class="na">Visibility=</span><span class="s">&#34;{Binding IsLoggedIn, Converter={StaticResource InvertBooleanConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="特点">特点：
+</h4><ul>
+<li>直接将 <code>true</code> 变为 <code>false</code>，反之亦然</li>
+</ul>
+<h4 id="应用场景-3">应用场景：
+</h4><ul>
+<li>控制“登录”和“登出”的切换显示</li>
+<li>快速反转控件状态</li>
+</ul>
+<hr>
+<h3 id="5-nulltovisibilityconverter空值控制可见性">5. <code>NullToVisibilityConverter</code>：空值控制可见性
+</h3><h4 id="示例代码-4">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;{Binding UserName}&#34;</span> 
+</span></span><span class="line"><span class="cl">           <span class="na">Visibility=</span><span class="s">&#34;{Binding UserName, Converter={StaticResource NullToVisibilityConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持参数-2">支持参数：
+</h4><ul>
+<li><code>WhenNull</code>: 设置为 <code>Visibility.Collapsed</code> 或 <code>Visibility.Hidden</code></li>
+<li><code>WhenNotNull</code>: 同上</li>
+</ul>
+<h4 id="应用场景-4">应用场景：
+</h4><ul>
+<li>隐藏空字段</li>
+<li>控制非空内容的显示</li>
+</ul>
+<hr>
+<h3 id="6-enumtobooleanconverter枚举匹配判断布尔值">6. <code>EnumToBooleanConverter</code>：枚举匹配判断布尔值
+</h3><h4 id="示例代码-5">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// 枚举</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">UserLevel</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Guest</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Member</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Admin</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">UserLevel</span> <span class="n">Level</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">UserLevel</span><span class="p">.</span><span class="n">Admin</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;删除用户&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">Visibility=</span><span class="s">&#34;{Binding Level, Converter={StaticResource EnumToBooleanConverter}, ConverterParameter=Admin}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="应用场景-5">应用场景：
+</h4><ul>
+<li>根据角色权限显示/隐藏按钮</li>
+<li>枚举匹配时启用某些操作</li>
+</ul>
+<hr>
+<h3 id="7-multibindingconverters多个绑定值组合转换">7. <code>MultiBindingConverters</code>：多个绑定值组合转换
+</h3><h4 id="示例根据两个布尔值决定是否启用按钮">示例：根据两个布尔值决定是否启用按钮
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;提交&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Button.Visibility&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;MultiBinding</span> <span class="na">Converter=</span><span class="s">&#34;{StaticResource BooleanAndToVisibilityConverter}&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;Binding</span> <span class="na">Path=</span><span class="s">&#34;IsFormValid&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;Binding</span> <span class="na">Path=</span><span class="s">&#34;IsNetworkAvailable&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/MultiBinding&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/Button.Visibility&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Button&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持的-multiconverter">支持的 MultiConverter：
+</h4><ul>
+<li><code>BooleanAndConverter</code></li>
+<li><code>BooleanOrConverter</code></li>
+<li><code>BooleanXorConverter</code></li>
+<li><code>BooleanAndToVisibilityConverter</code></li>
+<li><code>BooleanOrToVisibilityConverter</code></li>
+</ul>
+<h4 id="应用场景-6">应用场景：
+</h4><ul>
+<li>多条件判断控件状态</li>
+<li>表单验证联动控制</li>
+</ul>
+<hr>
+<h3 id="8-imagesourceconverter图像路径转-imagesource">8. <code>ImageSourceConverter</code>：图像路径转 ImageSource
+</h3><h4 id="示例代码-6">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">AvatarPath</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;Images/avatar.png&#34;</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;Image</span> <span class="na">Source=</span><span class="s">&#34;{Binding AvatarPath, Converter={StaticResource ImageSourceConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="支持参数-3">支持参数：
+</h4><ul>
+<li>支持相对路径、绝对路径、Base64 图像等</li>
+</ul>
+<h4 id="应用场景-7">应用场景：
+</h4><ul>
+<li>数据绑定图像地址</li>
+<li>动态加载头像、图标等</li>
+</ul>
+<hr>
+<h3 id="9-filesizetostringconverter字节大小自动转-kbmbgb">9. <code>FileSizeToStringConverter</code>：字节大小自动转 KB/MB/GB
+</h3><h4 id="示例代码-7">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">long</span> <span class="n">FileSize</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">1024</span> <span class="p">*</span> <span class="m">1024</span> <span class="p">*</span> <span class="m">10</span><span class="p">;</span> <span class="c1">// 10 MB</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;{Binding FileSize, Converter={StaticResource FileSizeToStringConverter}}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果：<code>10.00 MB</code></p>
+<h4 id="应用场景-8">应用场景：
+</h4><ul>
+<li>文件管理器、磁盘清理工具等显示文件大小</li>
+<li>日志系统、监控系统中显示内存占用</li>
+</ul>
+<hr>
+<h3 id="10-stringformatconverter自定义字符串格式化">10. <code>StringFormatConverter</code>：自定义字符串格式化
+</h3><h4 id="示例代码-8">示例代码：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// ViewModel</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">decimal</span> <span class="n">Price</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">99.99</span><span class="n">m</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="c">&lt;!-- XAML --&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;TextBlock</span> <span class="na">Text=</span><span class="s">&#34;{Binding Price, Converter={StaticResource StringFormatConverter}, ConverterParameter=&#39;{}{0:C}&#39;}&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出结果：<code>$99.99</code>（根据文化设置）</p>
+<h4 id="应用场景-9">应用场景：
+</h4><ul>
+<li>货币、百分比、数字格式化显示</li>
+<li>支持动态格式模板</li>
+</ul>
+<hr>
+<h2 id="-文化敏感支持culture-awareness">🌍 文化敏感支持（Culture Awareness）
+</h2><p>所有转换器都支持文化感知：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// 在 App.xaml.cs 或初始化时配置</span>
+</span></span><span class="line"><span class="cl"><span class="n">ValueConvertersConfig</span><span class="p">.</span><span class="n">DefaultPreferredCulture</span> <span class="p">=</span> <span class="n">ConverterCulture</span><span class="p">.</span><span class="n">CurrentUICulture</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你也可以在运行时更改语言并刷新界面：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">Thread</span><span class="p">.</span><span class="n">CurrentThread</span><span class="p">.</span><span class="n">CurrentUICulture</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CultureInfo</span><span class="p">(</span><span class="s">&#34;zh-CN&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<hr>
+<h2 id="-总结">📦 总结
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>转换器名称</th>
+          <th>功能</th>
+          <th>应用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>DateTimeConverter</code></td>
+          <td>日期格式化</td>
+          <td>时间戳展示</td>
+      </tr>
+      <tr>
+          <td><code>BooleanToVisibilityConverter</code></td>
+          <td>布尔转可视性</td>
+          <td>控件显示隐藏</td>
+      </tr>
+      <tr>
+          <td><code>EnumWrapperConverter</code></td>
+          <td>枚举本地化</td>
+          <td>下拉框、状态栏</td>
+      </tr>
+      <tr>
+          <td><code>InvertBooleanConverter</code></td>
+          <td>布尔取反</td>
+          <td>控件状态反转</td>
+      </tr>
+      <tr>
+          <td><code>NullToVisibilityConverter</code></td>
+          <td>空值控制可视性</td>
+          <td>隐藏空字段</td>
+      </tr>
+      <tr>
+          <td><code>EnumToBooleanConverter</code></td>
+          <td>枚举匹配布尔</td>
+          <td>权限控制</td>
+      </tr>
+      <tr>
+          <td><code>ImageSourceConverter</code></td>
+          <td>字符串路径转图像源</td>
+          <td>图像绑定</td>
+      </tr>
+      <tr>
+          <td><code>FileSizeToStringConverter</code></td>
+          <td>字节数大小转易读格式</td>
+          <td>文件信息展示</td>
+      </tr>
+      <tr>
+          <td><code>StringFormatConverter</code></td>
+          <td>字符串格式化</td>
+          <td>货币、百分比</td>
+      </tr>
+      <tr>
+          <td><code>BooleanAndConverter</code>, <code>BooleanOrConverter</code></td>
+          <td>多个布尔值逻辑运算</td>
+          <td>表单验证</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="-结语为什么推荐使用-valueconvertersnet">🧩 结语：为什么推荐使用 ValueConverters.NET？
+</h2><ul>
+<li>✅ 提供了常见场景下的高质量 <code>IValueConverter</code> 实现</li>
+<li>✅ 支持多语言、文化敏感</li>
+<li>✅ 支持 WPF、Xamarin.Forms、MAUI 等主流 UI 框架</li>
+<li>✅ 可扩展性强，易于封装复用</li>
+<li>✅ 减少 Code-Behind，增强 MVVM 解耦能力</li>
+</ul>
+<hr>
+<h2 id="-推荐使用方式">📦 推荐使用方式
+</h2><h3 id="安装包">安装包：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">PM&gt; Install-Package ValueConverters
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="全局注册appxaml">全局注册（App.xaml）：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Application.Resources&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;converters:BooleanToVisibilityConverter</span> <span class="na">x:Key=</span><span class="s">&#34;BoolToVisConverter&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;converters:DateTimeConverter</span> <span class="na">x:Key=</span><span class="s">&#34;DateTimeConverter&#34;</span> <span class="na">Format=</span><span class="s">&#34;yyyy-MM-dd&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Application.Resources&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-参考资料">📚 参考资料
+</h2><ul>
+<li>GitHub 仓库：<a class="link" href="https://github.com/thomasgalliker/ValueConverters.NET"  target="_blank" rel="noopener"
+    >https://github.com/thomasgalliker/ValueConverters.NET</a></li>
+<li>NuGet 地址：
+<ul>
+<li><a class="link" href="https://www.nuget.org/packages/ValueConverters/"  target="_blank" rel="noopener"
+    >WPF / WinForms / UWP</a></li>
+<li><a class="link" href="https://www.nuget.org/packages/ValueConverters.Forms/"  target="_blank" rel="noopener"
+    >Xamarin.Forms</a></li>
+<li><a class="link" href="https://www.nuget.org/packages/ValueConverters.MAUI/"  target="_blank" rel="noopener"
+    >.NET MAUI</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/wpf/">Wpf</a>
+        
+            <a href="/tags/xaml/">Xaml</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/calcbinding/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg" loading="lazy" data-key="CalcBinding" data-hash="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-XAML中使用表达式进行数据绑定计算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/data-template-selector-tips/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg" loading="lazy" data-key="data-template-selector-tips" data-hash="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-数据模板动态选择</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 飞人博尔特的摄影师
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>
