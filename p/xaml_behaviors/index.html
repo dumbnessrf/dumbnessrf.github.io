@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="开发者通过 **XAML 行为（Behaviors）** 和 **触发器（Triggers）** 来扩展 UI 控件的功能，而无需编写复杂的代码或修改控件本身。">
+<title>Xaml Behaviors</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/xaml_behaviors/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="Xaml Behaviors">
+<meta property='og:description' content="开发者通过 **XAML 行为（Behaviors）** 和 **触发器（Triggers）** 来扩展 UI 控件的功能，而无需编写复杂的代码或修改控件本身。">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/xaml_behaviors/'>
+<meta property='og:site_name' content='飞人博尔特的摄影师'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='wpf' /><meta property='article:tag' content='xaml' /><meta property='article:published_time' content='2025-07-23T23:01:03&#43;08:00'/><meta property='article:modified_time' content='2025-07-23T23:01:03&#43;08:00'/><meta property='og:image' content='https://www.notion.so/images/page-cover/met_horace_pippin.jpg' />
+<meta name="twitter:title" content="Xaml Behaviors">
+<meta name="twitter:description" content="开发者通过 **XAML 行为（Behaviors）** 和 **触发器（Triggers）** 来扩展 UI 控件的功能，而无需编写复杂的代码或修改控件本身。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.notion.so/images/page-cover/met_horace_pippin.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">飞人博尔特的摄影师</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-什么是-microsoftxamlbehaviors">✅ 什么是 Microsoft.Xaml.Behaviors？</a>
+      <ol>
+        <li><a href="#-核心概念">💡 核心概念</a></li>
+      </ol>
+    </li>
+    <li><a href="#-安装-microsoftxamlbehaviors">📦 安装 Microsoft.Xaml.Behaviors</a>
+      <ol>
+        <li><a href="#使用-nuget-安装命令">使用 NuGet 安装命令：</a></li>
+      </ol>
+    </li>
+    <li><a href="#-xaml-命名空间引用">🛠️ XAML 命名空间引用</a></li>
+    <li><a href="#-使用示例与应用场景">🎯 使用示例与应用场景</a>
+      <ol>
+        <li><a href="#示例-1点击按钮时弹出消息框不使用代码">示例 1：点击按钮时弹出消息框（不使用代码）</a>
+          <ol>
+            <li><a href="#场景说明">场景说明：</a></li>
+            <li><a href="#实现方式">实现方式：</a></li>
+            <li><a href="#viewmodel-中定义命令">ViewModel 中定义命令：</a></li>
+          </ol>
+        </li>
+        <li><a href="#示例-2文本框内容变化时更新绑定值实时验证">示例 2：文本框内容变化时更新绑定值（实时验证）</a>
+          <ol>
+            <li><a href="#场景说明-1">场景说明：</a></li>
+            <li><a href="#实现方式-1">实现方式：</a></li>
+          </ol>
+        </li>
+        <li><a href="#示例-3鼠标悬停时高亮元素">示例 3：鼠标悬停时高亮元素</a>
+          <ol>
+            <li><a href="#场景说明-2">场景说明：</a></li>
+            <li><a href="#实现方式-2">实现方式：</a></li>
+          </ol>
+        </li>
+        <li><a href="#示例-4自定义行为--右键菜单">示例 4：自定义行为 —— 右键菜单</a>
+          <ol>
+            <li><a href="#场景说明-3">场景说明：</a></li>
+            <li><a href="#自定义行为类c">自定义行为类（C#）：</a></li>
+            <li><a href="#xaml-使用方式">XAML 使用方式：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#-应用场景总结">🧩 应用场景总结</a></li>
+    <li><a href="#-总结">🧠 总结</a></li>
+    <li><a href="#-参考资料">📚 参考资料</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/xaml_behaviors/">
+                
+                    <img src="https://www.notion.so/images/page-cover/met_horace_pippin.jpg" loading="lazy" alt="Featured image of post Xaml Behaviors" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/wpf/" >
+                Wpf
+            </a>
+        
+            <a href="/categories/xaml/" >
+                Xaml
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/xaml_behaviors/">Xaml Behaviors</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            开发者通过 **XAML 行为（Behaviors）** 和 **触发器（Triggers）** 来扩展 UI 控件的功能，而无需编写复杂的代码或修改控件本身。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jul 23, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="-在-wpf-中使用-microsoftxamlbehaviors行为behaviors的优雅解决方案">🚀 在 WPF 中使用 Microsoft.Xaml.Behaviors：行为（Behaviors）的优雅解决方案
+</h1><h2 id="-什么是-microsoftxamlbehaviors">✅ 什么是 Microsoft.Xaml.Behaviors？
+</h2><p><code>Microsoft.Xaml.Behaviors</code> 是一个开源库，最初由 Expression Blend 团队开发，后来被微软官方维护并托管在 GitHub 上。这个库允许开发者通过 <strong>XAML 行为（Behaviors）</strong> 和 <strong>触发器（Triggers）</strong> 来扩展 UI 控件的功能，而无需编写复杂的代码或修改控件本身。</p>
+<h3 id="-核心概念">💡 核心概念
+</h3><ul>
+<li><strong>Behavior（行为）</strong>：一种可重用的组件，附加到某个 UI 元素上，并为其添加额外的行为。</li>
+<li><strong>Trigger（触发器）</strong>：根据某些条件或事件执行特定的操作。</li>
+<li><strong>Action（动作）</strong>：触发器执行的具体操作，如调用方法、改变属性等。</li>
+</ul>
+<p>GitHub 地址：<a class="link" href="https://github.com/microsoft/XamlBehaviors"  target="_blank" rel="noopener"
+    >https://github.com/microsoft/XamlBehaviors</a></p>
+<hr>
+<h2 id="-安装-microsoftxamlbehaviors">📦 安装 Microsoft.Xaml.Behaviors
+</h2><p>你可以通过 NuGet 包管理器轻松地将 <code>Microsoft.Xaml.Behaviors.Wpf</code> 添加到你的 WPF 项目中。</p>
+<h3 id="使用-nuget-安装命令">使用 NuGet 安装命令：
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">Install-Package Microsoft.Xaml.Behaviors.Wpf
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者通过 Visual Studio 的 NuGet 包管理器搜索并安装：</p>
+<ul>
+<li>打开菜单：<strong>工具 &gt; NuGet 包管理器 &gt; 管理解决方案的 NuGet 包</strong></li>
+<li>搜索关键词：<code>Microsoft.Xaml.Behaviors.Wpf</code></li>
+<li>安装最新版本</li>
+</ul>
+<hr>
+<h2 id="-xaml-命名空间引用">🛠️ XAML 命名空间引用
+</h2><p>在 XAML 文件顶部添加以下命名空间引用，以便使用 Behaviors：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl">xmlns:i=&#34;http://schemas.microsoft.com/expression/2010/interactivity&#34;
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-使用示例与应用场景">🎯 使用示例与应用场景
+</h2><p>下面我们将通过几个典型的使用场景来展示 <code>Microsoft.Xaml.Behaviors</code> 的强大之处。</p>
+<hr>
+<h3 id="示例-1点击按钮时弹出消息框不使用代码">示例 1：点击按钮时弹出消息框（不使用代码）
+</h3><h4 id="场景说明">场景说明：
+</h4><p>你希望点击按钮时显示一个简单的消息框，但不想在代码后台写任何逻辑。</p>
+<h4 id="实现方式">实现方式：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;点击我&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;i:EventTrigger</span> <span class="na">EventName=</span><span class="s">&#34;Click&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;i:InvokeCommandAction</span> <span class="na">Command=</span><span class="s">&#34;{Binding ShowMessageCommand}&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/i:EventTrigger&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Button&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="viewmodel-中定义命令">ViewModel 中定义命令：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">ICommand</span> <span class="n">ShowMessageCommand</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">MyViewModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ShowMessageCommand</span> <span class="p">=</span> <span class="k">new</span> <span class="n">RelayCommand</span><span class="p">(()</span> <span class="p">=&gt;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">&#34;你好，世界！&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="示例-2文本框内容变化时更新绑定值实时验证">示例 2：文本框内容变化时更新绑定值（实时验证）
+</h3><h4 id="场景说明-1">场景说明：
+</h4><p>用户在输入框中输入内容时，自动触发验证逻辑。</p>
+<h4 id="实现方式-1">实现方式：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;TextBox</span> <span class="na">Text=</span><span class="s">&#34;{Binding Name}&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;i:EventTrigger</span> <span class="na">EventName=</span><span class="s">&#34;TextChanged&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;i:InvokeCommandAction</span> <span class="na">Command=</span><span class="s">&#34;{Binding ValidateNameCommand}&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/i:EventTrigger&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/TextBox&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="示例-3鼠标悬停时高亮元素">示例 3：鼠标悬停时高亮元素
+</h3><h4 id="场景说明-2">场景说明：
+</h4><p>当鼠标悬停在一个按钮上时，改变其背景颜色。</p>
+<h4 id="实现方式-2">实现方式：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;悬停试试看&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;i:EventTrigger</span> <span class="na">EventName=</span><span class="s">&#34;MouseEnter&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;i:ChangePropertyAction</span> <span class="na">TargetObject=</span><span class="s">&#34;{Binding ElementName=MyButton}&#34;</span>
+</span></span><span class="line"><span class="cl">                                    <span class="na">PropertyName=</span><span class="s">&#34;Background&#34;</span> <span class="na">Value=</span><span class="s">&#34;LightBlue&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/i:EventTrigger&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;i:EventTrigger</span> <span class="na">EventName=</span><span class="s">&#34;MouseLeave&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;i:ChangePropertyAction</span> <span class="na">TargetObject=</span><span class="s">&#34;{Binding ElementName=MyButton}&#34;</span>
+</span></span><span class="line"><span class="cl">                                    <span class="na">PropertyName=</span><span class="s">&#34;Background&#34;</span> <span class="na">Value=</span><span class="s">&#34;White&#34;</span><span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/i:EventTrigger&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/i:Interaction.Triggers&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Button&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="示例-4自定义行为--右键菜单">示例 4：自定义行为 —— 右键菜单
+</h3><h4 id="场景说明-3">场景说明：
+</h4><p>为任意控件添加右键菜单功能。</p>
+<h4 id="自定义行为类c">自定义行为类（C#）：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">RightClickMenuBehavior</span> <span class="p">:</span> <span class="n">Behavior</span><span class="p">&lt;</span><span class="n">FrameworkElement</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="k">readonly</span> <span class="n">DependencyProperty</span> <span class="n">ContextMenuProperty</span> <span class="p">=</span>
+</span></span><span class="line"><span class="cl">        <span class="n">DependencyProperty</span><span class="p">.</span><span class="n">Register</span><span class="p">(</span><span class="s">&#34;ContextMenu&#34;</span><span class="p">,</span> <span class="k">typeof</span><span class="p">(</span><span class="n">ContextMenu</span><span class="p">),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">RightClickMenuBehavior</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ContextMenu</span> <span class="n">ContextMenu</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">get</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">ContextMenu</span><span class="p">)</span><span class="n">GetValue</span><span class="p">(</span><span class="n">ContextMenuProperty</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">set</span> <span class="p">{</span> <span class="n">SetValue</span><span class="p">(</span><span class="n">ContextMenuProperty</span><span class="p">,</span> <span class="k">value</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnAttached</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AssociatedObject</span><span class="p">.</span><span class="n">MouseRightButtonDown</span> <span class="p">+=</span> <span class="n">OnMouseRightButtonDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="kd">override</span> <span class="k">void</span> <span class="n">OnDetaching</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">AssociatedObject</span><span class="p">.</span><span class="n">MouseRightButtonDown</span> <span class="p">-=</span> <span class="n">OnMouseRightButtonDown</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">void</span> <span class="n">OnMouseRightButtonDown</span><span class="p">(</span><span class="kt">object</span> <span class="n">sender</span><span class="p">,</span> <span class="n">MouseButtonEventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">ContextMenu</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ContextMenu</span><span class="p">.</span><span class="n">PlacementTarget</span> <span class="p">=</span> <span class="n">AssociatedObject</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">ContextMenu</span><span class="p">.</span><span class="n">IsOpen</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="xaml-使用方式">XAML 使用方式：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Button</span> <span class="na">Content=</span><span class="s">&#34;右键点击我&#34;</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;i:Interaction.Behaviors&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;local:RightClickMenuBehavior&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;local:RightClickMenuBehavior.ContextMenu&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;ContextMenu&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;MenuItem</span> <span class="na">Header=</span><span class="s">&#34;复制&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nt">&lt;MenuItem</span> <span class="na">Header=</span><span class="s">&#34;粘贴&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">                <span class="nt">&lt;/ContextMenu&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="nt">&lt;/local:RightClickMenuBehavior.ContextMenu&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;/local:RightClickMenuBehavior&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/i:Interaction.Behaviors&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Button&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-应用场景总结">🧩 应用场景总结
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>场景</th>
+          <th>描述</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>⚙️ 事件绑定</td>
+          <td>将 UI 事件绑定到 ViewModel 中的命令，实现 MVVM 解耦</td>
+      </tr>
+      <tr>
+          <td>🔍 输入验证</td>
+          <td>实时验证用户输入内容，提升用户体验</td>
+      </tr>
+      <tr>
+          <td>🖱️ 鼠标交互</td>
+          <td>处理鼠标悬停、单击、拖拽等交互逻辑</td>
+      </tr>
+      <tr>
+          <td>🔄 动态样式</td>
+          <td>根据状态动态更改控件外观</td>
+      </tr>
+      <tr>
+          <td>🧪 单元测试</td>
+          <td>减少代码耦合，提高可测试性</td>
+      </tr>
+      <tr>
+          <td>🧱 自定义行为</td>
+          <td>快速构建可复用的 UI 行为模块</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="-总结">🧠 总结
+</h2><p><code>Microsoft.Xaml.Behaviors</code> 是 WPF 开发中非常强大的辅助工具。它不仅简化了 UI 与逻辑之间的绑定，还提升了代码的可维护性和可测试性。通过使用行为和触发器，我们可以实现更加灵活、解耦的 UI 设计，特别适合 MVVM 架构下的开发。</p>
+<p>如果你正在寻找一种更优雅的方式来处理 UI 交互逻辑，那么 <code>Microsoft.Xaml.Behaviors</code> 绝对值得一试！</p>
+<hr>
+<h2 id="-参考资料">📚 参考资料
+</h2><ul>
+<li><a class="link" href="https://github.com/microsoft/XamlBehaviors"  target="_blank" rel="noopener"
+    >GitHub - Microsoft.Xaml.Behaviors</a></li>
+<li><a class="link" href="https://www.nuget.org/packages/Microsoft.Xaml.Behaviors.Wpf/"  target="_blank" rel="noopener"
+    >NuGet - Microsoft.Xaml.Behaviors.Wpf</a></li>
+<li><a class="link" href="https://docs.microsoft.com/en-us/dotnet/desktop/wpf/advanced/interactivity-library-overview?view=netdesktop-6.0"  target="_blank" rel="noopener"
+    >MSDN - Interactivity Library</a></li>
+</ul>
+<hr>
+<p>如果你喜欢这篇文章，欢迎点赞、收藏、分享！<br>
+也可以关注我的博客，获取更多 WPF / .NET 技术干货 😊</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/wpf/">Wpf</a>
+        
+            <a href="/tags/xaml/">Xaml</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/value_converters/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/webb3.jpg" loading="lazy" data-key="value_converters" data-hash="https://www.notion.so/images/page-cover/webb3.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Value Converters</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/calcbinding/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg" loading="lazy" data-key="CalcBinding" data-hash="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-XAML中使用表达式进行数据绑定计算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/data-template-selector-tips/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg" loading="lazy" data-key="data-template-selector-tips" data-hash="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-数据模板动态选择</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 飞人博尔特的摄影师
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>
