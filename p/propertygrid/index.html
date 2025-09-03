@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一个功能强大、高度可扩展的 WPF 属性编辑器（PropertyGrid），专为现代 MVVM 应用设计。">
+<title>PropertyGrid</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/propertygrid/'>
+
+<link rel="stylesheet" href="/scss/style.min.946cca6c6259ef94ac55abfae7c7bf3291ea3ed5eea17ef77500b257217c6710.css"><meta property='og:title' content="PropertyGrid">
+<meta property='og:description' content="一个功能强大、高度可扩展的 WPF 属性编辑器（PropertyGrid），专为现代 MVVM 应用设计。">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/propertygrid/'>
+<meta property='og:site_name' content='飞人博尔特的摄影师'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='wpf' /><meta property='article:published_time' content='2025-09-02T23:01:03&#43;08:00'/><meta property='article:modified_time' content='2025-09-02T23:01:03&#43;08:00'/><meta property='og:image' content='https://www.notion.so/images/page-cover/met_winslow_homer_maine_coast.jpg' />
+<meta name="twitter:title" content="PropertyGrid">
+<meta name="twitter:description" content="一个功能强大、高度可扩展的 WPF 属性编辑器（PropertyGrid），专为现代 MVVM 应用设计。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://www.notion.so/images/page-cover/met_winslow_homer_maine_coast.jpg' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">飞人博尔特的摄影师</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#-核心特性">✨ 核心特性</a></li>
+    <li><a href="#-快速开始">🚀 快速开始</a>
+      <ol>
+        <li><a href="#1-安装引用">1. 安装引用</a>
+          <ol>
+            <li><a href="#net-cli">.NET CLI</a></li>
+            <li><a href="#packagereference">PackageReference</a></li>
+            <li><a href="#cpm">CPM</a></li>
+          </ol>
+        </li>
+        <li><a href="#2-在-xaml-中使用">2. 在 XAML 中使用</a></li>
+        <li><a href="#3-绑定数据对象">3. 绑定数据对象</a></li>
+      </ol>
+    </li>
+    <li><a href="#-示例完整数据模型">📦 示例：完整数据模型</a></li>
+    <li><a href="#-ui-效果预览">🎨 UI 效果预览</a></li>
+    <li><a href="#-高级功能详解">🔧 高级功能详解</a>
+      <ol>
+        <li><a href="#1-枚举显示-description">1. 枚举显示 <code>[Description]</code></a></li>
+        <li><a href="#2-滑块调节-showslider">2. 滑块调节 <code>[ShowSlider]</code></a></li>
+        <li><a href="#3-自定义按钮与命令绑定">3. 自定义按钮与命令绑定</a></li>
+        <li><a href="#4-数值范围验证">4. 数值范围验证</a></li>
+        <li><a href="#5-下拉框-enumerableproperty">5. 下拉框 <code>[EnumerableProperty]</code></a></li>
+        <li><a href="#6-文件文件夹选择">6. 文件/文件夹选择</a></li>
+        <li><a href="#7-复合类型嵌套对象">7. 复合类型（嵌套对象）</a></li>
+        <li><a href="#8-集合编辑list--dictionary">8. 集合编辑（List / Dictionary）</a></li>
+      </ol>
+    </li>
+    <li><a href="#-事件系统">🧩 事件系统</a>
+      <ol>
+        <li><a href="#propertyvaluechanged--属性更改事件"><code>PropertyValueChanged</code> — 属性更改事件</a></li>
+        <li><a href="#buttonclicked--按钮点击事件fallback"><code>ButtonClicked</code> — 按钮点击事件（fallback）</a></li>
+      </ol>
+    </li>
+    <li><a href="#-自定义-attribute-说明">🛠️ 自定义 Attribute 说明</a></li>
+    <li><a href="#-高级配置">⚙️ 高级配置</a>
+      <ol>
+        <li><a href="#防抖机制debounce">防抖机制（Debounce）</a></li>
+        <li><a href="#手动触发属性更改">手动触发属性更改</a></li>
+      </ol>
+    </li>
+    <li><a href="#-已知限制">📚 已知限制</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/propertygrid/">
+                
+                    <img src="https://www.notion.so/images/page-cover/met_winslow_homer_maine_coast.jpg" loading="lazy" alt="Featured image of post PropertyGrid" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/wpf/" >
+                Wpf
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/propertygrid/">PropertyGrid</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            一个功能强大、高度可扩展的 WPF 属性编辑器（PropertyGrid），专为现代 MVVM 应用设计。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 02, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    6 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="-sharpboxescorewpfpropertygrid">🎯 SharpBoxesCore.Wpf.PropertyGrid
+</h1><p>一个功能强大、高度可扩展的 WPF 属性编辑器（PropertyGrid），专为现代 MVVM 应用设计。支持自动 UI 生成、属性分组、描述显示、范围验证、滑块调节、自定义按钮、命令绑定、复合类型嵌套、集合编辑、动态刷新、防抖优化等高级功能，开箱即用，适用于配置面板、调试工具、设计器、参数设置等场景。</p>
+<hr>
+<h2 id="-核心特性">✨ 核心特性
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>功能</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>🔹 自动属性发现</td>
+          <td>扫描对象的公共可读写属性</td>
+      </tr>
+      <tr>
+          <td>🔹 属性分组（Category）</td>
+          <td>支持 <code>[Category(&quot;分组名&quot;)]</code> 分类显示</td>
+      </tr>
+      <tr>
+          <td>🔹 属性排序</td>
+          <td>支持 <code>[PropertyOrder(1)]</code> 自定义排序</td>
+      </tr>
+      <tr>
+          <td>🔹 描述显示</td>
+          <td>鼠标悬停或聚焦时显示 <code>[Description]</code> 内容</td>
+      </tr>
+      <tr>
+          <td>🔹 显示名称</td>
+          <td>支持 <code>[DisplayName(&quot;别名&quot;)]</code> 自定义名称</td>
+      </tr>
+      <tr>
+          <td>🔹 枚举支持</td>
+          <td>显示 <code>[Description]</code> 文本，支持可空枚举</td>
+      </tr>
+      <tr>
+          <td>🔹 数值范围验证</td>
+          <td>支持 <code>[Range(0, 100)]</code> 输入限制</td>
+      </tr>
+      <tr>
+          <td>🔹 滑块调节</td>
+          <td>配合 <code>[ShowSlider]</code> 显示 <code>Slider</code> 控件</td>
+      </tr>
+      <tr>
+          <td>🔹 自定义按钮</td>
+          <td>支持 <code>[AddButton]</code> 添加操作按钮</td>
+      </tr>
+      <tr>
+          <td>🔹 命令绑定</td>
+          <td>按钮可绑定 <code>ICommand</code>，支持参数传递</td>
+      </tr>
+      <tr>
+          <td>🔹 降级机制</td>
+          <td>命令不存在时 fallback 到 <code>ButtonClicked</code> 事件</td>
+      </tr>
+      <tr>
+          <td>🔹 折叠面板</td>
+          <td>每个 Category 支持 <code>Expander</code> 折叠/展开</td>
+      </tr>
+      <tr>
+          <td>🔹 事件回调</td>
+          <td>支持 <code>ButtonClicked</code> 和 <code>PropertyValueChanged</code> 事件</td>
+      </tr>
+      <tr>
+          <td>🔹 错误提示</td>
+          <td>边框变红，显示错误提示，不更新数据源</td>
+      </tr>
+      <tr>
+          <td>🔹 文件/文件夹选择</td>
+          <td>支持 <code>[SelectFilePath]</code> / <code>[SelectFolder]</code> 对话框</td>
+      </tr>
+      <tr>
+          <td>🔹 下拉框编辑</td>
+          <td>支持 <code>[EnumerableProperty]</code> 绑定数据源</td>
+      </tr>
+      <tr>
+          <td>🔹 复合类型嵌套</td>
+          <td>支持类属性展开为子属性面板</td>
+      </tr>
+      <tr>
+          <td>🔹 集合编辑</td>
+          <td>支持 <code>List&lt;T&gt;</code> / <code>Dictionary&lt;K,V&gt;</code> 弹窗编辑</td>
+      </tr>
+      <tr>
+          <td>🔹 动态刷新</td>
+          <td>数据源变化自动更新 UI</td>
+      </tr>
+      <tr>
+          <td>🔹 类型安全</td>
+          <td>编辑时保留原始类型，支持自动解析</td>
+      </tr>
+      <tr>
+          <td>🔹 防抖机制</td>
+          <td>高频更新时自动合并刷新，提升性能</td>
+      </tr>
+      <tr>
+          <td>🔹 高度自适应</td>
+          <td>支持滚动条，内容展开自动拉伸</td>
+      </tr>
+      <tr>
+          <td>🔹 搜索属性字段</td>
+          <td>支持搜索指定名称属性编辑</td>
+      </tr>
+      <tr>
+          <td>🔹 一键展开、折叠</td>
+          <td>支持一键展开、折叠所有属性</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="-快速开始">🚀 快速开始
+</h2><h3 id="1-安装引用">1. 安装引用
+</h3><h4 id="net-cli">.NET CLI
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="nx">dotnet</span><span class="w"> </span><span class="nx">add</span><span class="w"> </span><span class="kn">package</span><span class="w"> </span><span class="nx">SharpBoxesCore</span><span class="p">.</span><span class="nx">Wpf</span><span class="w"> </span><span class="o">--</span><span class="nx">version</span><span class="w"> </span><span class="mf">1.1.2</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="packagereference">PackageReference
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;SharpBoxesCore.Wpf&#34;</span> <span class="na">Version=</span><span class="s">&#34;1.1.2&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="cpm">CPM
+</h4><p>Directory.Packages.props</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageVersion</span> <span class="na">Include=</span><span class="s">&#34;SharpBoxesCore.Wpf&#34;</span> <span class="na">Version=</span><span class="s">&#34;1.1.2&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Project file</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;SharpBoxesCore.Wpf&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="2-在-xaml-中使用">2. 在 XAML 中使用
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;Window</span> <span class="na">x:Class=</span><span class="s">&#34;YourApp.MainWindow&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="na">xmlns:local=</span><span class="s">&#34;clr-namespace:SharpBoxesCore.Wpf.PropertyGrid&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="err">...</span><span class="nt">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;Grid&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&lt;local:PropertyGrid</span> <span class="na">x:Name=</span><span class="s">&#34;propertyGrid&#34;</span> <span class="na">Padding=</span><span class="s">&#34;10&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&lt;/Grid&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;/Window&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-绑定数据对象">3. 绑定数据对象
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">partial</span> <span class="k">class</span> <span class="nc">MainWindow</span> <span class="p">:</span> <span class="n">Window</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">MainWindow</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">InitializeComponent</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">propertyGrid</span><span class="p">.</span><span class="n">SelectedObject</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SampleObject</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 订阅事件</span>
+</span></span><span class="line"><span class="cl">        <span class="n">propertyGrid</span><span class="p">.</span><span class="n">ButtonClicked</span> <span class="p">+=</span> <span class="n">OnButtonClicked</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">propertyGrid</span><span class="p">.</span><span class="n">PropertyValueChanged</span> <span class="p">+=</span> <span class="n">OnPropertyValueChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-示例完整数据模型">📦 示例：完整数据模型
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">SampleObject</span> <span class="p">:</span> <span class="n">INotifyPropertyChanged</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;基本信息&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DisplayName(&#34;姓名&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;用户的全名&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [EnumerableProperty(&#34;AvaliableNames&#34;, true)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Name</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;张三&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;数值设置&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DisplayName(&#34;音量&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;调节音量大小&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Range(0, 100)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [ShowSlider(10, true)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Volume</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">75</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;高级&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DisplayName(&#34;数据模式&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">DataMode</span> <span class="n">Mode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">DataMode</span><span class="p">.</span><span class="n">Development</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;文件&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DisplayName(&#34;配置文件&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SelectFilePath(Title = &#34;选择配置文件&#34;, Filter = &#34;JSON Files|*.json&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">ConfigFile</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;路径&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [DisplayName(&#34;工作目录&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [SelectFolder(Title = &#34;选择工作目录&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">WorkDir</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;集合&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">Hobbies</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="s">&#34;阅读&#34;</span><span class="p">,</span> <span class="s">&#34;音乐&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;字典&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span> <span class="n">Scores</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [&#34;数学&#34;]</span> <span class="p">=</span> <span class="m">90</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">        [&#34;英语&#34;]</span> <span class="p">=</span> <span class="m">85</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;嵌套对象&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Address</span> <span class="n">HomeAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Category(&#34;操作&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [AddButton(&#34;ResetCommand&#34;, &#34;重置&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [AddButton(&#34;LogCommand&#34;, &#34;记录当前值&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">RetryCount</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">3</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 命令定义</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ICommand</span> <span class="n">ResetCommand</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">RelayCommand</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">_</span> <span class="p">=&gt;</span> <span class="n">RetryCount</span> <span class="p">=</span> <span class="m">0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ICommand</span> <span class="n">LogCommand</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="n">RelayCommand</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;(</span><span class="n">action</span> <span class="p">=&gt;</span> 
+</span></span><span class="line"><span class="cl">        <span class="n">Debug</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;日志: {action}, Count={RetryCount}&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 下拉数据源</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ObservableCollection</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">AvaliableNames</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="s">&#34;Alice&#34;</span><span class="p">,</span> <span class="s">&#34;Bob&#34;</span><span class="p">,</span> <span class="s">&#34;Charlie&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">event</span> <span class="n">PropertyChangedEventHandler</span> <span class="n">PropertyChanged</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">protected</span> <span class="k">virtual</span> <span class="k">void</span> <span class="n">OnPropertyChanged</span><span class="p">([</span><span class="n">CallerMemberName</span><span class="p">]</span> <span class="kt">string</span> <span class="n">propertyName</span> <span class="p">=</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">=&gt;</span> <span class="n">PropertyChanged</span><span class="p">?.</span><span class="n">Invoke</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="k">new</span> <span class="n">PropertyChangedEventArgs</span><span class="p">(</span><span class="n">propertyName</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="-ui-效果预览">🎨 UI 效果预览
+</h2><p><img src="https://img.cdn1.vip/i/68b8057eaacf9_1756890494.webp"
+	
+	
+	
+	loading="lazy"
+	
+		alt="PropertyGrid 预览图"
+	
+	
+></p>
+<ul>
+<li>分组折叠/展开</li>
+<li>滑块与文本框联动</li>
+<li>按钮自动布局</li>
+<li>错误输入红色提示</li>
+<li>描述信息实时显示</li>
+<li>复合对象嵌套展开</li>
+<li>集合点击“编辑&hellip;”弹窗</li>
+<li>滚动条支持长内容</li>
+</ul>
+<hr>
+<h2 id="-高级功能详解">🔧 高级功能详解
+</h2><h3 id="1-枚举显示-description">1. 枚举显示 <code>[Description]</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">enum</span> <span class="n">DataMode</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;开发模式&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Development</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [Description(&#34;生产模式&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Production</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 显示为“开发模式”而非 <code>Development</code></p>
+<hr>
+<h3 id="2-滑块调节-showslider">2. 滑块调节 <code>[ShowSlider]</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[Range(0, 100)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">[ShowSlider(5, true)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">int</span> <span class="n">Brightness</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 自动生成 <code>Slider + TextBox</code> 联动控件</p>
+<hr>
+<h3 id="3-自定义按钮与命令绑定">3. 自定义按钮与命令绑定
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[AddButton(&#34;SaveCommand&#34;, &#34;保存&#34;, &#34;另存为&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">[AddButton(&#34;DeleteCommand&#34;, &#34;删除&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">FileName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>✅ 存在命令 → 绑定执行</li>
+<li>❌ 不存在 → 触发 <code>ButtonClicked</code> 事件</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">propertyGrid</span><span class="p">.</span><span class="n">ButtonClicked</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MessageBox</span><span class="p">.</span><span class="n">Show</span><span class="p">(</span><span class="s">$&#34;按钮点击: {e.PropertyName} - {e.ButtonText}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="4-数值范围验证">4. 数值范围验证
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[Range(1, 1000)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">int</span> <span class="n">Count</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 输入非法时：</p>
+<ul>
+<li>边框变红</li>
+<li>显示错误提示</li>
+<li>不更新数据源</li>
+</ul>
+<hr>
+<h3 id="5-下拉框-enumerableproperty">5. 下拉框 <code>[EnumerableProperty]</code>
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[EnumerableProperty(&#34;AvaliableNames&#34;, true)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">Theme</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 显示下拉框，支持自定义输入，数据源动态刷新</p>
+<hr>
+<h3 id="6-文件文件夹选择">6. 文件/文件夹选择
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="na">[SelectFilePath(Title = &#34;选择日志&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">LogFile</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">[SelectFolder]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">string</span> <span class="n">BackupDir</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 使用 <code>Ookii.Dialogs.Wpf</code> 提供专业对话框</p>
+<hr>
+<h3 id="7-复合类型嵌套对象">7. 复合类型（嵌套对象）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">Address</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Street</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">City</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">[DisplayName(&#34;家庭地址&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Address</span> <span class="n">HomeAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 自动展开为子属性面板，支持 <code>INotifyPropertyChanged</code> 动态刷新</p>
+<hr>
+<h3 id="8-集合编辑list--dictionary">8. 集合编辑（List / Dictionary）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">Hobbies</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">Dictionary</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span> <span class="n">Scores</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 点击“编辑&hellip;”弹出 <code>ListEditor</code> / <code>DictEditor</code>，支持类型保留编辑</p>
+<hr>
+<h2 id="-事件系统">🧩 事件系统
+</h2><h3 id="propertyvaluechanged--属性更改事件"><code>PropertyValueChanged</code> — 属性更改事件
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">propertyGrid</span><span class="p">.</span><span class="n">PropertyValueChanged</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;属性更改: {e.PropertyName}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;  类型: {e.PropertyType.Name}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;  旧值: {e.OldValue}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;  新值: {e.NewValue}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 所有编辑操作（包括集合、文件选择）均触发此事件</p>
+<h3 id="buttonclicked--按钮点击事件fallback"><code>ButtonClicked</code> — 按钮点击事件（fallback）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">propertyGrid</span><span class="p">.</span><span class="n">ButtonClicked</span> <span class="p">+=</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">ButtonText</span> <span class="p">==</span> <span class="s">&#34;重置&#34;</span><span class="p">)</span> <span class="n">ResetLogic</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>✅ 用于未绑定 <code>ICommand</code> 的按钮</p>
+<hr>
+<h2 id="-自定义-attribute-说明">🛠️ 自定义 Attribute 说明
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>Attribute</th>
+          <th>用途</th>
+          <th>示例</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>[Category(&quot;分组&quot;)]</code></td>
+          <td>属性分组</td>
+          <td><code>Category(&quot;网络&quot;)</code></td>
+      </tr>
+      <tr>
+          <td><code>[DisplayName(&quot;别名&quot;)]</code></td>
+          <td>自定义显示名</td>
+          <td><code>DisplayName(&quot;IP地址&quot;)</code></td>
+      </tr>
+      <tr>
+          <td><code>[Description(&quot;说明&quot;)]</code></td>
+          <td>描述信息</td>
+          <td><code>Description(&quot;服务器IP&quot;)</code></td>
+      </tr>
+      <tr>
+          <td><code>[PropertyOrder(1)]</code></td>
+          <td>排序优先级</td>
+          <td>数字越小越靠前</td>
+      </tr>
+      <tr>
+          <td><code>[Range(0,100)]</code></td>
+          <td>数值范围</td>
+          <td>支持 int/double/float</td>
+      </tr>
+      <tr>
+          <td><code>[ShowSlider(10)]</code></td>
+          <td>显示滑块</td>
+          <td><code>TickFrequency=10</code></td>
+      </tr>
+      <tr>
+          <td><code>[AddButton(&quot;Cmd&quot;, &quot;按钮&quot;)]</code></td>
+          <td>添加操作按钮</td>
+          <td>支持多标签</td>
+      </tr>
+      <tr>
+          <td><code>[EnumerableProperty(&quot;Source&quot;, true)]</code></td>
+          <td>下拉框</td>
+          <td>绑定数据源</td>
+      </tr>
+      <tr>
+          <td><code>[SelectFilePath]</code></td>
+          <td>文件选择</td>
+          <td>打开 OpenFileDialog</td>
+      </tr>
+      <tr>
+          <td><code>[SelectFolder]</code></td>
+          <td>文件夹选择</td>
+          <td>打开 FolderBrowserDialog</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="-高级配置">⚙️ 高级配置
+</h2><h3 id="防抖机制debounce">防抖机制（Debounce）
+</h3><p>默认启用，防止高频刷新：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">propertyGrid</span><span class="p">.</span><span class="n">DebounceEnabled</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">// 默认 true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可调整延迟时间（内部使用 <code>DispatcherTimer</code>）</p>
+<h3 id="手动触发属性更改">手动触发属性更改
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="n">propertyGrid</span><span class="p">.</span><span class="n">RaisePropertyValueChanged</span><span class="p">(</span><span class="s">&#34;Name&#34;</span><span class="p">,</span> <span class="s">&#34;旧值&#34;</span><span class="p">,</span> <span class="s">&#34;新值&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用于代码修改属性后通知外部系统</p>
+<hr>
+<h2 id="-已知限制">📚 已知限制
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>限制</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>❌ 不支持集合增删项</td>
+          <td><code>ListEditor</code> 仅支持修改值</td>
+      </tr>
+      <tr>
+          <td>❌ 不支持复杂对象列表编辑</td>
+          <td>仅支持简单类型列表</td>
+      </tr>
+      <tr>
+          <td>❌ 不支持 <code>DateTime</code> 专用控件</td>
+          <td>可用 <code>TextBox</code> 输入</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>✅ 后续计划支持：<code>DatePicker</code>、<code>ColorPicker</code>、<code>IEditableObject</code> 撤销</p></blockquote>
+<hr>
+<p>如果你喜欢这篇文章，欢迎点赞、收藏、分享！<br>
+也可以关注我的博客，获取更多 WPF / .NET 技术干货 😊</p>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/wpf/">Wpf</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="has-image">
+    <a href="/p/xaml_behaviors/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/met_horace_pippin.jpg" loading="lazy" data-key="xaml_behaviors" data-hash="https://www.notion.so/images/page-cover/met_horace_pippin.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Xaml Behaviors</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/value_converters/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/webb3.jpg" loading="lazy" data-key="value_converters" data-hash="https://www.notion.so/images/page-cover/webb3.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Value Converters</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/calcbinding/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg" loading="lazy" data-key="CalcBinding" data-hash="https://www.notion.so/images/page-cover/rijksmuseum_mignons_1660.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-XAML中使用表达式进行数据绑定计算</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="has-image">
+    <a href="/p/data-template-selector-tips/">
+        
+        
+            <div class="article-image">
+                
+                    <img src="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg" loading="lazy" data-key="data-template-selector-tips" data-hash="https://www.notion.so/images/page-cover/nasa_new_york_city_grid.jpg"/>
+                
+            </div>
+        
+
+        <div class="article-details">
+            <h2 class="article-title">WPF技巧-数据模板动态选择</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 飞人博尔特的摄影师
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>
