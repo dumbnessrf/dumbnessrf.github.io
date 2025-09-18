@@ -7,7 +7,23 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>飞人博尔特的摄影师</copyright>
-        <lastBuildDate>Tue, 02 Sep 2025 23:01:03 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 15 Sep 2025 10:21:49 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Halcon</title>
+        <link>https://dumbnessrf.github.io/categories/halcon/</link>
+        <pubDate>Mon, 15 Sep 2025 10:21:49 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/categories/halcon/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>深度学习</title>
+        <link>https://dumbnessrf.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</link>
+        <pubDate>Mon, 15 Sep 2025 10:21:49 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Wpf</title>
         <link>https://dumbnessrf.github.io/categories/wpf/</link>
         <pubDate>Tue, 02 Sep 2025 23:01:03 +0800</pubDate>
