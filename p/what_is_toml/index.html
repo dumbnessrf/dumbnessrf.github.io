@@ -599,7 +599,7 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">toml</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="s">&#34;app.toml&#34;</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToObject</span><span class="p">&lt;</span><span class="n">AppConfig</span><span class="p">&gt;(</span><span class="n">toml</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToModel</span><span class="p">&lt;</span><span class="n">AppConfig</span><span class="p">&gt;(</span><span class="n">toml</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Server: {config.Server.Host}:{config.Server.Port}&#34;</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
@@ -663,7 +663,7 @@
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">};</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">tomlText</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromObject</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">tomlText</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromModel</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl"><span class="n">File</span><span class="p">.</span><span class="n">WriteAllText</span><span class="p">(</span><span class="s">&#34;app.toml&#34;</span><span class="p">,</span> <span class="n">tomlText</span><span class="p">);</span>
 </span></span></code></pre></td></tr></table>
 </div>
@@ -836,7 +836,7 @@
 </span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">FileNotFoundException</span><span class="p">(</span><span class="s">$&#34;TOML 配置文件不存在: {filePath}&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">content</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToObject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToModel</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">content</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
@@ -844,7 +844,7 @@
 </span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">Save</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">T</span> <span class="n">config</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">content</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromObject</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">content</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromModel</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">Directory</span><span class="p">.</span><span class="n">CreateDirectory</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">GetDirectoryName</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">??</span> <span class="s">&#34;.&#34;</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        <span class="n">File</span><span class="p">.</span><span class="n">WriteAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
