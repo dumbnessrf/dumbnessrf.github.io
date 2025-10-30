@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://dumbnessrf.github.io/p/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E5%BF%B5/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="深度学习的一些理念">
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="深度学习的一些理念">
 <meta property='og:description' content="深度学习模型超参数配置指南（分类：目标检测、语义分割、异常检测、Deep OCR）">
 <meta property='og:url' content='https://dumbnessrf.github.io/p/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%B8%80%E4%BA%9B%E7%90%86%E5%BF%B5/'>
 <meta property='og:site_name' content='飞人博尔特的摄影师'>
@@ -574,7 +574,8 @@
 <ul>
 <li>小物体为主 → 设 <code>MinLevel=0</code>, <code>MaxLevel=4</code></li>
 <li>大物体为主 → 设 <code>MinLevel=2</code>, <code>MaxLevel=5</code></li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <hr>
 <h2 id="2-语义分割semantic-segmentation">2️⃣ 语义分割（Semantic Segmentation）
 </h2><p>语义分割模型通常使用 U-Net、DeepLab 等架构，输出像素级类别掩码。</p>
@@ -595,7 +596,8 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。</p></blockquote>
+<p>⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。</p>
+</blockquote>
 <hr>
 <h2 id="3-通用异常检测gc-ad-generalized-anomaly-detection">3️⃣ 通用异常检测（GC-AD, Generalized Anomaly Detection）
 </h2><p>GC-AD 是一种双分支异常检测框架，包含<strong>全局子网</strong>与<strong>局部子网</strong>，支持三种模式。</p>
@@ -647,7 +649,8 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）</p></blockquote>
+<p>💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）</p>
+</blockquote>
 <hr>
 <h2 id="4-deep-ocr光学字符识别">4️⃣ Deep OCR（光学字符识别）
 </h2><p>Deep OCR 由两个独立模型组成，需分别训练与评估：</p>
@@ -698,7 +701,8 @@
 </table></div>
 <blockquote>
 <p>✅ 推荐流程：<br>
-<code>原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本</code></p></blockquote>
+<code>原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本</code></p>
+</blockquote>
 <hr>
 <h2 id="-通用建议类别权重class-weights">📊 通用建议：类别权重（Class Weights）
 </h2><div class="table-wrapper"><table>
@@ -773,12 +777,14 @@
 <hr>
 <h1 id="-目标检测超参数深度解析逐项详解">🔍 目标检测超参数深度解析（逐项详解）
 </h1><blockquote>
-<p>本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。</p></blockquote>
+<p>本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。</p>
+</blockquote>
 <hr>
 <h2 id="1-容量capacity">1. <strong>容量（Capacity）</strong>
 </h2><h3 id="-定义">✅ 定义：
 </h3><blockquote>
-<p>网络<strong>深层部分</strong>（通常指特征提取器后端、分类/回归头）的<strong>参数总量</strong>，反映模型的表达能力。</p></blockquote>
+<p>网络<strong>深层部分</strong>（通常指特征提取器后端、分类/回归头）的<strong>参数总量</strong>，反映模型的表达能力。</p>
+</blockquote>
 <h3 id="-本质">📌 本质：
 </h3><ul>
 <li>并非直接设置层数，而是控制“<strong>网络宽度</strong>”或“<strong>通道数</strong>”。</li>
@@ -860,7 +866,8 @@
 <h2 id="2-最小级别min-level">2. <strong>最小级别（Min Level）</strong>
 </h2><h3 id="-定义-1">✅ 定义：
 </h3><blockquote>
-<p>特征金字塔中最底层（最精细）的特征图层级编号，代表<strong>最小下采样倍数</strong>。</p></blockquote>
+<p>特征金字塔中最底层（最精细）的特征图层级编号，代表<strong>最小下采样倍数</strong>。</p>
+</blockquote>
 <h3 id="-数学定义">📌 数学定义：
 </h3><ul>
 <li>输入图像大小：<code>H × W</code></li>
@@ -952,7 +959,8 @@
 <h2 id="3-最大级别max-level">3. <strong>最大级别（Max Level）</strong>
 </h2><h3 id="-定义-2">✅ 定义：
 </h3><blockquote>
-<p>特征金字塔中最顶层（最粗略）的特征图层级编号，代表<strong>最大下采样倍数</strong>。</p></blockquote>
+<p>特征金字塔中最顶层（最粗略）的特征图层级编号，代表<strong>最大下采样倍数</strong>。</p>
+</blockquote>
 <h3 id="-数学定义-1">📌 数学定义：
 </h3><ul>
 <li>Max Level = 5 → 特征图尺寸 = 原图 1/32</li>
@@ -1038,12 +1046,14 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>✅ 最佳实践：<strong>MinLevel 和 MaxLevel 的差值应 ≥ 3</strong>，以保证至少 4 级特征用于多尺度检测。</p></blockquote>
+<p>✅ 最佳实践：<strong>MinLevel 和 MaxLevel 的差值应 ≥ 3</strong>，以保证至少 4 级特征用于多尺度检测。</p>
+</blockquote>
 <hr>
 <h2 id="4-子尺度锚数量number-of-scales-per-level">4. <strong>子尺度锚数量（Number of Scales per Level）</strong>
 </h2><h3 id="-定义-3">✅ 定义：
 </h3><blockquote>
-<p>在每个特征层级上，生成的<strong>不同尺寸锚框（anchor scales）的数量</strong>。</p></blockquote>
+<p>在每个特征层级上，生成的<strong>不同尺寸锚框（anchor scales）的数量</strong>。</p>
+</blockquote>
 <h3 id="-示例">📌 示例：
 </h3><ul>
 <li>设置为 <code>3</code> → 每个位置生成 3 个不同面积的锚框：
@@ -1124,12 +1134,14 @@
 </table></div>
 <blockquote>
 <p>✅ 建议结合“锚长宽比”共同优化：<br>
-如：<code>scales=[0.5,1,2]</code> + <code>ratios=[0.5,1,2]</code> → 总锚数 = 3×3=9 个/位置</p></blockquote>
+如：<code>scales=[0.5,1,2]</code> + <code>ratios=[0.5,1,2]</code> → 总锚数 = 3×3=9 个/位置</p>
+</blockquote>
 <hr>
 <h2 id="5-锚长宽比aspect-ratio">5. <strong>锚长宽比（Aspect Ratio）</strong>
 </h2><h3 id="-定义-4">✅ 定义：
 </h3><blockquote>
-<p>锚框的<strong>高度与宽度之比</strong>（Height:Width），决定锚的形状。</p></blockquote>
+<p>锚框的<strong>高度与宽度之比</strong>（Height:Width），决定锚的形状。</p>
+</blockquote>
 <h3 id="-常见值">📌 常见值：
 </h3><ul>
 <li><code>[1.0]</code> → 正方形</li>
@@ -1196,12 +1208,14 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！</p></blockquote>
+<p>✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！</p>
+</blockquote>
 <hr>
 <h2 id="6-锚角度-">6. <strong>锚角度 [°]（Anchor Angle）——仅限自由矩形（Oriented Bounding Box）</strong>
 </h2><h3 id="-定义-5">✅ 定义：
 </h3><blockquote>
-<p>锚框相对于水平轴的<strong>旋转角度</strong>（数学正方向，逆时针），用于检测<strong>倾斜目标</strong>。</p></blockquote>
+<p>锚框相对于水平轴的<strong>旋转角度</strong>（数学正方向，逆时针），用于检测<strong>倾斜目标</strong>。</p>
+</blockquote>
 <h3 id="-范围">📌 范围：
 </h3><ul>
 <li><strong>合法范围</strong>：<code>(-90°, 90°]</code></li>
@@ -1277,12 +1291,14 @@
 <ul>
 <li>锚角度是“先验”，用于匹配真实框</li>
 <li>模型最终输出的是偏移量 Δθ，通过回归学习修正</li>
-</ul></blockquote>
+</ul>
+</blockquote>
 <hr>
 <h2 id="7-忽略方向ignore-orientation">7. <strong>忽略方向（Ignore Orientation）</strong>
 </h2><h3 id="-定义-6">✅ 定义：
 </h3><blockquote>
-<p>是否将<strong>不同旋转角度</strong>的矩形视为<strong>同一个目标</strong>（即不区分朝向）。</p></blockquote>
+<p>是否将<strong>不同旋转角度</strong>的矩形视为<strong>同一个目标</strong>（即不区分朝向）。</p>
+</blockquote>
 <h3 id="-工作机制-6">⚙️ 工作机制：
 </h3><ul>
 <li><strong>开启（✅）</strong>：无论锚框角度是多少，只要中心、宽高一致 → 视为同一候选框</li>
@@ -1335,12 +1351,14 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>✅ 最佳实践：<strong>如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”</strong>。</p></blockquote>
+<p>✅ 最佳实践：<strong>如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”</strong>。</p>
+</blockquote>
 <hr>
 <h2 id="8-权重先验weight-prior-α">8. <strong>权重先验（Weight Prior, α）</strong>
 </h2><h3 id="-定义-7">✅ 定义：
 </h3><blockquote>
-<p>L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。</p></blockquote>
+<p>L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。</p>
+</blockquote>
 <h3 id="-数学形式">📌 数学形式：
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1421,12 +1439,14 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>✅ 技巧：监控 <code>weight_norm</code> 曲线 —— 若权重持续增大且 loss 波动 → 增大 α</p></blockquote>
+<p>✅ 技巧：监控 <code>weight_norm</code> 曲线 —— 若权重持续增大且 loss 波动 → 增大 α</p>
+</blockquote>
 <hr>
 <h2 id="9-边界框头部权重bbox-head-weight">9. <strong>边界框头部权重（BBox Head Weight）</strong>
 </h2><h3 id="-定义-8">✅ 定义：
 </h3><blockquote>
-<p>在总损失函数中，<strong>边界框回归损失</strong>所占的比重。</p></blockquote>
+<p>在总损失函数中，<strong>边界框回归损失</strong>所占的比重。</p>
+</blockquote>
 <h3 id="-总损失公式示例">📌 总损失公式示例：
 </h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1497,12 +1517,14 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>✅ 建议：<strong>优先使用 IoU-based Loss（GIoU/DIoU）</strong>，其天然与位置相关，可减少对 λ_bbox 的依赖。</p></blockquote>
+<p>✅ 建议：<strong>优先使用 IoU-based Loss（GIoU/DIoU）</strong>，其天然与位置相关，可减少对 λ_bbox 的依赖。</p>
+</blockquote>
 <hr>
 <h2 id="10-类别头部权重class-head-weight">10. <strong>类别头部权重（Class Head Weight）</strong>
 </h2><h3 id="-定义-9">✅ 定义：
 </h3><blockquote>
-<p>在总损失函数中，<strong>分类损失</strong>所占的比重。</p></blockquote>
+<p>在总损失函数中，<strong>分类损失</strong>所占的比重。</p>
+</blockquote>
 <h3 id="-与上一项协同工作">📌 与上一项协同工作：
 </h3><ul>
 <li>控制“分类 vs 定位”的训练优先级</li>
@@ -1565,7 +1587,8 @@
 <h2 id="11-冻结骨干级别freeze-backbone-level">11. <strong>冻结骨干级别（Freeze Backbone Level）</strong>
 </h2><h3 id="-定义-10">✅ 定义：
 </h3><blockquote>
-<p>在训练过程中，<strong>从输入端起</strong>，冻结骨干网络（Backbone）的最高层级编号。</p></blockquote>
+<p>在训练过程中，<strong>从输入端起</strong>，冻结骨干网络（Backbone）的最高层级编号。</p>
+</blockquote>
 <h3 id="-举例">📌 举例：
 </h3><ul>
 <li>骨干结构：<code>conv1 → layer1 → layer2 → layer3 → layer4</code></li>
@@ -1648,7 +1671,8 @@
 </table></div>
 <blockquote>
 <p>✅ 最佳实践：<br>
-<strong>“冻结骨干 + 检测头单独学习率”</strong> 是工业界标准做法！</p></blockquote>
+<strong>“冻结骨干 + 检测头单独学习率”</strong> 是工业界标准做法！</p>
+</blockquote>
 <hr>
 <h2 id="-总结目标检测参数调优终极-checklist">✅ 总结：目标检测参数调优终极 Checklist
 </h2><div class="table-wrapper"><table>
@@ -1773,7 +1797,8 @@
 <h1 id="-锚anchor到底是什么深度详解">🔍 <strong>锚（Anchor）到底是什么？——深度详解</strong>
 </h1><blockquote>
 <p>✅ <strong>一句话定义</strong>：<br>
-<strong>锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”</strong>，用于指导模型预测真实物体的位置与类别。</p></blockquote>
+<strong>锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”</strong>，用于指导模型预测真实物体的位置与类别。</p>
+</blockquote>
 <p>它不是真实存在的物体边界框，而是<strong>模型学习的“先验假设”</strong> —— 像是给模型提供一组“候选模板”，让模型只需学习“如何调整这些模板”，而不是从零开始猜一个框。</p>
 <hr>
 <h2 id="-一锚的起源为什么需要-anchor">🧩 一、锚的起源：为什么需要 Anchor？
@@ -1809,7 +1834,8 @@
 <p>→ 如果让模型直接回归任意框，训练会不稳定、收敛慢、精度差。</p>
 <h3 id="-解决方案引入-anchor">✅ 解决方案：<strong>引入 Anchor</strong>
 </h3><blockquote>
-<p>让模型<strong>不要从零生成框</strong>，而是<strong>基于一组预设的“模板框”做微调</strong>。</p></blockquote>
+<p>让模型<strong>不要从零生成框</strong>，而是<strong>基于一组预设的“模板框”做微调</strong>。</p>
+</blockquote>
 <p>就像你给一个孩子看 10 种不同大小和形状的“盒子样板”，然后说：“你看到的东西，一定是这 10 种之一的变形。”</p>
 <p>这就是 Anchor 的思想。</p>
 <hr>
@@ -1857,7 +1883,8 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>💡 注意：<strong>Anchor 不是图像中的真实框</strong>，它是<strong>在特征图网格上密集生成的虚拟框</strong>。</p></blockquote>
+<p>💡 注意：<strong>Anchor 不是图像中的真实框</strong>，它是<strong>在特征图网格上密集生成的虚拟框</strong>。</p>
+</blockquote>
 <hr>
 <h2 id="-三anchor-如何生成以-fpn-为例">🌐 三、Anchor 如何生成？——以 FPN 为例
 </h2><p>我们以典型的 <strong>RetinaNet + FPN</strong> 架构为例：</p>
@@ -1890,7 +1917,8 @@
   </tbody>
 </table></div>
 <blockquote>
-<p>每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。</p></blockquote>
+<p>每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。</p>
+</blockquote>
 <h3 id="步骤-2在每个特征点上生成多个-anchor">步骤 2：在每个特征点上生成多个 Anchor
 </h3><ul>
 <li>每个特征图单元（cell）代表原图的一个区域（如 P3 上每个 cell = 8×8 像素）</li>
@@ -1931,7 +1959,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。</p></blockquote>
+<p>每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。</p>
+</blockquote>
 <h3 id="步骤-3anchor-总数惊人">步骤 3：Anchor 总数惊人！
 </h3><div class="table-wrapper"><table>
   <thead>
@@ -1981,7 +2010,8 @@
 <li>Δθ → 旋转角度（若启用）</li>
 </ul>
 <blockquote>
-<p>这些偏移量是<strong>相对于 Anchor 的修正值</strong>！</p></blockquote>
+<p>这些偏移量是<strong>相对于 Anchor 的修正值</strong>！</p>
+</blockquote>
 <h4 id="-公式示例经典-rpn--retinanet">📌 公式示例（经典 RPN / RetinaNet）：
 </h4><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -1998,7 +2028,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。</p></blockquote>
+<p>所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。</p>
+</blockquote>
 <h3 id="-匹配过程training">✅ 匹配过程（Training）：
 </h3><ol>
 <li>对每个真实标注框（Ground Truth），找到与其 IoU 最大的 Anchor；</li>
@@ -2012,7 +2043,8 @@
 </li>
 </ol>
 <blockquote>
-<p>👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！</p></blockquote>
+<p>👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！</p>
+</blockquote>
 <hr>
 <h2 id="-五anchor-vs-anchor-free对比总结">🔄 五、Anchor vs Anchor-Free：对比总结
 </h2><div class="table-wrapper"><table>
@@ -2069,7 +2101,8 @@
 <blockquote>
 <p>✅ <strong>结论</strong>：<br>
 <strong>Anchor 是“稳而重”</strong>，适合对精度要求高的工业场景；<br>
-<strong>Anchor-Free 是“轻而快”</strong>，适合实时或资源受限环境。</p></blockquote>
+<strong>Anchor-Free 是“轻而快”</strong>，适合实时或资源受限环境。</p>
+</blockquote>
 <hr>
 <h2 id="-六anchor-的优缺点总结">🎯 六、Anchor 的优缺点总结
 </h2><div class="table-wrapper"><table>

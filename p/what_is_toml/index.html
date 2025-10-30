@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="TOML（Tom's Obvious, Minimal Language）是一种语义明确、易于阅读和编写的配置文件格式。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。">
+<title>什么是Toml</title>
+
+<link rel='canonical' href='https://dumbnessrf.github.io/p/what_is_toml/'>
+
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="什么是Toml">
+<meta property='og:description' content="TOML（Tom's Obvious, Minimal Language）是一种语义明确、易于阅读和编写的配置文件格式。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。">
+<meta property='og:url' content='https://dumbnessrf.github.io/p/what_is_toml/'>
+<meta property='og:site_name' content='飞人博尔特的摄影师'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='toml' /><meta property='article:tag' content='csharp' /><meta property='article:tag' content='json' /><meta property='article:tag' content='ini' /><meta property='article:tag' content='yaml' /><meta property='article:tag' content='xml' /><meta property='article:tag' content='configuration' /><meta property='article:tag' content='appsettings' /><meta property='article:published_time' content='2025-10-30T09:49:41&#43;08:00'/><meta property='article:modified_time' content='2025-10-30T09:49:41&#43;08:00'/><meta property='og:image' content='https://images.unsplash.com/photo-1563387852576-964bc31b73af?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=6000' />
+<meta name="twitter:title" content="什么是Toml">
+<meta name="twitter:description" content="TOML（Tom's Obvious, Minimal Language）是一种语义明确、易于阅读和编写的配置文件格式。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。"><meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content='https://images.unsplash.com/photo-1563387852576-964bc31b73af?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=6000' />
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_9d1349b4aee32533.png" width="300"
+                            height="302" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🤩</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">飞人博尔特的摄影师</a></h1>
+            <h2 class="site-description">何当共剪西窗烛，却话巴山夜雨时</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/335769294?spm_id_from=333.1007.0.0'
+                        target="_blank"
+                        title="BiliBili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6z" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/dumbnessrf'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%BD%92%E6%A1%A3/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>Dark Mode</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一什么是-toml">一、什么是 TOML？</a>
+      <ol>
+        <li><a href="#核心特点">核心特点</a></li>
+        <li><a href="#示例-toml-文件">示例 TOML 文件</a></li>
+      </ol>
+    </li>
+    <li><a href="#二toml-与其他配置格式对比">二、TOML 与其他配置格式对比</a></li>
+    <li><a href="#三为什么在-c-项目中使用-toml">三、为什么在 C# 项目中使用 TOML？</a></li>
+    <li><a href="#四c-中读写-toml使用-tomlyn-库">四、C# 中读写 TOML：使用 Tomlyn 库</a>
+      <ol>
+        <li><a href="#1-安装">1. 安装</a></li>
+        <li><a href="#2-加载-toml-文件">2. 加载 TOML 文件</a></li>
+        <li><a href="#方式一强类型反序列化推荐">方式一：强类型反序列化（推荐）</a></li>
+        <li><a href="#方式二动态解析灵活但需手动处理">方式二：动态解析（灵活但需手动处理）</a></li>
+        <li><a href="#3-保存-toml-文件">3. 保存 TOML 文件</a></li>
+        <li><a href="#4-高级特性">4. 高级特性</a></li>
+        <li><a href="#自定义字段名映射">自定义字段名映射</a></li>
+        <li><a href="#数组支持">数组支持</a></li>
+        <li><a href="#日期时间">日期时间</a></li>
+      </ol>
+    </li>
+    <li><a href="#五完整工具类封装推荐复用">五、完整工具类封装（推荐复用）</a></li>
+    <li><a href="#六常见问题与注意事项">六、常见问题与注意事项</a></li>
+    <li><a href="#七与其他-net-配置系统的集成可选">七、与其他 .NET 配置系统的集成（可选）</a></li>
+    <li><a href="#八总结">八、总结</a></li>
+    <li><a href="#附录参考资料">附录：参考资料</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="has-image main-article">
+    <header class="article-header">
+        <div class="article-image">
+            <a href="/p/what_is_toml/">
+                
+                    <img src="https://images.unsplash.com/photo-1563387852576-964bc31b73af?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=6000" loading="lazy" alt="Featured image of post 什么是Toml" />
+                
+            </a>
+        </div>
+    
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/what_is_toml/">什么是Toml</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            TOML（Tom&#39;s Obvious, Minimal Language）是一种语义明确、易于阅读和编写的配置文件格式。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 30, 2025</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    5 minute read
+                </time>
+            </div>
+        
+        
+        <div id="viewCount">
+            <?xml version="1.0" standalone="no"?><!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"><svg t="1748504941001" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2652" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256"><path d="M512 256c-163.8 0-291.4 97.6-448 256 134.8 135.4 248 256 448 256 199.8 0 346.8-152.8 448-253.2C856.4 397.2 709.6 256 512 256zM512 694.6c-98.8 0-179.2-82-179.2-182.6 0-100.8 80.4-182.6 179.2-182.6s179.2 82 179.2 182.6C691.2 612.8 610.8 694.6 512 694.6z" p-id="2653"></path><path d="M512 448c0-15.8 5.8-30.2 15.2-41.4-5-0.8-10-1.2-15.2-1.2-57.6 0-104.6 47.8-104.6 106.6 0 58.8 47 106.6 104.6 106.6s104.6-47.8 104.6-106.6c0-4.6-0.4-9.2-0.8-13.8-11 8.6-24.6 13.8-39.6 13.8C540.6 512 512 483.4 512 448z" p-id="2654"></path></svg>
+            <time class="article-time--reading">
+                
+                <span id="vercount_value_page_pv">loading... </span>次
+            </time>
+        </div>
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="toml-文件在-c-中的全面指南">TOML 文件在 C# 中的全面指南
+</h1><blockquote>
+<p>适用于 .NET 开发者：从基础概念到实战应用，掌握现代配置文件格式 TOML 在 C# 项目中的使用方法。</p>
+</blockquote>
+<hr>
+<h2 id="一什么是-toml">一、什么是 TOML？
+</h2><p><strong>TOML</strong>（<strong>Tom&rsquo;s Obvious, Minimal Language</strong>）是一种语义明确、易于阅读和编写的<strong>配置文件格式</strong>，由 GitHub 联合创始人 Tom Preston-Werner 提出。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。</p>
+<h3 id="核心特点">核心特点
+</h3><ul>
+<li>✅ <strong>人类可读</strong>：语法简洁，结构清晰</li>
+<li>✅ <strong>强类型支持</strong>：原生支持字符串、整数、布尔、日期、数组、嵌套表等</li>
+<li>✅ <strong>标准化</strong>：有明确规范（<a class="link" href="https://toml.io/"  target="_blank" rel="noopener"
+    >toml.io</a>），跨语言兼容</li>
+<li>✅ <strong>支持注释</strong>：使用 <code>#</code> 添加说明</li>
+<li>✅ <strong>层级结构</strong>：通过 <code>[section]</code> 和 <code>[section.subsection]</code> 实现嵌套</li>
+</ul>
+<h3 id="示例-toml-文件">示例 TOML 文件
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="c"># 应用基本信息</span>
+</span></span><span class="line"><span class="cl"><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;My C# Application&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">version</span> <span class="p">=</span> <span class="s2">&#34;1.0.0&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">server</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">host</span> <span class="p">=</span> <span class="s2">&#34;localhost&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span> <span class="p">=</span> <span class="mi">8080</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssl_enabled</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">database</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server</span> <span class="p">=</span> <span class="s2">&#34;192.168.1.10&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span> <span class="p">=</span> <span class="mi">5432</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">database</span><span class="p">.</span><span class="nx">credentials</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">username</span> <span class="p">=</span> <span class="s2">&#34;admin&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">password</span> <span class="p">=</span> <span class="s2">&#34;s3cr3t&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="二toml-与其他配置格式对比">二、TOML 与其他配置格式对比
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>TOML</th>
+          <th>INI</th>
+          <th>JSON</th>
+          <th>YAML</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>人类可读性</strong></td>
+          <td>⭐⭐⭐⭐</td>
+          <td>⭐⭐⭐</td>
+          <td>⭐⭐</td>
+          <td>⭐⭐⭐⭐</td>
+      </tr>
+      <tr>
+          <td><strong>支持注释</strong></td>
+          <td>✅（<code>#</code>）</td>
+          <td>✅（<code>#</code> 或 <code>;</code>，不标准）</td>
+          <td>❌</td>
+          <td>✅（<code>#</code>）</td>
+      </tr>
+      <tr>
+          <td><strong>数据类型</strong></td>
+          <td>原生支持多种类型</td>
+          <td>仅字符串</td>
+          <td>支持基本类型</td>
+          <td>支持但易出错</td>
+      </tr>
+      <tr>
+          <td><strong>嵌套结构</strong></td>
+          <td>✅（通过表）</td>
+          <td>❌（需命名约定）</td>
+          <td>✅（对象）</td>
+          <td>✅（缩进）</td>
+      </tr>
+      <tr>
+          <td><strong>标准规范</strong></td>
+          <td>✅（严格）</td>
+          <td>❌（各实现不一）</td>
+          <td>✅</td>
+          <td>✅（但复杂）</td>
+      </tr>
+      <tr>
+          <td><strong>缩进敏感</strong></td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>❌</td>
+          <td>✅（易错）</td>
+      </tr>
+      <tr>
+          <td><strong>适合手写</strong></td>
+          <td>✅✅✅</td>
+          <td>✅✅</td>
+          <td>❌</td>
+          <td>✅（但需小心缩进）</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>💡 结论：TOML 是 INI 的现代化升级版，兼具可读性与结构表达能力，特别适合应用程序配置文件。</p>
+</blockquote>
+<hr>
+<h2 id="三为什么在-c-项目中使用-toml">三、为什么在 C# 项目中使用 TOML？
+</h2><ul>
+<li><strong>现代项目趋势</strong>：Rust（<code>Cargo.toml</code>）、Python（<code>pyproject.toml</code>）、Deno 等广泛采用</li>
+<li><strong>优于传统 <code>appsettings.json</code></strong>：支持注释，结构更清晰，避免 JSON 的“无注释”痛点</li>
+<li><strong>比 XML 简洁</strong>：无需闭合标签，无命名空间复杂性</li>
+<li><strong>比 YAML 安全</strong>：无缩进陷阱，无类型自动推断风险</li>
+</ul>
+<blockquote>
+<p>📌 典型应用场景：</p>
+<ul>
+<li>应用程序主配置文件（替代 <code>appsettings.json</code>）</li>
+<li>插件/模块配置</li>
+<li>构建脚本参数（如自定义构建工具）</li>
+<li>游戏或桌面应用的用户设置</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="四c-中读写-toml使用-tomlyn-库">四、C# 中读写 TOML：使用 Tomlyn 库
+</h2><p>.NET 官方未内置 TOML 支持，但社区库 <a class="link" href="https://github.com/xoofx/Tomlyn"  target="_blank" rel="noopener"
+    ><strong>Tomlyn</strong></a> 是目前最成熟、轻量、高性能的选择。</p>
+<h3 id="1-安装">1. 安装
+</h3><p>通过 NuGet 安装：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">dotnet add package Tomlyn
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>或在 <code>.csproj</code> 中添加：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;Tomlyn&#34;</span> <span class="na">Version=</span><span class="s">&#34;0.15.0&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>✅ 支持 .NET Standard 2.0+，兼容 .NET Core、.NET 5/6/7/8 及 .NET Framework。</p>
+</blockquote>
+<hr>
+<h3 id="2-加载-toml-文件">2. 加载 TOML 文件
+</h3><h3 id="方式一强类型反序列化推荐">方式一：强类型反序列化（推荐）
+</h3><p>适用于结构固定的配置。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Tomlyn</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">AppConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Title</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ServerConfig</span> <span class="n">Server</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">DatabaseConfig</span> <span class="n">Database</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ServerConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Host</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;localhost&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Port</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="m">8080</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">SslEnabled</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">DatabaseConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Server</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Port</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">DbCredentials</span> <span class="n">Credentials</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">DbCredentials</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Username</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Password</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>加载代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">toml</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="s">&#34;app.toml&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToObject</span><span class="p">&lt;</span><span class="n">AppConfig</span><span class="p">&gt;(</span><span class="n">toml</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;Server: {config.Server.Host}:{config.Server.Port}&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>✅ 自动类型转换：int、bool、嵌套对象等无需手动解析。</p>
+</blockquote>
+<h3 id="方式二动态解析灵活但需手动处理">方式二：动态解析（灵活但需手动处理）
+</h3><p>适用于结构未知或临时解析。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Tomlyn.Model</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">model</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToModel</span><span class="p">(</span><span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="s">&#34;config.toml&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">server</span> <span class="p">=</span> <span class="p">(</span><span class="n">TomlTable</span><span class="p">)</span><span class="n">model</span><span class="p">[</span><span class="s">&#34;server&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">host</span> <span class="p">=</span> <span class="p">(</span><span class="kt">string</span><span class="p">)</span><span class="n">server</span><span class="p">[</span><span class="s">&#34;host&#34;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="n">port</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">server</span><span class="p">[</span><span class="s">&#34;port&#34;</span><span class="p">];</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>⚠️ 注意：需显式类型转换，嵌套需递归处理。</p>
+</blockquote>
+<hr>
+<h3 id="3-保存-toml-文件">3. 保存 TOML 文件
+</h3><p>将 C# 对象序列化为 TOML 文本：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Title</span> <span class="p">=</span> <span class="s">&#34;My App&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Server</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">Host</span> <span class="p">=</span> <span class="s">&#34;0.0.0.0&#34;</span><span class="p">,</span> <span class="n">Port</span> <span class="p">=</span> <span class="m">9000</span><span class="p">,</span> <span class="n">SslEnabled</span> <span class="p">=</span> <span class="kc">false</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Database</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Server</span> <span class="p">=</span> <span class="s">&#34;db.example.com&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Port</span> <span class="p">=</span> <span class="m">5432</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Credentials</span> <span class="p">=</span> <span class="k">new</span><span class="p">()</span> <span class="p">{</span> <span class="n">Username</span> <span class="p">=</span> <span class="s">&#34;user&#34;</span><span class="p">,</span> <span class="n">Password</span> <span class="p">=</span> <span class="s">&#34;pass&#34;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">tomlText</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromObject</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">File</span><span class="p">.</span><span class="n">WriteAllText</span><span class="p">(</span><span class="s">&#34;app.toml&#34;</span><span class="p">,</span> <span class="n">tomlText</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>输出示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">title</span> <span class="p">=</span> <span class="s2">&#34;My App&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">server</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">host</span> <span class="p">=</span> <span class="s2">&#34;0.0.0.0&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span> <span class="p">=</span> <span class="mi">9000</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ssl_enabled</span> <span class="p">=</span> <span class="kc">false</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">database</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">server</span> <span class="p">=</span> <span class="s2">&#34;db.example.com&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">port</span> <span class="p">=</span> <span class="mi">5432</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="nx">database</span><span class="p">.</span><span class="nx">credentials</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">username</span> <span class="p">=</span> <span class="s2">&#34;user&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">password</span> <span class="p">=</span> <span class="s2">&#34;pass&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="4-高级特性">4. 高级特性
+</h3><h3 id="自定义字段名映射">自定义字段名映射
+</h3><p>当 TOML 键名与 C# 属性名不一致时，使用 <code>[TomlProperty]</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ServerConfig</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="na">    [TomlProperty(&#34;bind_address&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Host</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="na">
+</span></span></span><span class="line"><span class="cl"><span class="na">    [TomlProperty(&#34;use_tls&#34;)]</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">bool</span> <span class="n">SslEnabled</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>对应 TOML：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="p">[</span><span class="nx">server</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">bind_address</span> <span class="p">=</span> <span class="s2">&#34;127.0.0.1&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nx">use_tls</span> <span class="p">=</span> <span class="kc">true</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="数组支持">数组支持
+</h3><p>TOML：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">allowed_ips</span> <span class="p">=</span> <span class="p">[</span><span class="s2">&#34;192.168.1.1&#34;</span><span class="p">,</span> <span class="s2">&#34;10.0.0.5&#34;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="nx">ports</span> <span class="p">=</span> <span class="p">[</span><span class="mi">8080</span><span class="p">,</span> <span class="mi">8081</span><span class="p">,</span> <span class="mi">8082</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>C#：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span> <span class="n">AllowedIps</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="k">new</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kt">int</span><span class="p">[]</span> <span class="n">Ports</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span> <span class="p">=</span> <span class="n">Array</span><span class="p">.</span><span class="n">Empty</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;();</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="日期时间">日期时间
+</h3><p>TOML 支持 RFC 3339 日期：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-toml" data-lang="toml"><span class="line"><span class="cl"><span class="nx">created_at</span> <span class="p">=</span> <span class="ld">2025-10-30T14:30:00Z</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>C#：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="kd">public</span> <span class="n">DateTime</span> <span class="n">CreatedAt</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="五完整工具类封装推荐复用">五、完整工具类封装（推荐复用）
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">Tomlyn</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">System.IO</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// TOML 配置文件读写工具类</span>
+</span></span><span class="line"><span class="cl"><span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">class</span> <span class="nc">TomlConfigHelper</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 从文件加载 TOML 配置（强类型）</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">T</span> <span class="n">Load</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">filePath</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="k">new</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(!</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="n">filePath</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="k">throw</span> <span class="k">new</span> <span class="n">FileNotFoundException</span><span class="p">(</span><span class="s">$&#34;TOML 配置文件不存在: {filePath}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">content</span> <span class="p">=</span> <span class="n">File</span><span class="p">.</span><span class="n">ReadAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">Toml</span><span class="p">.</span><span class="n">ToObject</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// 保存配置对象到 TOML 文件</span>
+</span></span><span class="line"><span class="cl">    <span class="cs">/// &lt;/summary&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">Save</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="kt">string</span> <span class="n">filePath</span><span class="p">,</span> <span class="n">T</span> <span class="n">config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">content</span> <span class="p">=</span> <span class="n">Toml</span><span class="p">.</span><span class="n">FromObject</span><span class="p">(</span><span class="n">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Directory</span><span class="p">.</span><span class="n">CreateDirectory</span><span class="p">(</span><span class="n">Path</span><span class="p">.</span><span class="n">GetDirectoryName</span><span class="p">(</span><span class="n">filePath</span><span class="p">)</span> <span class="p">??</span> <span class="s">&#34;.&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">File</span><span class="p">.</span><span class="n">WriteAllText</span><span class="p">(</span><span class="n">filePath</span><span class="p">,</span> <span class="n">content</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>使用示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-csharp" data-lang="csharp"><span class="line"><span class="cl"><span class="c1">// 首次运行：创建默认配置</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(!</span><span class="n">File</span><span class="p">.</span><span class="n">Exists</span><span class="p">(</span><span class="s">&#34;config.toml&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">defaultConfig</span> <span class="p">=</span> <span class="k">new</span> <span class="n">AppConfig</span> <span class="p">{</span> <span class="n">Title</span> <span class="p">=</span> <span class="s">&#34;My App&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="n">TomlConfigHelper</span><span class="p">.</span><span class="n">Save</span><span class="p">(</span><span class="s">&#34;config.toml&#34;</span><span class="p">,</span> <span class="n">defaultConfig</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 加载配置</span>
+</span></span><span class="line"><span class="cl"><span class="kt">var</span> <span class="n">config</span> <span class="p">=</span> <span class="n">TomlConfigHelper</span><span class="p">.</span><span class="n">Load</span><span class="p">&lt;</span><span class="n">AppConfig</span><span class="p">&gt;(</span><span class="s">&#34;config.toml&#34;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="六常见问题与注意事项">六、常见问题与注意事项
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>问题</th>
+          <th>解决方案</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>属性未赋值</strong></td>
+          <td>确保属性为 <code>public</code> 且有 <code>set</code> 访问器</td>
+      </tr>
+      <tr>
+          <td><strong>类型转换异常</strong></td>
+          <td>检查 TOML 值类型是否匹配（如 <code>&quot;8080&quot;</code> 是字符串，应写为 <code>8080</code>）</td>
+      </tr>
+      <tr>
+          <td><strong>嵌套结构不匹配</strong></td>
+          <td>C# 类的嵌套层级必须与 TOML 表结构一致</td>
+      </tr>
+      <tr>
+          <td><strong>中文乱码</strong></td>
+          <td>保存 TOML 文件时使用 UTF-8 编码（<code>File.WriteAllText</code> 默认 UTF-8）</td>
+      </tr>
+      <tr>
+          <td><strong>注释丢失</strong></td>
+          <td>Tomlyn 不保留注释（符合 TOML 规范），如需保留注释需用其他方案</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>⚠️ TOML 规范要求：键名区分大小写，字符串建议用双引号（虽然部分值可无引号，但为安全起见推荐显式使用）。</p>
+</blockquote>
+<hr>
+<h2 id="七与其他-net-配置系统的集成可选">七、与其他 .NET 配置系统的集成（可选）
+</h2><p>虽然 TOML 不能直接用于 <code>Microsoft.Extensions.Configuration</code>（如 <a class="link" href="http://asp.net/"  target="_blank" rel="noopener"
+    >ASP.NET</a> Core 的 <code>IConfiguration</code>），但可通过自定义 <code>ConfigurationProvider</code> 实现集成。</p>
+<blockquote>
+<p>🔧 如有需要，可基于 Tomlyn 实现 TomlConfigurationProvider，将 TOML 文件纳入标准配置管道。</p>
+</blockquote>
+<hr>
+<h2 id="八总结">八、总结
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>优势</th>
+          <th>说明</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>简洁直观</strong></td>
+          <td>比 JSON 更易读，比 YAML 更安全</td>
+      </tr>
+      <tr>
+          <td><strong>类型安全</strong></td>
+          <td>原生支持多种数据类型，减少解析错误</td>
+      </tr>
+      <tr>
+          <td><strong>现代标准</strong></td>
+          <td>被 Rust、Python 等主流生态广泛采用</td>
+      </tr>
+      <tr>
+          <td><strong>C# 支持完善</strong></td>
+          <td>Tomlyn 库成熟、轻量、高性能</td>
+      </tr>
+  </tbody>
+</table></div>
+<blockquote>
+<p>✅ 推荐在以下场景使用 TOML：</p>
+<ul>
+<li>桌面应用、控制台工具、游戏等需要<strong>用户可编辑配置</strong>的项目</li>
+<li>替代 <code>appsettings.json</code> 以支持<strong>注释和更清晰结构</strong></li>
+<li>构建系统、CI/CD 脚本中的参数配置</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="附录参考资料">附录：参考资料
+</h2><ul>
+<li><a class="link" href="https://toml.io/"  target="_blank" rel="noopener"
+    >TOML 官方规范</a></li>
+<li><a class="link" href="https://github.com/xoofx/Tomlyn"  target="_blank" rel="noopener"
+    >Tomlyn GitHub 仓库</a></li>
+<li><a class="link" href="https://www.nuget.org/packages/Tomlyn"  target="_blank" rel="noopener"
+    >NuGet: Tomlyn</a></li>
+</ul>
+<hr>
+<blockquote>
+<p>📝 作者建议：对于新项目，优先考虑 TOML 作为配置格式；对于现有项目，可在非核心模块中逐步引入，体验其简洁与强大。</p>
+</blockquote>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/toml/">Toml</a>
+        
+            <a href="/tags/csharp/">Csharp</a>
+        
+            <a href="/tags/json/">Json</a>
+        
+            <a href="/tags/ini/">Ini</a>
+        
+            <a href="/tags/yaml/">Yaml</a>
+        
+            <a href="/tags/xml/">Xml</a>
+        
+            <a href="/tags/configuration/">Configuration</a>
+        
+            <a href="/tags/appsettings/">Appsettings</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <script
+    src="https://giscus.app/client.js"
+    data-repo="dumbnessrf/dumbnessrf.github.io"
+    data-repo-id="R_kgDOOyAbRA"
+    data-category="Announcements"
+    data-category-id="DIC_kwDOOyAbRM4CquJK"
+    data-mapping="pathname"
+    data-strict="0"
+    data-reactions-enabled="1"
+    data-emit-metadata="0"
+    data-input-position="top"
+    data-theme="light"
+    data-lang="en"
+    data-loading=""
+    crossorigin="anonymous"
+    async
+></script>
+<script>
+    function setGiscusTheme(theme) {
+        let giscus = document.querySelector("iframe.giscus-frame");
+        if (giscus) {
+            giscus.contentWindow.postMessage(
+                {
+                    giscus: {
+                        setConfig: {
+                            theme: theme,
+                        },
+                    },
+                },
+                "https://giscus.app"
+            );
+        }
+    }
+
+    (function () {
+        addEventListener("message", (e) => {
+            if (event.origin !== "https://giscus.app") return;
+            handler();
+        });
+        window.addEventListener("onColorSchemeChange", handler);
+
+        function handler() {
+            if (document.documentElement.dataset.scheme === "light") {
+                setGiscusTheme('light');
+            } else {
+                setGiscusTheme('dark_dimmed');
+            }
+        }
+    })();
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2025 飞人博尔特的摄影师
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.30.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script defer src="https://cn.vercount.one/js"></script>
+
+<script>
+    function showHideView() {
+        
+        let viewCounts = document.querySelectorAll("#viewCount");
+        if (viewCounts) {
+            
+            let article =  document.querySelector(".article-page");
+            if (!article) {
+                viewCounts.forEach(ele => {
+                    ele.style.display = 'none';
+                });
+            }
+        }
+    }
+    
+    showHideView();
+</script>
+    </body>
+</html>

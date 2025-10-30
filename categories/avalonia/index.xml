@@ -57,7 +57,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 Avalonia 提供了真正的跨平台开发能力，适用于需要统一多端体验的应用场景。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 Avalonia 提供了真正的跨平台开发能力，适用于需要统一多端体验的应用场景。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-性能表现&#34;&gt;⚙️ 性能表现
 &lt;/h2&gt;&lt;p&gt;Avalonia 的渲染引擎经过优化，具备高效的绘制能力和良好的硬件加速支持，尤其在处理复杂图形与数据可视化时表现出色。&lt;/p&gt;
@@ -110,7 +111,8 @@
 &lt;hr&gt;
 &lt;h1 id=&#34;-示例在-avalonia-中集成依赖注入&#34;&gt;🧪 示例：在 Avalonia 中集成依赖注入
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;📝以下示例将添加&lt;code&gt;Redis&lt;/code&gt;和第三方Avalonia样式库&lt;code&gt;SukiUI&lt;/code&gt;作为参考&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;📝以下示例将添加&lt;code&gt;Redis&lt;/code&gt;和第三方Avalonia样式库&lt;code&gt;SukiUI&lt;/code&gt;作为参考&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;1-安装依赖注入包&#34;&gt;1️⃣ 安装依赖注入包
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -317,7 +319,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;📝 如果未启用 &lt;code&gt;ViewLocator&lt;/code&gt;，则需要手动设置 &lt;code&gt;DataContext&lt;/code&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;📝 如果未启用 &lt;code&gt;ViewLocator&lt;/code&gt;，则需要手动设置 &lt;code&gt;DataContext&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;-总结&#34;&gt;✅ 总结
 &lt;/h1&gt;&lt;p&gt;Avalonia 是一个强大的跨平台 UI 框架，结合 &lt;code&gt;Microsoft.Extensions.DependencyInjection&lt;/code&gt; 可实现高度解耦和模块化的应用程序架构。通过合理配置服务生命周期和使用视图定位器等机制，可以显著提升开发效率和代码质量。&lt;/p&gt;

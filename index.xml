@@ -7,7 +7,626 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en</language>
         <copyright>飞人博尔特的摄影师</copyright>
-        <lastBuildDate>Mon, 15 Sep 2025 21:08:09 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 30 Oct 2025 09:49:41 +0800</lastBuildDate><atom:link href="https://dumbnessrf.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>什么是Toml</title>
+        <link>https://dumbnessrf.github.io/p/what_is_toml/</link>
+        <pubDate>Thu, 30 Oct 2025 09:49:41 +0800</pubDate>
+        
+        <guid>https://dumbnessrf.github.io/p/what_is_toml/</guid>
+        <description>&lt;img src="https://images.unsplash.com/photo-1563387852576-964bc31b73af?ixlib=rb-4.1.0&amp;q=85&amp;fm=jpg&amp;crop=entropy&amp;cs=srgb&amp;w=6000" alt="Featured image of post 什么是Toml" /&gt;&lt;h1 id=&#34;toml-文件在-c-中的全面指南&#34;&gt;TOML 文件在 C# 中的全面指南
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;适用于 .NET 开发者：从基础概念到实战应用，掌握现代配置文件格式 TOML 在 C# 项目中的使用方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一什么是-toml&#34;&gt;一、什么是 TOML？
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;TOML&lt;/strong&gt;（&lt;strong&gt;Tom&amp;rsquo;s Obvious, Minimal Language&lt;/strong&gt;）是一种语义明确、易于阅读和编写的&lt;strong&gt;配置文件格式&lt;/strong&gt;，由 GitHub 联合创始人 Tom Preston-Werner 提出。其设计目标是成为比 JSON、YAML、INI 更直观、无歧义的配置语言。&lt;/p&gt;
+&lt;h3 id=&#34;核心特点&#34;&gt;核心特点
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;✅ &lt;strong&gt;人类可读&lt;/strong&gt;：语法简洁，结构清晰&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;强类型支持&lt;/strong&gt;：原生支持字符串、整数、布尔、日期、数组、嵌套表等&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;标准化&lt;/strong&gt;：有明确规范（&lt;a class=&#34;link&#34; href=&#34;https://toml.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;toml.io&lt;/a&gt;），跨语言兼容&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;支持注释&lt;/strong&gt;：使用 &lt;code&gt;#&lt;/code&gt; 添加说明&lt;/li&gt;
+&lt;li&gt;✅ &lt;strong&gt;层级结构&lt;/strong&gt;：通过 &lt;code&gt;[section]&lt;/code&gt; 和 &lt;code&gt;[section.subsection]&lt;/code&gt; 实现嵌套&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例-toml-文件&#34;&gt;示例 TOML 文件
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# 应用基本信息&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;My C# Application&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;version&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;1.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8080&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;ssl_enabled&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.1.10&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5432&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;credentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;admin&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;s3cr3t&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;二toml-与其他配置格式对比&#34;&gt;二、TOML 与其他配置格式对比
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;TOML&lt;/th&gt;
+          &lt;th&gt;INI&lt;/th&gt;
+          &lt;th&gt;JSON&lt;/th&gt;
+          &lt;th&gt;YAML&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;人类可读性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;⭐⭐⭐⭐&lt;/td&gt;
+          &lt;td&gt;⭐⭐⭐&lt;/td&gt;
+          &lt;td&gt;⭐⭐&lt;/td&gt;
+          &lt;td&gt;⭐⭐⭐⭐&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;支持注释&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅（&lt;code&gt;#&lt;/code&gt;）&lt;/td&gt;
+          &lt;td&gt;✅（&lt;code&gt;#&lt;/code&gt; 或 &lt;code&gt;;&lt;/code&gt;，不标准）&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅（&lt;code&gt;#&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;数据类型&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;原生支持多种类型&lt;/td&gt;
+          &lt;td&gt;仅字符串&lt;/td&gt;
+          &lt;td&gt;支持基本类型&lt;/td&gt;
+          &lt;td&gt;支持但易出错&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;嵌套结构&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅（通过表）&lt;/td&gt;
+          &lt;td&gt;❌（需命名约定）&lt;/td&gt;
+          &lt;td&gt;✅（对象）&lt;/td&gt;
+          &lt;td&gt;✅（缩进）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;标准规范&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅（严格）&lt;/td&gt;
+          &lt;td&gt;❌（各实现不一）&lt;/td&gt;
+          &lt;td&gt;✅&lt;/td&gt;
+          &lt;td&gt;✅（但复杂）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;缩进敏感&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅（易错）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;适合手写&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;✅✅✅&lt;/td&gt;
+          &lt;td&gt;✅✅&lt;/td&gt;
+          &lt;td&gt;❌&lt;/td&gt;
+          &lt;td&gt;✅（但需小心缩进）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;💡 结论：TOML 是 INI 的现代化升级版，兼具可读性与结构表达能力，特别适合应用程序配置文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;三为什么在-c-项目中使用-toml&#34;&gt;三、为什么在 C# 项目中使用 TOML？
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;现代项目趋势&lt;/strong&gt;：Rust（&lt;code&gt;Cargo.toml&lt;/code&gt;）、Python（&lt;code&gt;pyproject.toml&lt;/code&gt;）、Deno 等广泛采用&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;优于传统 &lt;code&gt;appsettings.json&lt;/code&gt;&lt;/strong&gt;：支持注释，结构更清晰，避免 JSON 的“无注释”痛点&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;比 XML 简洁&lt;/strong&gt;：无需闭合标签，无命名空间复杂性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;比 YAML 安全&lt;/strong&gt;：无缩进陷阱，无类型自动推断风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📌 典型应用场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;应用程序主配置文件（替代 &lt;code&gt;appsettings.json&lt;/code&gt;）&lt;/li&gt;
+&lt;li&gt;插件/模块配置&lt;/li&gt;
+&lt;li&gt;构建脚本参数（如自定义构建工具）&lt;/li&gt;
+&lt;li&gt;游戏或桌面应用的用户设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;四c-中读写-toml使用-tomlyn-库&#34;&gt;四、C# 中读写 TOML：使用 Tomlyn 库
+&lt;/h2&gt;&lt;p&gt;.NET 官方未内置 TOML 支持，但社区库 &lt;a class=&#34;link&#34; href=&#34;https://github.com/xoofx/Tomlyn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;&lt;strong&gt;Tomlyn&lt;/strong&gt;&lt;/a&gt; 是目前最成熟、轻量、高性能的选择。&lt;/p&gt;
+&lt;h3 id=&#34;1-安装&#34;&gt;1. 安装
+&lt;/h3&gt;&lt;p&gt;通过 NuGet 安装：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;dotnet add package Tomlyn
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;或在 &lt;code&gt;.csproj&lt;/code&gt; 中添加：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-xml&#34; data-lang=&#34;xml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nt&#34;&gt;&amp;lt;PackageReference&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Include=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Tomlyn&amp;#34;&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;Version=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;0.15.0&amp;#34;&lt;/span&gt; &lt;span class=&#34;nt&#34;&gt;/&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 支持 .NET Standard 2.0+，兼容 .NET Core、.NET 5/6/7/8 及 .NET Framework。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;2-加载-toml-文件&#34;&gt;2. 加载 TOML 文件
+&lt;/h3&gt;&lt;h3 id=&#34;方式一强类型反序列化推荐&#34;&gt;方式一：强类型反序列化（推荐）
+&lt;/h3&gt;&lt;p&gt;适用于结构固定的配置。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Tomlyn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;AppConfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ServerConfig&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DatabaseConfig&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ServerConfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;localhost&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;8080&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SslEnabled&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DatabaseConfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DbCredentials&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Credentials&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;DbCredentials&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Username&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Password&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;加载代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;toml&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReadAllText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;app.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AppConfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Console&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WriteLine&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$&amp;#34;Server: {config.Server.Host}:{config.Server.Port}&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;✅ 自动类型转换：int、bool、嵌套对象等无需手动解析。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;方式二动态解析灵活但需手动处理&#34;&gt;方式二：动态解析（灵活但需手动处理）
+&lt;/h3&gt;&lt;p&gt;适用于结构未知或临时解析。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Tomlyn.Model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;model&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToModel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReadAllText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;config.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TomlTable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;model&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;server&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;host&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;port&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;p&gt;⚠️ 注意：需显式类型转换，嵌套需递归处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;3-保存-toml-文件&#34;&gt;3. 保存 TOML 文件
+&lt;/h3&gt;&lt;p&gt;将 C# 对象序列化为 TOML 文本：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AppConfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;My App&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;0.0.0.0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;9000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SslEnabled&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Database&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;db.example.com&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;m&#34;&gt;5432&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Credentials&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Username&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Password&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;pass&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tomlText&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FromObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WriteAllText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;app.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tomlText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;My App&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;0.0.0.0&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;9000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;ssl_enabled&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;db.example.com&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;port&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;5432&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;database&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;credentials&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;username&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;user&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;pass&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;4-高级特性&#34;&gt;4. 高级特性
+&lt;/h3&gt;&lt;h3 id=&#34;自定义字段名映射&#34;&gt;自定义字段名映射
+&lt;/h3&gt;&lt;p&gt;当 TOML 键名与 C# 属性名不一致时，使用 &lt;code&gt;[TomlProperty]&lt;/code&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;ServerConfig&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;    [TomlProperty(&amp;#34;bind_address&amp;#34;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Host&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;na&#34;&gt;    [TomlProperty(&amp;#34;use_tls&amp;#34;)]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;bool&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SslEnabled&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;对应 TOML：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;server&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;bind_address&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;use_tls&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;数组支持&#34;&gt;数组支持
+&lt;/h3&gt;&lt;p&gt;TOML：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;allowed_ips&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;192.168.1.1&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;10.0.0.5&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;ports&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;8080&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8081&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;8082&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;C#：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;List&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AllowedIps&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ports&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Array&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Empty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;日期时间&#34;&gt;日期时间
+&lt;/h3&gt;&lt;p&gt;TOML 支持 RFC 3339 日期：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-toml&#34; data-lang=&#34;toml&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;created_at&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;ld&#34;&gt;2025-10-30T14:30:00Z&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;C#：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DateTime&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CreatedAt&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;get&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;五完整工具类封装推荐复用&#34;&gt;五、完整工具类封装（推荐复用）
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;Tomlyn&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;using&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;System.IO&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cs&#34;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cs&#34;&gt;/// TOML 配置文件读写工具类&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cs&#34;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;TomlConfigHelper&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// 从文件加载 TOML 配置（强类型）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Exists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;throw&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;FileNotFoundException&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;$&amp;#34;TOML 配置文件不存在: {filePath}&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ReadAllText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ToObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// &amp;lt;summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// 保存配置对象到 TOML 文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cs&#34;&gt;/// &amp;lt;/summary&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;public&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;static&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;T&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Toml&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FromObject&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Directory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CreateDirectory&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetDirectoryName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;??&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;.&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WriteAllText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;filePath&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;使用示例：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-csharp&#34; data-lang=&#34;csharp&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 首次运行：创建默认配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(!&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;File&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Exists&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;config.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;defaultConfig&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;new&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AppConfig&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Title&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;My App&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;TomlConfigHelper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;config.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;defaultConfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 加载配置&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;config&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TomlConfigHelper&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Load&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AppConfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;config.toml&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h2 id=&#34;六常见问题与注意事项&#34;&gt;六、常见问题与注意事项
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;问题&lt;/th&gt;
+          &lt;th&gt;解决方案&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;属性未赋值&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;确保属性为 &lt;code&gt;public&lt;/code&gt; 且有 &lt;code&gt;set&lt;/code&gt; 访问器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;类型转换异常&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;检查 TOML 值类型是否匹配（如 &lt;code&gt;&amp;quot;8080&amp;quot;&lt;/code&gt; 是字符串，应写为 &lt;code&gt;8080&lt;/code&gt;）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;嵌套结构不匹配&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;C# 类的嵌套层级必须与 TOML 表结构一致&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;中文乱码&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;保存 TOML 文件时使用 UTF-8 编码（&lt;code&gt;File.WriteAllText&lt;/code&gt; 默认 UTF-8）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;注释丢失&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Tomlyn 不保留注释（符合 TOML 规范），如需保留注释需用其他方案&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⚠️ TOML 规范要求：键名区分大小写，字符串建议用双引号（虽然部分值可无引号，但为安全起见推荐显式使用）。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;七与其他-net-配置系统的集成可选&#34;&gt;七、与其他 .NET 配置系统的集成（可选）
+&lt;/h2&gt;&lt;p&gt;虽然 TOML 不能直接用于 &lt;code&gt;Microsoft.Extensions.Configuration&lt;/code&gt;（如 &lt;a class=&#34;link&#34; href=&#34;http://asp.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ASP.NET&lt;/a&gt; Core 的 &lt;code&gt;IConfiguration&lt;/code&gt;），但可通过自定义 &lt;code&gt;ConfigurationProvider&lt;/code&gt; 实现集成。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;🔧 如有需要，可基于 Tomlyn 实现 TomlConfigurationProvider，将 TOML 文件纳入标准配置管道。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八总结&#34;&gt;八、总结
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;优势&lt;/th&gt;
+          &lt;th&gt;说明&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;简洁直观&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;比 JSON 更易读，比 YAML 更安全&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;类型安全&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;原生支持多种数据类型，减少解析错误&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;现代标准&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;被 Rust、Python 等主流生态广泛采用&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;C# 支持完善&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;Tomlyn 库成熟、轻量、高性能&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;✅ 推荐在以下场景使用 TOML：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;桌面应用、控制台工具、游戏等需要&lt;strong&gt;用户可编辑配置&lt;/strong&gt;的项目&lt;/li&gt;
+&lt;li&gt;替代 &lt;code&gt;appsettings.json&lt;/code&gt; 以支持&lt;strong&gt;注释和更清晰结构&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;构建系统、CI/CD 脚本中的参数配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;附录参考资料&#34;&gt;附录：参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://toml.io/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;TOML 官方规范&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/xoofx/Tomlyn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Tomlyn GitHub 仓库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.nuget.org/packages/Tomlyn&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NuGet: Tomlyn&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;📝 作者建议：对于新项目，优先考虑 TOML 作为配置格式；对于现有项目，可在非核心模块中逐步引入，体验其简洁与强大。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+</description>
+        </item>
+        <item>
         <title>Parallel Programing Modern</title>
         <link>https://dumbnessrf.github.io/p/parallel_programing_modern/</link>
         <pubDate>Mon, 15 Sep 2025 21:08:09 +0800</pubDate>
@@ -15,7 +634,8 @@
         <guid>https://dumbnessrf.github.io/p/parallel_programing_modern/</guid>
         <description>&lt;img src="https://www.notion.so/images/page-cover/rijksmuseum_rembrandt_1642.jpg" alt="Featured image of post Parallel Programing Modern" /&gt;&lt;h1 id=&#34;-用-channel-替代-blockingcollection--net-6-现代并发数据流&#34;&gt;🚀 用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;更轻量、更高效、更函数式、更现代化的生产者-消费者模型&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;更轻量、更高效、更函数式、更现代化的生产者-消费者模型&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-为什么需要-channel&#34;&gt;📌 为什么需要 Channel&lt;T&gt;？
 &lt;/h2&gt;&lt;p&gt;虽然 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 功能强大，但在 .NET 6+ 时代，微软推荐使用 &lt;strong&gt;&lt;code&gt;System.Threading.Channels&lt;/code&gt;&lt;/strong&gt; 中的 &lt;code&gt;Channel&amp;lt;T&amp;gt;&lt;/code&gt; 来构建高性能、异步优先的生产者-消费者管道。&lt;/p&gt;
@@ -542,7 +1162,8 @@
 &lt;ul&gt;
 &lt;li&gt;小物体为主 → 设 &lt;code&gt;MinLevel=0&lt;/code&gt;, &lt;code&gt;MaxLevel=4&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;大物体为主 → 设 &lt;code&gt;MinLevel=2&lt;/code&gt;, &lt;code&gt;MaxLevel=5&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;2-语义分割semantic-segmentation&#34;&gt;2️⃣ 语义分割（Semantic Segmentation）
 &lt;/h2&gt;&lt;p&gt;语义分割模型通常使用 U-Net、DeepLab 等架构，输出像素级类别掩码。&lt;/p&gt;
@@ -563,7 +1184,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;3-通用异常检测gc-ad-generalized-anomaly-detection&#34;&gt;3️⃣ 通用异常检测（GC-AD, Generalized Anomaly Detection）
 &lt;/h2&gt;&lt;p&gt;GC-AD 是一种双分支异常检测框架，包含&lt;strong&gt;全局子网&lt;/strong&gt;与&lt;strong&gt;局部子网&lt;/strong&gt;，支持三种模式。&lt;/p&gt;
@@ -615,7 +1237,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;4-deep-ocr光学字符识别&#34;&gt;4️⃣ Deep OCR（光学字符识别）
 &lt;/h2&gt;&lt;p&gt;Deep OCR 由两个独立模型组成，需分别训练与评估：&lt;/p&gt;
@@ -666,7 +1289,8 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 推荐流程：&lt;br&gt;
-&lt;code&gt;原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;code&gt;原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-通用建议类别权重class-weights&#34;&gt;📊 通用建议：类别权重（Class Weights）
 &lt;/h2&gt;&lt;table&gt;
@@ -741,12 +1365,14 @@
 &lt;hr&gt;
 &lt;h1 id=&#34;-目标检测超参数深度解析逐项详解&#34;&gt;🔍 目标检测超参数深度解析（逐项详解）
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;1-容量capacity&#34;&gt;1. &lt;strong&gt;容量（Capacity）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;网络&lt;strong&gt;深层部分&lt;/strong&gt;（通常指特征提取器后端、分类/回归头）的&lt;strong&gt;参数总量&lt;/strong&gt;，反映模型的表达能力。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;网络&lt;strong&gt;深层部分&lt;/strong&gt;（通常指特征提取器后端、分类/回归头）的&lt;strong&gt;参数总量&lt;/strong&gt;，反映模型的表达能力。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-本质&#34;&gt;📌 本质：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;并非直接设置层数，而是控制“&lt;strong&gt;网络宽度&lt;/strong&gt;”或“&lt;strong&gt;通道数&lt;/strong&gt;”。&lt;/li&gt;
@@ -828,7 +1454,8 @@
 &lt;h2 id=&#34;2-最小级别min-level&#34;&gt;2. &lt;strong&gt;最小级别（Min Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-1&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;特征金字塔中最底层（最精细）的特征图层级编号，代表&lt;strong&gt;最小下采样倍数&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;特征金字塔中最底层（最精细）的特征图层级编号，代表&lt;strong&gt;最小下采样倍数&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学定义&#34;&gt;📌 数学定义：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;输入图像大小：&lt;code&gt;H × W&lt;/code&gt;&lt;/li&gt;
@@ -920,7 +1547,8 @@
 &lt;h2 id=&#34;3-最大级别max-level&#34;&gt;3. &lt;strong&gt;最大级别（Max Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-2&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;特征金字塔中最顶层（最粗略）的特征图层级编号，代表&lt;strong&gt;最大下采样倍数&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;特征金字塔中最顶层（最粗略）的特征图层级编号，代表&lt;strong&gt;最大下采样倍数&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学定义-1&#34;&gt;📌 数学定义：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Max Level = 5 → 特征图尺寸 = 原图 1/32&lt;/li&gt;
@@ -1006,12 +1634,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 最佳实践：&lt;strong&gt;MinLevel 和 MaxLevel 的差值应 ≥ 3&lt;/strong&gt;，以保证至少 4 级特征用于多尺度检测。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 最佳实践：&lt;strong&gt;MinLevel 和 MaxLevel 的差值应 ≥ 3&lt;/strong&gt;，以保证至少 4 级特征用于多尺度检测。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;4-子尺度锚数量number-of-scales-per-level&#34;&gt;4. &lt;strong&gt;子尺度锚数量（Number of Scales per Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-3&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在每个特征层级上，生成的&lt;strong&gt;不同尺寸锚框（anchor scales）的数量&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在每个特征层级上，生成的&lt;strong&gt;不同尺寸锚框（anchor scales）的数量&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-示例&#34;&gt;📌 示例：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;设置为 &lt;code&gt;3&lt;/code&gt; → 每个位置生成 3 个不同面积的锚框：
@@ -1092,12 +1722,14 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 建议结合“锚长宽比”共同优化：&lt;br&gt;
-如：&lt;code&gt;scales=[0.5,1,2]&lt;/code&gt; + &lt;code&gt;ratios=[0.5,1,2]&lt;/code&gt; → 总锚数 = 3×3=9 个/位置&lt;/p&gt;&lt;/blockquote&gt;
+如：&lt;code&gt;scales=[0.5,1,2]&lt;/code&gt; + &lt;code&gt;ratios=[0.5,1,2]&lt;/code&gt; → 总锚数 = 3×3=9 个/位置&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;5-锚长宽比aspect-ratio&#34;&gt;5. &lt;strong&gt;锚长宽比（Aspect Ratio）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-4&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;锚框的&lt;strong&gt;高度与宽度之比&lt;/strong&gt;（Height:Width），决定锚的形状。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;锚框的&lt;strong&gt;高度与宽度之比&lt;/strong&gt;（Height:Width），决定锚的形状。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-常见值&#34;&gt;📌 常见值：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;[1.0]&lt;/code&gt; → 正方形&lt;/li&gt;
@@ -1164,12 +1796,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;6-锚角度-&#34;&gt;6. &lt;strong&gt;锚角度 [°]（Anchor Angle）——仅限自由矩形（Oriented Bounding Box）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-5&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;锚框相对于水平轴的&lt;strong&gt;旋转角度&lt;/strong&gt;（数学正方向，逆时针），用于检测&lt;strong&gt;倾斜目标&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;锚框相对于水平轴的&lt;strong&gt;旋转角度&lt;/strong&gt;（数学正方向，逆时针），用于检测&lt;strong&gt;倾斜目标&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-范围&#34;&gt;📌 范围：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;合法范围&lt;/strong&gt;：&lt;code&gt;(-90°, 90°]&lt;/code&gt;&lt;/li&gt;
@@ -1245,12 +1879,14 @@
 &lt;ul&gt;
 &lt;li&gt;锚角度是“先验”，用于匹配真实框&lt;/li&gt;
 &lt;li&gt;模型最终输出的是偏移量 Δθ，通过回归学习修正&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;7-忽略方向ignore-orientation&#34;&gt;7. &lt;strong&gt;忽略方向（Ignore Orientation）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-6&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;是否将&lt;strong&gt;不同旋转角度&lt;/strong&gt;的矩形视为&lt;strong&gt;同一个目标&lt;/strong&gt;（即不区分朝向）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;是否将&lt;strong&gt;不同旋转角度&lt;/strong&gt;的矩形视为&lt;strong&gt;同一个目标&lt;/strong&gt;（即不区分朝向）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-工作机制-6&#34;&gt;⚙️ 工作机制：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;开启（✅）&lt;/strong&gt;：无论锚框角度是多少，只要中心、宽高一致 → 视为同一候选框&lt;/li&gt;
@@ -1303,12 +1939,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 最佳实践：&lt;strong&gt;如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 最佳实践：&lt;strong&gt;如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;8-权重先验weight-prior-α&#34;&gt;8. &lt;strong&gt;权重先验（Weight Prior, α）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-7&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学形式&#34;&gt;📌 数学形式：
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1389,12 +2027,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 技巧：监控 &lt;code&gt;weight_norm&lt;/code&gt; 曲线 —— 若权重持续增大且 loss 波动 → 增大 α&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 技巧：监控 &lt;code&gt;weight_norm&lt;/code&gt; 曲线 —— 若权重持续增大且 loss 波动 → 增大 α&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;9-边界框头部权重bbox-head-weight&#34;&gt;9. &lt;strong&gt;边界框头部权重（BBox Head Weight）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-8&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在总损失函数中，&lt;strong&gt;边界框回归损失&lt;/strong&gt;所占的比重。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在总损失函数中，&lt;strong&gt;边界框回归损失&lt;/strong&gt;所占的比重。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-总损失公式示例&#34;&gt;📌 总损失公式示例：
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1465,12 +2105,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 建议：&lt;strong&gt;优先使用 IoU-based Loss（GIoU/DIoU）&lt;/strong&gt;，其天然与位置相关，可减少对 λ_bbox 的依赖。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 建议：&lt;strong&gt;优先使用 IoU-based Loss（GIoU/DIoU）&lt;/strong&gt;，其天然与位置相关，可减少对 λ_bbox 的依赖。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;10-类别头部权重class-head-weight&#34;&gt;10. &lt;strong&gt;类别头部权重（Class Head Weight）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-9&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在总损失函数中，&lt;strong&gt;分类损失&lt;/strong&gt;所占的比重。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在总损失函数中，&lt;strong&gt;分类损失&lt;/strong&gt;所占的比重。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-与上一项协同工作&#34;&gt;📌 与上一项协同工作：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;控制“分类 vs 定位”的训练优先级&lt;/li&gt;
@@ -1533,7 +2175,8 @@
 &lt;h2 id=&#34;11-冻结骨干级别freeze-backbone-level&#34;&gt;11. &lt;strong&gt;冻结骨干级别（Freeze Backbone Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-10&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在训练过程中，&lt;strong&gt;从输入端起&lt;/strong&gt;，冻结骨干网络（Backbone）的最高层级编号。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在训练过程中，&lt;strong&gt;从输入端起&lt;/strong&gt;，冻结骨干网络（Backbone）的最高层级编号。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-举例&#34;&gt;📌 举例：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;骨干结构：&lt;code&gt;conv1 → layer1 → layer2 → layer3 → layer4&lt;/code&gt;&lt;/li&gt;
@@ -1616,7 +2259,8 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 最佳实践：&lt;br&gt;
-&lt;strong&gt;“冻结骨干 + 检测头单独学习率”&lt;/strong&gt; 是工业界标准做法！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;“冻结骨干 + 检测头单独学习率”&lt;/strong&gt; 是工业界标准做法！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-总结目标检测参数调优终极-checklist&#34;&gt;✅ 总结：目标检测参数调优终极 Checklist
 &lt;/h2&gt;&lt;table&gt;
@@ -1741,7 +2385,8 @@
 &lt;h1 id=&#34;-锚anchor到底是什么深度详解&#34;&gt;🔍 &lt;strong&gt;锚（Anchor）到底是什么？——深度详解&lt;/strong&gt;
 &lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;✅ &lt;strong&gt;一句话定义&lt;/strong&gt;：&lt;br&gt;
-&lt;strong&gt;锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”&lt;/strong&gt;，用于指导模型预测真实物体的位置与类别。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”&lt;/strong&gt;，用于指导模型预测真实物体的位置与类别。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;它不是真实存在的物体边界框，而是&lt;strong&gt;模型学习的“先验假设”&lt;/strong&gt; —— 像是给模型提供一组“候选模板”，让模型只需学习“如何调整这些模板”，而不是从零开始猜一个框。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-一锚的起源为什么需要-anchor&#34;&gt;🧩 一、锚的起源：为什么需要 Anchor？
@@ -1777,7 +2422,8 @@
 &lt;p&gt;→ 如果让模型直接回归任意框，训练会不稳定、收敛慢、精度差。&lt;/p&gt;
 &lt;h3 id=&#34;-解决方案引入-anchor&#34;&gt;✅ 解决方案：&lt;strong&gt;引入 Anchor&lt;/strong&gt;
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;让模型&lt;strong&gt;不要从零生成框&lt;/strong&gt;，而是&lt;strong&gt;基于一组预设的“模板框”做微调&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;让模型&lt;strong&gt;不要从零生成框&lt;/strong&gt;，而是&lt;strong&gt;基于一组预设的“模板框”做微调&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;就像你给一个孩子看 10 种不同大小和形状的“盒子样板”，然后说：“你看到的东西，一定是这 10 种之一的变形。”&lt;/p&gt;
 &lt;p&gt;这就是 Anchor 的思想。&lt;/p&gt;
 &lt;hr&gt;
@@ -1825,7 +2471,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 注意：&lt;strong&gt;Anchor 不是图像中的真实框&lt;/strong&gt;，它是&lt;strong&gt;在特征图网格上密集生成的虚拟框&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 注意：&lt;strong&gt;Anchor 不是图像中的真实框&lt;/strong&gt;，它是&lt;strong&gt;在特征图网格上密集生成的虚拟框&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-三anchor-如何生成以-fpn-为例&#34;&gt;🌐 三、Anchor 如何生成？——以 FPN 为例
 &lt;/h2&gt;&lt;p&gt;我们以典型的 &lt;strong&gt;RetinaNet + FPN&lt;/strong&gt; 架构为例：&lt;/p&gt;
@@ -1858,7 +2505,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;步骤-2在每个特征点上生成多个-anchor&#34;&gt;步骤 2：在每个特征点上生成多个 Anchor
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;每个特征图单元（cell）代表原图的一个区域（如 P3 上每个 cell = 8×8 像素）&lt;/li&gt;
@@ -1899,7 +2547,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;步骤-3anchor-总数惊人&#34;&gt;步骤 3：Anchor 总数惊人！
 &lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
@@ -1949,7 +2598,8 @@
 &lt;li&gt;Δθ → 旋转角度（若启用）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;这些偏移量是&lt;strong&gt;相对于 Anchor 的修正值&lt;/strong&gt;！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这些偏移量是&lt;strong&gt;相对于 Anchor 的修正值&lt;/strong&gt;！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;-公式示例经典-rpn--retinanet&#34;&gt;📌 公式示例（经典 RPN / RetinaNet）：
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1966,7 +2616,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-匹配过程training&#34;&gt;✅ 匹配过程（Training）：
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;对每个真实标注框（Ground Truth），找到与其 IoU 最大的 Anchor；&lt;/li&gt;
@@ -1980,7 +2631,8 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-五anchor-vs-anchor-free对比总结&#34;&gt;🔄 五、Anchor vs Anchor-Free：对比总结
 &lt;/h2&gt;&lt;table&gt;
@@ -2037,7 +2689,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;✅ &lt;strong&gt;结论&lt;/strong&gt;：&lt;br&gt;
 &lt;strong&gt;Anchor 是“稳而重”&lt;/strong&gt;，适合对精度要求高的工业场景；&lt;br&gt;
-&lt;strong&gt;Anchor-Free 是“轻而快”&lt;/strong&gt;，适合实时或资源受限环境。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;Anchor-Free 是“轻而快”&lt;/strong&gt;，适合实时或资源受限环境。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-六anchor-的优缺点总结&#34;&gt;🎯 六、Anchor 的优缺点总结
 &lt;/h2&gt;&lt;table&gt;
@@ -2125,7 +2778,8 @@
         <guid>https://dumbnessrf.github.io/p/meet_parallel_programing/</guid>
         <description>&lt;img src="https://www.notion.so/images/page-cover/met_joseph_hidley_1870.jpg" alt="Featured image of post Meet Parallel Programing" /&gt;&lt;h1 id=&#34;-net-并发编程利器详解&#34;&gt;🧵 .NET 并发编程利器详解
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;附：volatile 与 Interlocked 在并发控制中的关键作用&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;附：volatile 与 Interlocked 在并发控制中的关键作用&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-引言为什么需要并发集合&#34;&gt;📌 引言：为什么需要并发集合？
 &lt;/h2&gt;&lt;p&gt;在多线程编程中，我们经常需要多个线程&lt;strong&gt;安全地共享数据&lt;/strong&gt; —— 比如生产者消费者模型、任务队列、缓存字典、限流控制等。如果使用普通集合（如 &lt;code&gt;List&amp;lt;T&amp;gt;&lt;/code&gt;、&lt;code&gt;Queue&amp;lt;T&amp;gt;&lt;/code&gt;、&lt;code&gt;Dictionary&amp;lt;TKey, TValue&amp;gt;&lt;/code&gt;），在并发读写时极易引发：&lt;/p&gt;
@@ -2422,7 +3076,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;✅ &lt;strong&gt;适用场景&lt;/strong&gt;：任务调度、数据流水线、限流缓冲区&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 默认有序（FIFO），因为默认包装 &lt;code&gt;ConcurrentQueue&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 默认有序（FIFO），因为默认包装 &lt;code&gt;ConcurrentQueue&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-三semaphoreslim--控制并发访问数量&#34;&gt;🚧 三、SemaphoreSlim —— 控制并发访问数量
 &lt;/h2&gt;&lt;h3 id=&#34;-它是什么-1&#34;&gt;▶ 它是什么？
@@ -2482,7 +3137,8 @@
 &lt;h2 id=&#34;-四volatile-与-interlocked--并发编程的基石&#34;&gt;⚙️ 四、volatile 与 Interlocked —— 并发编程的基石
 &lt;/h2&gt;&lt;h3 id=&#34;1-volatile-关键字&#34;&gt;1. &lt;code&gt;volatile&lt;/code&gt; 关键字
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;用于修饰字段，确保&lt;strong&gt;多线程环境下对该字段的读写不被编译器/CPU重排序或缓存&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;用于修饰字段，确保&lt;strong&gt;多线程环境下对该字段的读写不被编译器/CPU重排序或缓存&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：标志位、状态变量、引用替换&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2529,7 +3185,8 @@
 &lt;hr&gt;
 &lt;h3 id=&#34;2-interlocked-类&#34;&gt;2. &lt;code&gt;Interlocked&lt;/code&gt; 类
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;提供&lt;strong&gt;原子操作&lt;/strong&gt;，如自增、自减、交换、比较交换（CAS）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;提供&lt;strong&gt;原子操作&lt;/strong&gt;，如自增、自减、交换、比较交换（CAS）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;常用方法&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Interlocked.Increment(ref variable)&lt;/code&gt;&lt;/li&gt;
@@ -2610,7 +3267,8 @@
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 依赖底层并发集合&lt;br&gt;
 &lt;code&gt;SemaphoreSlim&lt;/code&gt; 常用于控制 &lt;code&gt;BlockingCollection&lt;/code&gt; 消费者或任务并发数&lt;br&gt;
-&lt;code&gt;volatile&lt;/code&gt; + &lt;code&gt;Interlocked&lt;/code&gt; 是实现无锁替换、状态同步的基础&lt;/p&gt;&lt;/blockquote&gt;
+&lt;code&gt;volatile&lt;/code&gt; + &lt;code&gt;Interlocked&lt;/code&gt; 是实现无锁替换、状态同步的基础&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-六实战构建一个带并发限制的任务调度器&#34;&gt;🎯 六、实战：构建一个带并发限制的任务调度器
 &lt;/h2&gt;&lt;p&gt;结合以上所有知识点：&lt;/p&gt;
@@ -2826,7 +3484,8 @@
 &lt;/div&gt;&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;🎉 感谢阅读！如果你觉得有帮助，欢迎点赞、收藏、转发！&lt;br&gt;
-下期预告：《用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流》&lt;/p&gt;&lt;/blockquote&gt;
+下期预告：《用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流》&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -3499,7 +4158,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 后续计划支持：&lt;code&gt;DatePicker&lt;/code&gt;、&lt;code&gt;ColorPicker&lt;/code&gt;、&lt;code&gt;IEditableObject&lt;/code&gt; 撤销&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 后续计划支持：&lt;code&gt;DatePicker&lt;/code&gt;、&lt;code&gt;ColorPicker&lt;/code&gt;、&lt;code&gt;IEditableObject&lt;/code&gt; 撤销&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;p&gt;如果你喜欢这篇文章，欢迎点赞、收藏、分享！&lt;br&gt;
 也可以关注我的博客，获取更多 WPF / .NET 技术干货 😊&lt;/p&gt;
@@ -4434,7 +5094,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;将 Width 乘以 2 再加上 Height，结果作为 TextBlock.Text&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;将 Width 乘以 2 再加上 Height，结果作为 TextBlock.Text&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-2字符串拼接&#34;&gt;✅ 示例 2：字符串拼接
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4446,7 +5107,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;把两个字段拼接成完整姓名&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;把两个字段拼接成完整姓名&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-3布尔值转可见性visibility&#34;&gt;✅ 示例 3：布尔值转可见性（Visibility）
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4460,7 +5122,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;使用三元运算符实现 Visibility 控制，无需 Converter&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;使用三元运算符实现 Visibility 控制，无需 Converter&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-4绑定多个属性并做计算&#34;&gt;✅ 示例 4：绑定多个属性并做计算
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4472,7 +5135,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;多绑定支持最多 5 个路径（Path1~Path5），可以组合任意表达式&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;多绑定支持最多 5 个路径（Path1~Path5），可以组合任意表达式&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-5使用-math-函数如-maxminround&#34;&gt;✅ 示例 5：使用 Math 函数（如 Max、Min、Round）
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4484,7 +5148,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;显示 Width 和 Height 中较大的那个&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;显示 Width 和 Height 中较大的那个&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;支持的函数包括：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Math.Abs&lt;/code&gt;&lt;/li&gt;
@@ -4507,7 +5172,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;如果 Value 大于 0，则显示 Value，否则显示 0&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;如果 Value 大于 0，则显示 Value，否则显示 0&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-7绑定集合元素&#34;&gt;✅ 示例 7：绑定集合元素
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4519,7 +5185,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;绑定集合中第一个元素的属性并进行计算&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;绑定集合中第一个元素的属性并进行计算&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-8绑定资源中的静态值&#34;&gt;✅ 示例 8：绑定资源中的静态值
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4539,7 +5206,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;可以在表达式中嵌入静态资源&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;可以在表达式中嵌入静态资源&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-9使用方法调用需要注册&#34;&gt;✅ 示例 9：使用方法调用（需要注册）
 &lt;/h3&gt;&lt;p&gt;你可以在代码中注册自定义函数，例如：&lt;/p&gt;
@@ -4561,7 +5229,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;类似格式化货币输出，替代 StringFormat&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;类似格式化货币输出，替代 StringFormat&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;-示例-10绑定依赖属性如控件尺寸&#34;&gt;✅ 示例 10：绑定依赖属性（如控件尺寸）
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -4581,7 +5250,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;计算控件居中位置，不需要在后台代码中设置布局逻辑&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;计算控件居中位置，不需要在后台代码中设置布局逻辑&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-四性能与注意事项&#34;&gt;🧪 四、性能与注意事项
 &lt;/h2&gt;&lt;table&gt;
@@ -4996,7 +5666,8 @@ Thread.CurrentThread._synchronizationContext&lt;/p&gt;
 &lt;p&gt;在这个示例中，由于 &lt;code&gt;observable2&lt;/code&gt; 延迟 100 毫秒，比 &lt;code&gt;observable1&lt;/code&gt; 的 200 毫秒延迟要短，所以 &lt;code&gt;observable2&lt;/code&gt; 会率先产生元素，&lt;code&gt;Amb&lt;/code&gt; 操作符会选择 &lt;code&gt;observable2&lt;/code&gt; 并忽略 &lt;code&gt;observable1&lt;/code&gt;。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Received: Observable 2&lt;br&gt;
-Completed&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+Completed&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;retrycatch&#34;&gt;&lt;code&gt;Retry&lt;/code&gt;、&lt;code&gt;Catch&lt;/code&gt;
 &lt;/h2&gt;&lt;p&gt;&lt;code&gt;Retry&lt;/code&gt;允许在发生错误时或抛出错误时重新订阅源序列。例如，以下代码创建一个会抛出异常的序列，并通过Retry(2)最多重试2次：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -5047,7 +5718,8 @@ Completed&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Doing work&amp;hellip;&lt;br&gt;
 Doing work&amp;hellip;&lt;br&gt;
-OnError: Initial failure&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+OnError: Initial failure&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;**&lt;code&gt;Catch&lt;/code&gt;**用于捕获异常并替换为新的序列。例如，以下代码在发生错误后返回一个备用值：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5091,7 +5763,8 @@ OnError: Initial failure&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;OnNext: 42&lt;br&gt;
-OnCompleted&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+OnCompleted&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;scanbuffer&#34;&gt;&lt;code&gt;Scan&lt;/code&gt;、&lt;code&gt;Buffer&lt;/code&gt;
 &lt;/h2&gt;&lt;p&gt;&lt;code&gt;Scan&lt;/code&gt; 用于对序列中的每个元素连续应用累积函数，并输出中间结果。类似于LINQ的 Aggregate，但会发射所有中间值&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -5119,7 +5792,8 @@ OnCompleted&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 Scan Result: 3&lt;br&gt;
 Scan Result: 6&lt;br&gt;
 Scan Result: 10&lt;br&gt;
-Scan Result: 15&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+Scan Result: 15&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;Buffer&lt;/code&gt; 将事件流按时间或数量分组，输出批量数据。常见用法包括按时间窗口或元素数量缓冲。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5149,7 +5823,8 @@ Scan Result: 15&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;Buffered Count: 3  // 第1-3秒的数据&lt;br&gt;
 Buffered Count: 3  // 第4-5秒的数据（可能触发时间窗口）&lt;br&gt;
 Buffered Count: 3  // 下一个窗口&lt;br&gt;
-Buffered Count: 1  // 剩余1个元素&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+Buffered Count: 1  // 剩余1个元素&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;aside&gt;
 📢
 &lt;p&gt;&lt;code&gt;Buffer&lt;/code&gt; 支持多种分组策略，如纯时间窗口（Buffer(&lt;code&gt;TimeSpan&lt;/code&gt;)）、纯数量（Buffer(&lt;code&gt;count&lt;/code&gt;)）或两者结合&lt;/p&gt;
@@ -5211,7 +5886,8 @@ Buffered Count: 1  // 剩余1个元素&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;1A&lt;br&gt;
-2B&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+2B&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;delaydotimeinterval&#34;&gt;&lt;code&gt;Delay&lt;/code&gt;、&lt;code&gt;Do&lt;/code&gt;、&lt;code&gt;TimeInterval&lt;/code&gt;
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5291,7 +5967,8 @@ Do: 被延迟的值 = 3&lt;br&gt;
 TimeInterval: 值=3, 间隔=1.0001499秒&lt;br&gt;
 Do: 被延迟的值 = 4&lt;br&gt;
 TimeInterval: 值=4, 间隔=1.0005686秒&lt;br&gt;
-OnCompleted&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+OnCompleted&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;averageaggregate&#34;&gt;&lt;strong&gt;&lt;code&gt;Average&lt;/code&gt;、&lt;code&gt;Concat&lt;/code&gt;、&lt;code&gt;Count&lt;/code&gt;、&lt;code&gt;Max&lt;/code&gt;、&lt;code&gt;Min&lt;/code&gt;、&lt;/strong&gt;&lt;code&gt;Aggregate&lt;/code&gt;&lt;strong&gt;、&lt;code&gt;Sum&lt;/code&gt;&lt;/strong&gt;
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5393,7 +6070,8 @@ Total Sum: 15&lt;br&gt;
 Average: 3&lt;br&gt;
 Min: 1&lt;br&gt;
 Max: 5&lt;br&gt;
-Reduce (Custom Sum): 15&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+Reduce (Custom Sum): 15&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;all&#34;&gt;&lt;strong&gt;&lt;code&gt;All&lt;/code&gt;、&lt;code&gt;Contains&lt;/code&gt;、&lt;code&gt;TakeUntil&lt;/code&gt;、&lt;code&gt;StartWith&lt;/code&gt; 、&lt;code&gt;Join&lt;/code&gt;&lt;/strong&gt;
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -5523,7 +6201,8 @@ Join Result: N0+L1&lt;br&gt;
 Join Result: N1+L1&lt;br&gt;
 Join Result: N2+L0&lt;br&gt;
 Join Result: N2+L1&lt;br&gt;
-Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
+Join Result: N2+L2&lt;br&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -5733,7 +6412,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;⚠️ 注意：使用 &lt;code&gt;Assembly.Load(&amp;quot;xxx.dll&amp;quot;)&lt;/code&gt; 加载的程序集会一直占用该 DLL 文件。若需要卸载或更新 DLL，建议使用如下方式：&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;⚠️ 注意：使用 &lt;code&gt;Assembly.Load(&amp;quot;xxx.dll&amp;quot;)&lt;/code&gt; 加载的程序集会一直占用该 DLL 文件。若需要卸载或更新 DLL，建议使用如下方式：&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -6043,7 +6723,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 Avalonia 提供了真正的跨平台开发能力，适用于需要统一多端体验的应用场景。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 Avalonia 提供了真正的跨平台开发能力，适用于需要统一多端体验的应用场景。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-性能表现&#34;&gt;⚙️ 性能表现
 &lt;/h2&gt;&lt;p&gt;Avalonia 的渲染引擎经过优化，具备高效的绘制能力和良好的硬件加速支持，尤其在处理复杂图形与数据可视化时表现出色。&lt;/p&gt;
@@ -6096,7 +6777,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;-示例在-avalonia-中集成依赖注入&#34;&gt;🧪 示例：在 Avalonia 中集成依赖注入
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;📝以下示例将添加&lt;code&gt;Redis&lt;/code&gt;和第三方Avalonia样式库&lt;code&gt;SukiUI&lt;/code&gt;作为参考&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;📝以下示例将添加&lt;code&gt;Redis&lt;/code&gt;和第三方Avalonia样式库&lt;code&gt;SukiUI&lt;/code&gt;作为参考&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h2 id=&#34;1-安装依赖注入包&#34;&gt;1️⃣ 安装依赖注入包
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -6303,7 +6985,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;📝 如果未启用 &lt;code&gt;ViewLocator&lt;/code&gt;，则需要手动设置 &lt;code&gt;DataContext&lt;/code&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;📝 如果未启用 &lt;code&gt;ViewLocator&lt;/code&gt;，则需要手动设置 &lt;code&gt;DataContext&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h1 id=&#34;-总结&#34;&gt;✅ 总结
 &lt;/h1&gt;&lt;p&gt;Avalonia 是一个强大的跨平台 UI 框架，结合 &lt;code&gt;Microsoft.Extensions.DependencyInjection&lt;/code&gt; 可实现高度解耦和模块化的应用程序架构。通过合理配置服务生命周期和使用视图定位器等机制，可以显著提升开发效率和代码质量。&lt;/p&gt;
@@ -6801,7 +7484,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;注意：&lt;code&gt;local&lt;/code&gt; 需要引用你的命名空间，例如：&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;注意：&lt;code&gt;local&lt;/code&gt; 需要引用你的命名空间，例如：&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
@@ -7076,7 +7760,8 @@ Join Result: N2+L2&lt;br&gt;&lt;/p&gt;&lt;/blockquote&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;💡 注：你可以自定义 &lt;code&gt;TemplateMapEntry&lt;/code&gt; 类型来支持这种字典结构。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 注：你可以自定义 &lt;code&gt;TemplateMapEntry&lt;/code&gt; 类型来支持这种字典结构。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-技巧-4调试时注意-binding-上下文问题&#34;&gt;✅ 技巧 4：调试时注意 Binding 上下文问题
 &lt;/h2&gt;&lt;h3 id=&#34;常见错误&#34;&gt;常见错误：

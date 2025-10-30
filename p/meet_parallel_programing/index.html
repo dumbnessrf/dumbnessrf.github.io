@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://dumbnessrf.github.io/p/meet_parallel_programing/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="Meet Parallel Programing">
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="Meet Parallel Programing">
 <meta property='og:description' content="在多线程编程中，我们经常需要多个线程安全地共享数据 —— 比如生产者消费者模型、任务队列、缓存字典、限流控制等">
 <meta property='og:url' content='https://dumbnessrf.github.io/p/meet_parallel_programing/'>
 <meta property='og:site_name' content='飞人博尔特的摄影师'>
@@ -368,7 +368,8 @@
     
     <h1 id="-net-并发编程利器详解">🧵 .NET 并发编程利器详解
 </h1><blockquote>
-<p>附：volatile 与 Interlocked 在并发控制中的关键作用</p></blockquote>
+<p>附：volatile 与 Interlocked 在并发控制中的关键作用</p>
+</blockquote>
 <hr>
 <h2 id="-引言为什么需要并发集合">📌 引言：为什么需要并发集合？
 </h2><p>在多线程编程中，我们经常需要多个线程<strong>安全地共享数据</strong> —— 比如生产者消费者模型、任务队列、缓存字典、限流控制等。如果使用普通集合（如 <code>List&lt;T&gt;</code>、<code>Queue&lt;T&gt;</code>、<code>Dictionary&lt;TKey, TValue&gt;</code>），在并发读写时极易引发：</p>
@@ -665,7 +666,8 @@
 </div>
 </div><p>✅ <strong>适用场景</strong>：任务调度、数据流水线、限流缓冲区</p>
 <blockquote>
-<p>💡 <code>BlockingCollection&lt;T&gt;</code> 默认有序（FIFO），因为默认包装 <code>ConcurrentQueue&lt;T&gt;</code></p></blockquote>
+<p>💡 <code>BlockingCollection&lt;T&gt;</code> 默认有序（FIFO），因为默认包装 <code>ConcurrentQueue&lt;T&gt;</code></p>
+</blockquote>
 <hr>
 <h2 id="-三semaphoreslim--控制并发访问数量">🚧 三、SemaphoreSlim —— 控制并发访问数量
 </h2><h3 id="-它是什么-1">▶ 它是什么？
@@ -725,7 +727,8 @@
 <h2 id="-四volatile-与-interlocked--并发编程的基石">⚙️ 四、volatile 与 Interlocked —— 并发编程的基石
 </h2><h3 id="1-volatile-关键字">1. <code>volatile</code> 关键字
 </h3><blockquote>
-<p>用于修饰字段，确保<strong>多线程环境下对该字段的读写不被编译器/CPU重排序或缓存</strong>。</p></blockquote>
+<p>用于修饰字段，确保<strong>多线程环境下对该字段的读写不被编译器/CPU重排序或缓存</strong>。</p>
+</blockquote>
 <p><strong>适用场景</strong>：标志位、状态变量、引用替换</p>
 <p><strong>示例</strong>：</p>
 <div class="highlight"><div class="chroma">
@@ -772,7 +775,8 @@
 <hr>
 <h3 id="2-interlocked-类">2. <code>Interlocked</code> 类
 </h3><blockquote>
-<p>提供<strong>原子操作</strong>，如自增、自减、交换、比较交换（CAS）</p></blockquote>
+<p>提供<strong>原子操作</strong>，如自增、自减、交换、比较交换（CAS）</p>
+</blockquote>
 <p><strong>常用方法</strong>：</p>
 <ul>
 <li><code>Interlocked.Increment(ref variable)</code></li>
@@ -853,7 +857,8 @@
 </div><blockquote>
 <p><code>BlockingCollection&lt;T&gt;</code> 依赖底层并发集合<br>
 <code>SemaphoreSlim</code> 常用于控制 <code>BlockingCollection</code> 消费者或任务并发数<br>
-<code>volatile</code> + <code>Interlocked</code> 是实现无锁替换、状态同步的基础</p></blockquote>
+<code>volatile</code> + <code>Interlocked</code> 是实现无锁替换、状态同步的基础</p>
+</blockquote>
 <hr>
 <h2 id="-六实战构建一个带并发限制的任务调度器">🎯 六、实战：构建一个带并发限制的任务调度器
 </h2><p>结合以上所有知识点：</p>
@@ -1069,7 +1074,8 @@
 </div><hr>
 <blockquote>
 <p>🎉 感谢阅读！如果你觉得有帮助，欢迎点赞、收藏、转发！<br>
-下期预告：《用 Channel<T> 替代 BlockingCollection —— .NET 6+ 现代并发数据流》</p></blockquote>
+下期预告：《用 Channel<T> 替代 BlockingCollection —— .NET 6+ 现代并发数据流》</p>
+</blockquote>
 
 </section>
 

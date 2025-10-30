@@ -90,7 +90,8 @@
 &lt;ul&gt;
 &lt;li&gt;小物体为主 → 设 &lt;code&gt;MinLevel=0&lt;/code&gt;, &lt;code&gt;MaxLevel=4&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;大物体为主 → 设 &lt;code&gt;MinLevel=2&lt;/code&gt;, &lt;code&gt;MaxLevel=5&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;2-语义分割semantic-segmentation&#34;&gt;2️⃣ 语义分割（Semantic Segmentation）
 &lt;/h2&gt;&lt;p&gt;语义分割模型通常使用 U-Net、DeepLab 等架构，输出像素级类别掩码。&lt;/p&gt;
@@ -111,7 +112,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;⚠️ 注意：此处“分类头部权重”应为笔误，语义分割中应为“遮罩头部权重”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;3-通用异常检测gc-ad-generalized-anomaly-detection&#34;&gt;3️⃣ 通用异常检测（GC-AD, Generalized Anomaly Detection）
 &lt;/h2&gt;&lt;p&gt;GC-AD 是一种双分支异常检测框架，包含&lt;strong&gt;全局子网&lt;/strong&gt;与&lt;strong&gt;局部子网&lt;/strong&gt;，支持三种模式。&lt;/p&gt;
@@ -163,7 +165,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 示例：检测 PCB 上 5×5mm 的焊点缺失 → 补丁大小设为 64×64 像素（假设原图 1024×1024）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;4-deep-ocr光学字符识别&#34;&gt;4️⃣ Deep OCR（光学字符识别）
 &lt;/h2&gt;&lt;p&gt;Deep OCR 由两个独立模型组成，需分别训练与评估：&lt;/p&gt;
@@ -214,7 +217,8 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 推荐流程：&lt;br&gt;
-&lt;code&gt;原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;code&gt;原始图像 → 检测模型 → 文本裁剪 → 预训练识别模型 → 输出文本&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-通用建议类别权重class-weights&#34;&gt;📊 通用建议：类别权重（Class Weights）
 &lt;/h2&gt;&lt;table&gt;
@@ -289,12 +293,14 @@
 &lt;hr&gt;
 &lt;h1 id=&#34;-目标检测超参数深度解析逐项详解&#34;&gt;🔍 目标检测超参数深度解析（逐项详解）
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;本节基于特征金字塔网络（FPN）架构，适用于如 RetinaNet、Faster R-CNN + FPN、YOLO-FPN 等多尺度检测模型。所有参数均围绕“锚框（Anchor）+ 多级特征图”机制展开。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;1-容量capacity&#34;&gt;1. &lt;strong&gt;容量（Capacity）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;网络&lt;strong&gt;深层部分&lt;/strong&gt;（通常指特征提取器后端、分类/回归头）的&lt;strong&gt;参数总量&lt;/strong&gt;，反映模型的表达能力。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;网络&lt;strong&gt;深层部分&lt;/strong&gt;（通常指特征提取器后端、分类/回归头）的&lt;strong&gt;参数总量&lt;/strong&gt;，反映模型的表达能力。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-本质&#34;&gt;📌 本质：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;并非直接设置层数，而是控制“&lt;strong&gt;网络宽度&lt;/strong&gt;”或“&lt;strong&gt;通道数&lt;/strong&gt;”。&lt;/li&gt;
@@ -376,7 +382,8 @@
 &lt;h2 id=&#34;2-最小级别min-level&#34;&gt;2. &lt;strong&gt;最小级别（Min Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-1&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;特征金字塔中最底层（最精细）的特征图层级编号，代表&lt;strong&gt;最小下采样倍数&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;特征金字塔中最底层（最精细）的特征图层级编号，代表&lt;strong&gt;最小下采样倍数&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学定义&#34;&gt;📌 数学定义：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;输入图像大小：&lt;code&gt;H × W&lt;/code&gt;&lt;/li&gt;
@@ -468,7 +475,8 @@
 &lt;h2 id=&#34;3-最大级别max-level&#34;&gt;3. &lt;strong&gt;最大级别（Max Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-2&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;特征金字塔中最顶层（最粗略）的特征图层级编号，代表&lt;strong&gt;最大下采样倍数&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;特征金字塔中最顶层（最粗略）的特征图层级编号，代表&lt;strong&gt;最大下采样倍数&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学定义-1&#34;&gt;📌 数学定义：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;Max Level = 5 → 特征图尺寸 = 原图 1/32&lt;/li&gt;
@@ -554,12 +562,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 最佳实践：&lt;strong&gt;MinLevel 和 MaxLevel 的差值应 ≥ 3&lt;/strong&gt;，以保证至少 4 级特征用于多尺度检测。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 最佳实践：&lt;strong&gt;MinLevel 和 MaxLevel 的差值应 ≥ 3&lt;/strong&gt;，以保证至少 4 级特征用于多尺度检测。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;4-子尺度锚数量number-of-scales-per-level&#34;&gt;4. &lt;strong&gt;子尺度锚数量（Number of Scales per Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-3&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在每个特征层级上，生成的&lt;strong&gt;不同尺寸锚框（anchor scales）的数量&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在每个特征层级上，生成的&lt;strong&gt;不同尺寸锚框（anchor scales）的数量&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-示例&#34;&gt;📌 示例：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;设置为 &lt;code&gt;3&lt;/code&gt; → 每个位置生成 3 个不同面积的锚框：
@@ -640,12 +650,14 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 建议结合“锚长宽比”共同优化：&lt;br&gt;
-如：&lt;code&gt;scales=[0.5,1,2]&lt;/code&gt; + &lt;code&gt;ratios=[0.5,1,2]&lt;/code&gt; → 总锚数 = 3×3=9 个/位置&lt;/p&gt;&lt;/blockquote&gt;
+如：&lt;code&gt;scales=[0.5,1,2]&lt;/code&gt; + &lt;code&gt;ratios=[0.5,1,2]&lt;/code&gt; → 总锚数 = 3×3=9 个/位置&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;5-锚长宽比aspect-ratio&#34;&gt;5. &lt;strong&gt;锚长宽比（Aspect Ratio）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-4&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;锚框的&lt;strong&gt;高度与宽度之比&lt;/strong&gt;（Height:Width），决定锚的形状。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;锚框的&lt;strong&gt;高度与宽度之比&lt;/strong&gt;（Height:Width），决定锚的形状。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-常见值&#34;&gt;📌 常见值：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;[1.0]&lt;/code&gt; → 正方形&lt;/li&gt;
@@ -712,12 +724,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 技巧：在训练前可视化真实框的长宽比分布，匹配锚比例！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;6-锚角度-&#34;&gt;6. &lt;strong&gt;锚角度 [°]（Anchor Angle）——仅限自由矩形（Oriented Bounding Box）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-5&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;锚框相对于水平轴的&lt;strong&gt;旋转角度&lt;/strong&gt;（数学正方向，逆时针），用于检测&lt;strong&gt;倾斜目标&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;锚框相对于水平轴的&lt;strong&gt;旋转角度&lt;/strong&gt;（数学正方向，逆时针），用于检测&lt;strong&gt;倾斜目标&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-范围&#34;&gt;📌 范围：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;合法范围&lt;/strong&gt;：&lt;code&gt;(-90°, 90°]&lt;/code&gt;&lt;/li&gt;
@@ -793,12 +807,14 @@
 &lt;ul&gt;
 &lt;li&gt;锚角度是“先验”，用于匹配真实框&lt;/li&gt;
 &lt;li&gt;模型最终输出的是偏移量 Δθ，通过回归学习修正&lt;/li&gt;
-&lt;/ul&gt;&lt;/blockquote&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;7-忽略方向ignore-orientation&#34;&gt;7. &lt;strong&gt;忽略方向（Ignore Orientation）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-6&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;是否将&lt;strong&gt;不同旋转角度&lt;/strong&gt;的矩形视为&lt;strong&gt;同一个目标&lt;/strong&gt;（即不区分朝向）。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;是否将&lt;strong&gt;不同旋转角度&lt;/strong&gt;的矩形视为&lt;strong&gt;同一个目标&lt;/strong&gt;（即不区分朝向）。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-工作机制-6&#34;&gt;⚙️ 工作机制：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;开启（✅）&lt;/strong&gt;：无论锚框角度是多少，只要中心、宽高一致 → 视为同一候选框&lt;/li&gt;
@@ -851,12 +867,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 最佳实践：&lt;strong&gt;如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 最佳实践：&lt;strong&gt;如果真实标注框包含角度字段（θ），则必须关闭“忽略方向”&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;8-权重先验weight-prior-α&#34;&gt;8. &lt;strong&gt;权重先验（Weight Prior, α）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-7&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;L2 正则化系数（λ），用于惩罚模型权重过大，防止过拟合。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-数学形式&#34;&gt;📌 数学形式：
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -937,12 +955,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 技巧：监控 &lt;code&gt;weight_norm&lt;/code&gt; 曲线 —— 若权重持续增大且 loss 波动 → 增大 α&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 技巧：监控 &lt;code&gt;weight_norm&lt;/code&gt; 曲线 —— 若权重持续增大且 loss 波动 → 增大 α&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;9-边界框头部权重bbox-head-weight&#34;&gt;9. &lt;strong&gt;边界框头部权重（BBox Head Weight）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-8&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在总损失函数中，&lt;strong&gt;边界框回归损失&lt;/strong&gt;所占的比重。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在总损失函数中，&lt;strong&gt;边界框回归损失&lt;/strong&gt;所占的比重。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-总损失公式示例&#34;&gt;📌 总损失公式示例：
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1013,12 +1033,14 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;✅ 建议：&lt;strong&gt;优先使用 IoU-based Loss（GIoU/DIoU）&lt;/strong&gt;，其天然与位置相关，可减少对 λ_bbox 的依赖。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;✅ 建议：&lt;strong&gt;优先使用 IoU-based Loss（GIoU/DIoU）&lt;/strong&gt;，其天然与位置相关，可减少对 λ_bbox 的依赖。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;10-类别头部权重class-head-weight&#34;&gt;10. &lt;strong&gt;类别头部权重（Class Head Weight）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-9&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在总损失函数中，&lt;strong&gt;分类损失&lt;/strong&gt;所占的比重。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在总损失函数中，&lt;strong&gt;分类损失&lt;/strong&gt;所占的比重。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-与上一项协同工作&#34;&gt;📌 与上一项协同工作：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;控制“分类 vs 定位”的训练优先级&lt;/li&gt;
@@ -1081,7 +1103,8 @@
 &lt;h2 id=&#34;11-冻结骨干级别freeze-backbone-level&#34;&gt;11. &lt;strong&gt;冻结骨干级别（Freeze Backbone Level）&lt;/strong&gt;
 &lt;/h2&gt;&lt;h3 id=&#34;-定义-10&#34;&gt;✅ 定义：
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;在训练过程中，&lt;strong&gt;从输入端起&lt;/strong&gt;，冻结骨干网络（Backbone）的最高层级编号。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;在训练过程中，&lt;strong&gt;从输入端起&lt;/strong&gt;，冻结骨干网络（Backbone）的最高层级编号。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-举例&#34;&gt;📌 举例：
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;骨干结构：&lt;code&gt;conv1 → layer1 → layer2 → layer3 → layer4&lt;/code&gt;&lt;/li&gt;
@@ -1164,7 +1187,8 @@
 &lt;/table&gt;
 &lt;blockquote&gt;
 &lt;p&gt;✅ 最佳实践：&lt;br&gt;
-&lt;strong&gt;“冻结骨干 + 检测头单独学习率”&lt;/strong&gt; 是工业界标准做法！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;“冻结骨干 + 检测头单独学习率”&lt;/strong&gt; 是工业界标准做法！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-总结目标检测参数调优终极-checklist&#34;&gt;✅ 总结：目标检测参数调优终极 Checklist
 &lt;/h2&gt;&lt;table&gt;
@@ -1289,7 +1313,8 @@
 &lt;h1 id=&#34;-锚anchor到底是什么深度详解&#34;&gt;🔍 &lt;strong&gt;锚（Anchor）到底是什么？——深度详解&lt;/strong&gt;
 &lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;✅ &lt;strong&gt;一句话定义&lt;/strong&gt;：&lt;br&gt;
-&lt;strong&gt;锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”&lt;/strong&gt;，用于指导模型预测真实物体的位置与类别。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;锚（Anchor）是目标检测模型在特征图上预设的、固定大小和形状的“参考框”&lt;/strong&gt;，用于指导模型预测真实物体的位置与类别。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;它不是真实存在的物体边界框，而是&lt;strong&gt;模型学习的“先验假设”&lt;/strong&gt; —— 像是给模型提供一组“候选模板”，让模型只需学习“如何调整这些模板”，而不是从零开始猜一个框。&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-一锚的起源为什么需要-anchor&#34;&gt;🧩 一、锚的起源：为什么需要 Anchor？
@@ -1325,7 +1350,8 @@
 &lt;p&gt;→ 如果让模型直接回归任意框，训练会不稳定、收敛慢、精度差。&lt;/p&gt;
 &lt;h3 id=&#34;-解决方案引入-anchor&#34;&gt;✅ 解决方案：&lt;strong&gt;引入 Anchor&lt;/strong&gt;
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;让模型&lt;strong&gt;不要从零生成框&lt;/strong&gt;，而是&lt;strong&gt;基于一组预设的“模板框”做微调&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;让模型&lt;strong&gt;不要从零生成框&lt;/strong&gt;，而是&lt;strong&gt;基于一组预设的“模板框”做微调&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;就像你给一个孩子看 10 种不同大小和形状的“盒子样板”，然后说：“你看到的东西，一定是这 10 种之一的变形。”&lt;/p&gt;
 &lt;p&gt;这就是 Anchor 的思想。&lt;/p&gt;
 &lt;hr&gt;
@@ -1373,7 +1399,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 注意：&lt;strong&gt;Anchor 不是图像中的真实框&lt;/strong&gt;，它是&lt;strong&gt;在特征图网格上密集生成的虚拟框&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 注意：&lt;strong&gt;Anchor 不是图像中的真实框&lt;/strong&gt;，它是&lt;strong&gt;在特征图网格上密集生成的虚拟框&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-三anchor-如何生成以-fpn-为例&#34;&gt;🌐 三、Anchor 如何生成？——以 FPN 为例
 &lt;/h2&gt;&lt;p&gt;我们以典型的 &lt;strong&gt;RetinaNet + FPN&lt;/strong&gt; 架构为例：&lt;/p&gt;
@@ -1406,7 +1433,8 @@
   &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;blockquote&gt;
-&lt;p&gt;每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;每一层对应不同尺度的目标：P3 检测小物体，P5 检测大物体。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;步骤-2在每个特征点上生成多个-anchor&#34;&gt;步骤 2：在每个特征点上生成多个 Anchor
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;每个特征图单元（cell）代表原图的一个区域（如 P3 上每个 cell = 8×8 像素）&lt;/li&gt;
@@ -1447,7 +1475,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;每个 Anchor 都有一个对应的“基尺寸”（比如 32×32），再乘以 scale 和 ratio 得到最终尺寸。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;步骤-3anchor-总数惊人&#34;&gt;步骤 3：Anchor 总数惊人！
 &lt;/h3&gt;&lt;table&gt;
   &lt;thead&gt;
@@ -1497,7 +1526,8 @@
 &lt;li&gt;Δθ → 旋转角度（若启用）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;blockquote&gt;
-&lt;p&gt;这些偏移量是&lt;strong&gt;相对于 Anchor 的修正值&lt;/strong&gt;！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;这些偏移量是&lt;strong&gt;相对于 Anchor 的修正值&lt;/strong&gt;！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h4 id=&#34;-公式示例经典-rpn--retinanet&#34;&gt;📌 公式示例（经典 RPN / RetinaNet）：
 &lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1514,7 +1544,8 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;blockquote&gt;
-&lt;p&gt;所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;所以模型学的是：“这个 Anchor 应该往哪移动、放大多少”，而不是“从头画一个框”。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;h3 id=&#34;-匹配过程training&#34;&gt;✅ 匹配过程（Training）：
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;对每个真实标注框（Ground Truth），找到与其 IoU 最大的 Anchor；&lt;/li&gt;
@@ -1528,7 +1559,8 @@
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;blockquote&gt;
-&lt;p&gt;👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;👉 这就是为什么 Anchor 是“先验”的意义：它把无限空间搜索变成有限局部优化！&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-五anchor-vs-anchor-free对比总结&#34;&gt;🔄 五、Anchor vs Anchor-Free：对比总结
 &lt;/h2&gt;&lt;table&gt;
@@ -1585,7 +1617,8 @@
 &lt;blockquote&gt;
 &lt;p&gt;✅ &lt;strong&gt;结论&lt;/strong&gt;：&lt;br&gt;
 &lt;strong&gt;Anchor 是“稳而重”&lt;/strong&gt;，适合对精度要求高的工业场景；&lt;br&gt;
-&lt;strong&gt;Anchor-Free 是“轻而快”&lt;/strong&gt;，适合实时或资源受限环境。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;strong&gt;Anchor-Free 是“轻而快”&lt;/strong&gt;，适合实时或资源受限环境。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-六anchor-的优缺点总结&#34;&gt;🎯 六、Anchor 的优缺点总结
 &lt;/h2&gt;&lt;table&gt;

@@ -6,7 +6,7 @@
 
 <link rel='canonical' href='https://dumbnessrf.github.io/p/calcbinding/'>
 
-<link rel="stylesheet" href="/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css"><meta property='og:title' content="WPF技巧-XAML中使用表达式进行数据绑定计算">
+<link rel="stylesheet" href="/scss/style.min.6a692fd055deae459f2a9767f57f3855ba80cafd5041317f24f7360f6ca47cdf.css"><meta property='og:title' content="WPF技巧-XAML中使用表达式进行数据绑定计算">
 <meta property='og:description' content="CalcBinding 是一个 WPF 第三方绑定增强库，它允许你在 XAML 中使用表达式进行数据绑定计算，而无需在 ViewModel 中写额外的属性或转换器（Converter）。--它非常适合用于简单的数学运算、字符串拼接、条件判断等场景。">
 <meta property='og:url' content='https://dumbnessrf.github.io/p/calcbinding/'>
 <meta property='og:site_name' content='飞人博尔特的摄影师'>
@@ -405,7 +405,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>将 Width 乘以 2 再加上 Height，结果作为 TextBlock.Text</p></blockquote>
+<p>将 Width 乘以 2 再加上 Height，结果作为 TextBlock.Text</p>
+</blockquote>
 <hr>
 <h3 id="-示例-2字符串拼接">✅ 示例 2：字符串拼接
 </h3><div class="highlight"><div class="chroma">
@@ -417,7 +418,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>把两个字段拼接成完整姓名</p></blockquote>
+<p>把两个字段拼接成完整姓名</p>
+</blockquote>
 <hr>
 <h3 id="-示例-3布尔值转可见性visibility">✅ 示例 3：布尔值转可见性（Visibility）
 </h3><div class="highlight"><div class="chroma">
@@ -431,7 +433,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>使用三元运算符实现 Visibility 控制，无需 Converter</p></blockquote>
+<p>使用三元运算符实现 Visibility 控制，无需 Converter</p>
+</blockquote>
 <hr>
 <h3 id="-示例-4绑定多个属性并做计算">✅ 示例 4：绑定多个属性并做计算
 </h3><div class="highlight"><div class="chroma">
@@ -443,7 +446,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>多绑定支持最多 5 个路径（Path1~Path5），可以组合任意表达式</p></blockquote>
+<p>多绑定支持最多 5 个路径（Path1~Path5），可以组合任意表达式</p>
+</blockquote>
 <hr>
 <h3 id="-示例-5使用-math-函数如-maxminround">✅ 示例 5：使用 Math 函数（如 Max、Min、Round）
 </h3><div class="highlight"><div class="chroma">
@@ -455,7 +459,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>显示 Width 和 Height 中较大的那个</p></blockquote>
+<p>显示 Width 和 Height 中较大的那个</p>
+</blockquote>
 <p>支持的函数包括：</p>
 <ul>
 <li><code>Math.Abs</code></li>
@@ -478,7 +483,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>如果 Value 大于 0，则显示 Value，否则显示 0</p></blockquote>
+<p>如果 Value 大于 0，则显示 Value，否则显示 0</p>
+</blockquote>
 <hr>
 <h3 id="-示例-7绑定集合元素">✅ 示例 7：绑定集合元素
 </h3><div class="highlight"><div class="chroma">
@@ -490,7 +496,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>绑定集合中第一个元素的属性并进行计算</p></blockquote>
+<p>绑定集合中第一个元素的属性并进行计算</p>
+</blockquote>
 <hr>
 <h3 id="-示例-8绑定资源中的静态值">✅ 示例 8：绑定资源中的静态值
 </h3><div class="highlight"><div class="chroma">
@@ -510,7 +517,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>可以在表达式中嵌入静态资源</p></blockquote>
+<p>可以在表达式中嵌入静态资源</p>
+</blockquote>
 <hr>
 <h3 id="-示例-9使用方法调用需要注册">✅ 示例 9：使用方法调用（需要注册）
 </h3><p>你可以在代码中注册自定义函数，例如：</p>
@@ -532,7 +540,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>类似格式化货币输出，替代 StringFormat</p></blockquote>
+<p>类似格式化货币输出，替代 StringFormat</p>
+</blockquote>
 <hr>
 <h3 id="-示例-10绑定依赖属性如控件尺寸">✅ 示例 10：绑定依赖属性（如控件尺寸）
 </h3><div class="highlight"><div class="chroma">
@@ -552,7 +561,8 @@
 </span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
-<p>计算控件居中位置，不需要在后台代码中设置布局逻辑</p></blockquote>
+<p>计算控件居中位置，不需要在后台代码中设置布局逻辑</p>
+</blockquote>
 <hr>
 <h2 id="-四性能与注意事项">🧪 四、性能与注意事项
 </h2><div class="table-wrapper"><table>

@@ -15,7 +15,8 @@
         <guid>https://dumbnessrf.github.io/p/parallel_programing_modern/</guid>
         <description>&lt;img src="https://www.notion.so/images/page-cover/rijksmuseum_rembrandt_1642.jpg" alt="Featured image of post Parallel Programing Modern" /&gt;&lt;h1 id=&#34;-用-channel-替代-blockingcollection--net-6-现代并发数据流&#34;&gt;🚀 用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;更轻量、更高效、更函数式、更现代化的生产者-消费者模型&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;更轻量、更高效、更函数式、更现代化的生产者-消费者模型&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-为什么需要-channel&#34;&gt;📌 为什么需要 Channel&lt;T&gt;？
 &lt;/h2&gt;&lt;p&gt;虽然 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 功能强大，但在 .NET 6+ 时代，微软推荐使用 &lt;strong&gt;&lt;code&gt;System.Threading.Channels&lt;/code&gt;&lt;/strong&gt; 中的 &lt;code&gt;Channel&amp;lt;T&amp;gt;&lt;/code&gt; 来构建高性能、异步优先的生产者-消费者管道。&lt;/p&gt;
@@ -467,7 +468,8 @@
         <guid>https://dumbnessrf.github.io/p/meet_parallel_programing/</guid>
         <description>&lt;img src="https://www.notion.so/images/page-cover/met_joseph_hidley_1870.jpg" alt="Featured image of post Meet Parallel Programing" /&gt;&lt;h1 id=&#34;-net-并发编程利器详解&#34;&gt;🧵 .NET 并发编程利器详解
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;附：volatile 与 Interlocked 在并发控制中的关键作用&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;附：volatile 与 Interlocked 在并发控制中的关键作用&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-引言为什么需要并发集合&#34;&gt;📌 引言：为什么需要并发集合？
 &lt;/h2&gt;&lt;p&gt;在多线程编程中，我们经常需要多个线程&lt;strong&gt;安全地共享数据&lt;/strong&gt; —— 比如生产者消费者模型、任务队列、缓存字典、限流控制等。如果使用普通集合（如 &lt;code&gt;List&amp;lt;T&amp;gt;&lt;/code&gt;、&lt;code&gt;Queue&amp;lt;T&amp;gt;&lt;/code&gt;、&lt;code&gt;Dictionary&amp;lt;TKey, TValue&amp;gt;&lt;/code&gt;），在并发读写时极易引发：&lt;/p&gt;
@@ -764,7 +766,8 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;✅ &lt;strong&gt;适用场景&lt;/strong&gt;：任务调度、数据流水线、限流缓冲区&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;💡 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 默认有序（FIFO），因为默认包装 &lt;code&gt;ConcurrentQueue&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;💡 &lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 默认有序（FIFO），因为默认包装 &lt;code&gt;ConcurrentQueue&amp;lt;T&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-三semaphoreslim--控制并发访问数量&#34;&gt;🚧 三、SemaphoreSlim —— 控制并发访问数量
 &lt;/h2&gt;&lt;h3 id=&#34;-它是什么-1&#34;&gt;▶ 它是什么？
@@ -824,7 +827,8 @@
 &lt;h2 id=&#34;-四volatile-与-interlocked--并发编程的基石&#34;&gt;⚙️ 四、volatile 与 Interlocked —— 并发编程的基石
 &lt;/h2&gt;&lt;h3 id=&#34;1-volatile-关键字&#34;&gt;1. &lt;code&gt;volatile&lt;/code&gt; 关键字
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;用于修饰字段，确保&lt;strong&gt;多线程环境下对该字段的读写不被编译器/CPU重排序或缓存&lt;/strong&gt;。&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;用于修饰字段，确保&lt;strong&gt;多线程环境下对该字段的读写不被编译器/CPU重排序或缓存&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：标志位、状态变量、引用替换&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;示例&lt;/strong&gt;：&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -871,7 +875,8 @@
 &lt;hr&gt;
 &lt;h3 id=&#34;2-interlocked-类&#34;&gt;2. &lt;code&gt;Interlocked&lt;/code&gt; 类
 &lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;提供&lt;strong&gt;原子操作&lt;/strong&gt;，如自增、自减、交换、比较交换（CAS）&lt;/p&gt;&lt;/blockquote&gt;
+&lt;p&gt;提供&lt;strong&gt;原子操作&lt;/strong&gt;，如自增、自减、交换、比较交换（CAS）&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;常用方法&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;code&gt;Interlocked.Increment(ref variable)&lt;/code&gt;&lt;/li&gt;
@@ -952,7 +957,8 @@
 &lt;/div&gt;&lt;blockquote&gt;
 &lt;p&gt;&lt;code&gt;BlockingCollection&amp;lt;T&amp;gt;&lt;/code&gt; 依赖底层并发集合&lt;br&gt;
 &lt;code&gt;SemaphoreSlim&lt;/code&gt; 常用于控制 &lt;code&gt;BlockingCollection&lt;/code&gt; 消费者或任务并发数&lt;br&gt;
-&lt;code&gt;volatile&lt;/code&gt; + &lt;code&gt;Interlocked&lt;/code&gt; 是实现无锁替换、状态同步的基础&lt;/p&gt;&lt;/blockquote&gt;
+&lt;code&gt;volatile&lt;/code&gt; + &lt;code&gt;Interlocked&lt;/code&gt; 是实现无锁替换、状态同步的基础&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;-六实战构建一个带并发限制的任务调度器&#34;&gt;🎯 六、实战：构建一个带并发限制的任务调度器
 &lt;/h2&gt;&lt;p&gt;结合以上所有知识点：&lt;/p&gt;
@@ -1168,7 +1174,8 @@
 &lt;/div&gt;&lt;hr&gt;
 &lt;blockquote&gt;
 &lt;p&gt;🎉 感谢阅读！如果你觉得有帮助，欢迎点赞、收藏、转发！&lt;br&gt;
-下期预告：《用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流》&lt;/p&gt;&lt;/blockquote&gt;
+下期预告：《用 Channel&lt;T&gt; 替代 BlockingCollection —— .NET 6+ 现代并发数据流》&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         

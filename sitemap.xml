@@ -3,7 +3,40 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dumbnessrf.github.io/</loc>
-    <lastmod>2025-09-15T21:08:09+08:00</lastmod>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/appsettings/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/configuration/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/ini/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/json/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/post/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/toml/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/xml/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/yaml/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/what_is_toml/</loc>
+    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/c%23/</loc>
     <lastmod>2025-09-15T21:08:09+08:00</lastmod>
@@ -14,13 +47,7 @@
     <loc>https://dumbnessrf.github.io/p/parallel_programing_modern/</loc>
     <lastmod>2025-09-15T21:08:09+08:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/post/</loc>
-    <lastmod>2025-09-15T21:08:09+08:00</lastmod>
-  </url><url>
     <loc>https://dumbnessrf.github.io/tags/sync-and-async/</loc>
-    <lastmod>2025-09-15T21:08:09+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/</loc>
     <lastmod>2025-09-15T21:08:09+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/</loc>
@@ -67,9 +94,6 @@
   </url><url>
     <loc>https://dumbnessrf.github.io/p/calcbinding/</loc>
     <lastmod>2025-06-06T14:46:48+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
-    <lastmod>2025-06-06T11:04:44+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/categories/reactive/</loc>
     <lastmod>2025-06-06T11:04:44+08:00</lastmod>
