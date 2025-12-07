@@ -3,7 +3,28 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://dumbnessrf.github.io/</loc>
-    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/mef/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/mef_with_di_to_plugin/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/plugin/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/post/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/tags/</loc>
+    <lastmod>2025-12-07T12:23:29+08:00</lastmod>
+  </url><url>
+    <loc>https://dumbnessrf.github.io/p/mef_in_csharp/</loc>
+    <lastmod>2025-12-07T12:18:55+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/appsettings/</loc>
     <lastmod>2025-10-30T09:49:41+08:00</lastmod>
@@ -11,19 +32,10 @@
     <loc>https://dumbnessrf.github.io/tags/configuration/</loc>
     <lastmod>2025-10-30T09:49:41+08:00</lastmod>
   </url><url>
-    <loc>https://dumbnessrf.github.io/tags/csharp/</loc>
-    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
-  </url><url>
     <loc>https://dumbnessrf.github.io/tags/ini/</loc>
     <lastmod>2025-10-30T09:49:41+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/json/</loc>
-    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/post/</loc>
-    <lastmod>2025-10-30T09:49:41+08:00</lastmod>
-  </url><url>
-    <loc>https://dumbnessrf.github.io/tags/</loc>
     <lastmod>2025-10-30T09:49:41+08:00</lastmod>
   </url><url>
     <loc>https://dumbnessrf.github.io/tags/toml/</loc>
