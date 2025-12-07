@@ -13,7 +13,7 @@
         <pubDate>Sun, 07 Dec 2025 12:23:29 +0800</pubDate>
         
         <guid>https://dumbnessrf.github.io/p/mef_with_di_to_plugin/</guid>
-        <description>&lt;h2 id=&#34;-优势&#34;&gt;✅ 优势
+        <description>&lt;img src="https://www.notion.so/images/page-cover/met_klimt_1912.jpg" alt="Featured image of post MEF 导出的插件（[Export]）如何使用由 Microsoft DI 容器（IServiceProvider）管理的服务（如 ILogger、IConfiguration 等）？" /&gt;&lt;h2 id=&#34;-优势&#34;&gt;✅ 优势
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;插件不依赖 MEF 或 DI 容器细节；&lt;/li&gt;
 &lt;li&gt;主程序完全控制传入的服务；&lt;/li&gt;
@@ -520,7 +520,7 @@
         <pubDate>Sun, 07 Dec 2025 12:18:55 +0800</pubDate>
         
         <guid>https://dumbnessrf.github.io/p/mef_in_csharp/</guid>
-        <description>&lt;h1 id=&#34;深入理解mef构建可扩展net应用程序的强大框架&#34;&gt;深入理解MEF：构建可扩展.NET应用程序的强大框架
+        <description>&lt;img src="https://www.notion.so/images/page-cover/met_camille_pissarro_1896.jpg" alt="Featured image of post 深入理解MEF：构建可扩展.NET应用程序的强大框架" /&gt;&lt;h1 id=&#34;深入理解mef构建可扩展net应用程序的强大框架&#34;&gt;深入理解MEF：构建可扩展.NET应用程序的强大框架
 &lt;/h1&gt;&lt;p&gt;在现代软件开发中，可扩展性是一个至关重要的特性。我们希望能够轻松添加新功能而不修改现有代码，实现真正的插件式架构。Microsoft的Managed Extensibility Framework (MEF) 正是为了解决这一问题而设计的强大框架。&lt;/p&gt;
 &lt;p&gt;本文将通过一个具体的代码示例来深入探讨MEF的工作原理和应用方法。&lt;/p&gt;
 &lt;h2 id=&#34;-什么是mef&#34;&gt;✅ 什么是MEF？
