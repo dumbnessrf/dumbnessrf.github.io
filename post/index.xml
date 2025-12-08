@@ -463,15 +463,6 @@
 &lt;p&gt;✅ 无需启动 MEF 或 DI，纯 C# 测试。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;-共享契约建议sharpboxescore&#34;&gt;📦 共享契约建议（SharpBoxesCore）
-&lt;/h2&gt;&lt;p&gt;将以下接口放到 &lt;strong&gt;单独的类库&lt;/strong&gt;（如 &lt;code&gt;SharpBoxes.Contracts&lt;/code&gt;）：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;IAnalyzer&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IAnalyzerContext&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;IAnalyzerMetadata&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;插件项目引用此契约库，&lt;strong&gt;主程序和插件完全解耦&lt;/strong&gt;。&lt;/p&gt;
-&lt;hr&gt;
 &lt;h2 id=&#34;-总结&#34;&gt;✅ 总结
 &lt;/h2&gt;&lt;table&gt;
   &lt;thead&gt;
@@ -1047,12 +1038,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h3 id=&#34;-给你的建议sharpboxescore&#34;&gt;📌 给你的建议（SharpBoxesCore）
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;继续用 MEF&lt;/strong&gt;：你的场景（WPF 脚本编辑器 + 插件分析器/调试器）&lt;strong&gt;正是 MEF 的理想用例&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;不要因为“MEF 不流行”而放弃&lt;/strong&gt;：流行度 ≠ 适用性；&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;混合 DI + MEF&lt;/strong&gt;：核心服务用 DI，插件用 MEF。&lt;/li&gt;
-&lt;/ul&gt;
 &lt;blockquote&gt;
 &lt;p&gt;正如 &lt;strong&gt;Visual Studio 至今仍重度依赖 MEF&lt;/strong&gt; —— 因为它解决了 VS 的核心问题：&lt;strong&gt;扩展性&lt;/strong&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;

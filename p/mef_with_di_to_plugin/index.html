@@ -251,7 +251,6 @@
     <li><a href="#6-主程序创建上下文并调用">6. 主程序（创建上下文并调用）</a></li>
     <li><a href="#-输出示例">🖨️ 输出示例</a></li>
     <li><a href="#-单元测试示例插件">🧪 单元测试示例（插件）</a></li>
-    <li><a href="#-共享契约建议sharpboxescore">📦 共享契约建议（SharpBoxesCore）</a></li>
     <li><a href="#-总结">✅ 总结</a></li>
   </ol>
 </nav>
@@ -793,15 +792,6 @@
 </div><blockquote>
 <p>✅ 无需启动 MEF 或 DI，纯 C# 测试。</p>
 </blockquote>
-<hr>
-<h2 id="-共享契约建议sharpboxescore">📦 共享契约建议（SharpBoxesCore）
-</h2><p>将以下接口放到 <strong>单独的类库</strong>（如 <code>SharpBoxes.Contracts</code>）：</p>
-<ul>
-<li><code>IAnalyzer</code></li>
-<li><code>IAnalyzerContext</code></li>
-<li><code>IAnalyzerMetadata</code></li>
-</ul>
-<p>插件项目引用此契约库，<strong>主程序和插件完全解耦</strong>。</p>
 <hr>
 <h2 id="-总结">✅ 总结
 </h2><div class="table-wrapper"><table>
